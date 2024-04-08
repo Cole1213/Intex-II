@@ -3,3 +3,44 @@
 *@
 @{
 }
+@model List<Product>
+@{
+    ViewData["Title"] = "Products";
+}
+<h2>Products</h2>
+
+<form asp-controller="Home" asp-action="Products" method="get">
+    <div>
+        <label for="categories">Categories:</label>
+        @foreach(var category in ViewBag.Categories)
+        {
+            <input type="checkbox" id="@category" name="categories" value="@category">
+            <label for="@category">@category</label><br />
+        }
+    </div>
+    <div>
+        <label for="minPrice">Min Price:</label>
+        <input type="number" class="form-control" id="minPrice" name="minPrice" step="0.01">
+    </div>
+    <div>
+        <label for="maxPrice">Max Price:</label>
+        <input type="number" class="form-control" id="maxPrice" name="maxPrice" step="0.01">
+    </div>
+    <button type="submit" class="btn btn-primary">Apply Filters</button>
+</form>
+
+<!-- Display filtered products -->
+@if (Model is null)
+{
+    <h3>Filtered Products</h3>
+    <ul>
+        @foreach (var product in ViewBag.Products)
+        {
+            <li>@product.ProductName - @product.ProductPrice</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No products match the selected criteria.</p>
+}
