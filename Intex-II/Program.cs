@@ -1,7 +1,17 @@
+using Intex_II.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<IntexIiContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:LegoConnection"]);
+});
+
+builder.Services.AddScoped<ILegoRepository, EFLegoRepository>();
 
 var app = builder.Build();
 

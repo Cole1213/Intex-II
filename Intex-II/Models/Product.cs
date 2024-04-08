@@ -1,28 +1,27 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace Intex_II.Models
+namespace Intex_II.Models;
+
+public partial class Product
 {
-    public class Product
-    {
-        [Key]
-        public int Product_Id { get; set; }
+    public int ProductId { get; set; }
 
-        public string Product_Name { get; set; }
+    public string ProductName { get; set; } = null!;
 
-        public int? Product_Year { get; set; }
+    public int? ProductYear { get; set; }
 
-        public int? Product_Num_Parts { get; set; }
+    public int? ProductNumParts { get; set; }
 
-        public double Product_Price { get; set; }
+    public int ProductPrice { get; set; }
 
-        public string? Product_Image { get; set; }
+    public string? ProductImage { get; set; }
 
-        public string? Product_Primary_Color { get; set; }
+    public string ProductPrimaryColor { get; set; } = null!;
 
-        public string? Product_Secondary_Color { get; set; }
+    public string? ProductSecondaryColor { get; set; }
 
-        public string? Product_Description { get; set;}
+    public string? ProductDescription { get; set; }
 
-        public string? Product_Category { get; set; }
-    }
+    public string? ProductCategory { get; set; }
 }
