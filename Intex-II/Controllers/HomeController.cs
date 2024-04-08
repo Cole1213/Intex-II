@@ -10,5 +10,10 @@ namespace Intex_II.Controllers
         {
             return View();
         }
+        
+        public IActionResult Privacy()
+        {
+            return View();
+        }
     }
 }
