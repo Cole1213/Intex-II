@@ -1,8 +1,35 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<div class="hero-img">
+    <div class="hero-txt poppins-regular">
+        <h2 >
+            Welcome to Aurora Bricks!
+        </h2>
+        <img src="imgs/legobrick.png" height="50px"/>
+        <button>
+            Shop Now >
+        </button>
+    </div>
+    <div class="carousel" data-carousel="1" data-speed="5000">
+        <span class="carousel-control-left"></span>
+        <span class="carousel-control-right"></span>
+        <div class="carousel-content">
+            <!-- add extra last pic first and extra first pic last for hover effect to work properly  -->
+            <img src="imgs/lotr.png" alt="image 5"/>
+            <img src="imgs/gringotts.png" alt="image 1"/>
+            <img src="imgs/castle.png" alt="image 2"/>
 
+            <img src="imgs/sanctum.png" alt="image 3"/>
+
+            <img src="imgs/starry.png" alt="image 4"/>
+
+            <img src="imgs/lotr.png" alt="image 5"/>
+            <img src="imgs/gringotts.png" alt="image 1"/>
+        </div>
+    </div>
+    @* <img src="imgs/lotr.png" height="300px"/> *@
+</div>
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    
 </div>
