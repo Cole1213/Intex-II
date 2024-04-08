@@ -30,6 +30,10 @@
     </div>
     @* <img src="imgs/lotr.png" height="300px"/> *@
 </div>
+@foreach(var r in ViewBag.Recommendations)
+{
+    <p>@r.ProductName - @r.ProductPrice</p>
+}
 <div class="text-center">
     
 </div>
