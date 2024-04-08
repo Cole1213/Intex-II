@@ -11,6 +11,8 @@ builder.Services.AddDbContext<IntexIiContext>(options =>
     options.UseSqlServer(builder.Configuration["ConnectionStrings:LegoConnection"]);
 });
 
+builder.Services.AddScoped<ILegoRepository, EFLegoRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
