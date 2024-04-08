@@ -1,17 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
-namespace Intex_II.Models
+namespace Intex_II.Models;
+
+public partial class LineItem
 {
-    public class LineItem
-    {
-        [ForeignKey("Transaction_Id")]
-        public int Transaction_Id { get; set; }
+    public int TransactionId { get; set; }
 
-        [ForeignKey("Product_Id")]
-        public int Product_Id { get; set; }
+    public int ProductId { get; set; }
 
-        public int Quantity { get; set; }
+    public int Quantity { get; set; }
 
-        public int? Rating { get; set; }
-    }
+    public int? Rating { get; set; }
 }
