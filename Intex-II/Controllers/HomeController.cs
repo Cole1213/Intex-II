@@ -50,6 +50,7 @@ namespace Intex_II.Controllers
 
             ViewBag.Products = filteredProducts;
 
+            // Pass in categories for the checkbox filters
             ViewBag.Categories = _repo.Products
                                     .Select(p => p.ProductCategory)
                                     .Distinct()
@@ -58,9 +59,11 @@ namespace Intex_II.Controllers
             return View();
         }
 
-        public IActionResult SingleProduct()
+        public IActionResult SingleProduct(int productId)
         {
-            return View();
+            Product product = _repo.Products.FirstOrDefault(p => p.ProductId == productId);
+
+            return View(product);
         }
         
         public IActionResult Privacy()
@@ -80,6 +83,8 @@ namespace Intex_II.Controllers
 
         public IActionResult AdminProducts()
         {
+            ViewBag.Products = _repo.Products.ToList();
+
             return View();
         }
 
