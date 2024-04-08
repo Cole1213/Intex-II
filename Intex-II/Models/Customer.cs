@@ -1,22 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace Intex_II.Models
+namespace Intex_II.Models;
+
+public partial class Customer
 {
-    public class Customer
-    {
-        [Key]
-        public int Customer_Id { get; set; }
+    public int CustomerId { get; set; }
 
-        public string? Customer_FName { get; set; }
+    public string? CustomerFname { get; set; }
 
-        public string? Customer_LName { get; set;}
+    public string? CustomerLname { get; set; }
 
-        public DateOnly? Birth_Date { get; set; }
+    public DateOnly? BirthDate { get; set; }
 
-        public string? Customer_Country { get; set; }
+    public string? CustomerCountry { get; set; }
 
-        public char? Customer_Gender { get; set; }
+    public string? CustomerGender { get; set; }
 
-        public double? Customer_Age { get; set; }
-    }
+    public double? CustomerAge { get; set; }
 }
