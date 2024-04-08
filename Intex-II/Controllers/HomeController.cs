@@ -51,7 +51,7 @@ namespace Intex_II.Controllers
 
         public IActionResult AdminEditProduct()
         {
-            return View();
+            return View("AdminAddProduct");
         }
 
         public IActionResult AdminDeleteProduct()
@@ -69,12 +69,12 @@ namespace Intex_II.Controllers
             return View();
         }
 
-        public IActionResult AdminAddUsers()
+        public IActionResult AdminAddUser()
         {
             return View();
         }
 
-        public IActionResult AdminDeleteUsers()
+        public IActionResult AdminDeleteUser()
         {
             return View();
         }
