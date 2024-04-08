@@ -5,28 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Intex_II</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="https://kit.fontawesome.com/74c768f0cc.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Intex_II.styles.css" asp-append-version="true" />
+            <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+            <script type="text/javascript">
+            $(window).on('scroll',function(){
+                if($(window).scrollTop()){
+                    $('nav').addClass('black');
+                }
+                else{
+                    $('nav').removeClass('black');
+                }
+            })
+            </script>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Intex_II</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+        <nav>
+            <div class="left-nav-elements">
+                <img src="imgs/logo.png" height="50px" alt="Lego Brick Logo">
+                <a href="#">Shop</a>
+                <a href="#">Discover</a>
+                <a href="#">About</a>
+            </div>
+            <div class="right-nav-elements">
+              <a><img src="imgs/lego.png" height="30px"></a>
+              <a><img src="imgs/search.png" height="30px"></a>
+              <a><img src="imgs/cart.png" height="27px"></a> 
             </div>
         </nav>
     </header>
@@ -36,14 +42,52 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - Intex_II - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+<footer>
+    <div class="flex-grid">
+        <div class="col">
+            <div class="subscription-form">
+                <p>Subscribe for all things Aurora Lego</p>
+                <form action="your-server-side-handler">
+                    <input type="email" id="email" name="email" placeholder="Email Address" required>
+                    <button type="submit">&#10140;</button> <!-- Unicode arrow symbol -->
+                </form>
+            </div>
+            <div class="socials">
+                <ul class="socialList">
+                    <li><a href=""><i class="fa-brands fa-facebook-f"></i></a></li>
+                    <li><a href=""> <i class="fa-brands fa-tiktok"></i></a></li>
+                    <li><a href=""><i class="fa-brands fa-x-twitter"></i></a></li>
+                    <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
+                    
+                </ul>
+            </div>
+          
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+        <div class="col">
+            <ul class="aboutList">
+                <h4>About Us</h4>
+                <li><a href="">Test</a></li>
+                <li><a href="">Test</a></li>
+                <li><a href="">Test</a></li>
+                <li><a href="">Test</a></li>
+                <li><a href="">Test</a></li>
+            </ul>
+        </div>
+        <div class="col">
+            <ul class="helpList">
+                <h4>Get Help</h4>
+                <li><a href="">Test</a></li>
+                <li><a href="">Test</a></li>
+                <li><a href="">Test</a></li>
+                <li><a href="">Test</a></li>
+                <li><a href="">Test</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="privacy-info">
+        <p>Here is some privacy info</p>
+    </div>
+</footer>
+
 </body>
 </html>
