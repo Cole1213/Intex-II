@@ -1,3 +1,10 @@
+:root {
+  --primary-color: #ff4500;
+  --secondary-color: #333;
+  --padding: 1rem;
+  --border-radius: 5px;
+  --size-of-hero:70vh;
+}
 
 @media (min-width: 768px) {
   html {
@@ -13,19 +20,14 @@ html {
   /*position: relative;*/
   min-height: 100%;
   font-size: 14px;
-  height: 100vh;
+  /*height: 100vh;*/
 }
 
 body {
-  margin-bottom: 60px;
-}
-
-.container {
-  margin-top: 60px;
 }
 
 nav {
-  position: sticky;
+  position: absolute;
   top: 0; 
   display: flex;
   flex-direction: row;
@@ -34,19 +36,24 @@ nav {
   width: 100%;
   padding: 0 20px; 
   z-index: 2; 
-  padding-top: 10px;;
+  padding-top: 10px;
 }
+
 
 .logo img {
   height: 50px; 
+  
 }
 
 .left-nav-elements img {
   margin-right: 10px;
 }
 
+
+
 .left-nav-elements a, .right-nav-elements a {
   margin: 0 10px; 
+  color:white;
 }
 
 a {
@@ -65,11 +72,12 @@ a {
   margin: 10px;
 }
 
+
+
 footer {
   background-color: #3b3b88;
   height: 400px;
   position: absolute;
-  bottom: 0;
   width: 100vw;
 }
 
@@ -270,4 +278,112 @@ footer {
 p{
   color: #b9bec0;
 }
+}
+
+.hero-img {
+  background: linear-gradient(to top right, #000000, #000036);;
+  width: 100vw;
+  height: var(--size-of-hero);
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.hero-txt{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50vw;
+  button {
+    background-color: white;
+    padding: 10px;
+    color:black;
+  }
+  h2 {
+    color:white;
+  }
+
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+}
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+  z-index: 10001;
+  width: 50vw;
+}
+
+.carousel-content {
+  display: flex;
+  /*margin: 150px 0 70px;*/
+  transition: 500ms;
+}
+
+@media(max-width: 1024px) {
+  .carousel-content {
+    /*margin: 100px 0 50px;*/
+  }
+}
+
+@media(max-width: 800px) {
+  .carousel-content {
+    /*margin: 70px 0 30px;*/
+  }
+}
+
+.carousel-content img {
+  height: var(--size-of-hero);
+  min-width: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  padding:30px;
+}
+
+.carousel-content video {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  object-fit: fill;
+}
+
+.carousel .carousel-control-left {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 10%;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.carousel .carousel-control-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 10%;
+  cursor: pointer;
+  z-index: 1;
+}
+.carousel .carousel-control-right:hover  {
+  background: linear-gradient(to top left, #0000008a, #00003626);
+}
+.carousel .carousel-control-left:hover  {
+  background: linear-gradient(to top right, #0000008a, #00003626);
+}
+
+.text-center {
+  height: 500px;
 }
