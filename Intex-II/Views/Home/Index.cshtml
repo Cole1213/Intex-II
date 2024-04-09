@@ -1,6 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model Cart
+
 <div class="hero-img">
     <div class="hero-txt poppins-regular">
         <h2 >
@@ -33,7 +35,7 @@
 <div class="text-center">
 <div class="cards">
 @foreach(var r in ViewBag.Recommendations)
-{<a asp-action="SingleProduct" asp-controller="Home">
+{<a asp-action="SingleProduct" asp-controller="Home" asp-route-productId="@r.ProductId">
     <div class="wrapper">
         <div class="container" style="background: url(@r.ProductImage) no-repeat center center; background-size: contain;">
             <div class="top"></div>
@@ -42,7 +44,14 @@
                     <div class="details">
                         <p>@r.ProductPrice</p>
                     </div>
-                    <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+                    <!--<div class="buy"><i class="material-icons">add_shopping_cart</i></div>-->
+                    <form method="post">
+                        <input type="hidden" asp-for="CustomerId" value="1" />
+                        <input type="hidden" asp-for="ProductId" value="@r.ProductId" />
+                        <input type="hidden" asp-for="ItemQuantity" value="1" />
+                        <input type="hidden" asp-for="TotalPrice" value="@r.ProductPrice" />
+                        <button type="submit" style="border: none; background: none; padding: 0;"><div class="buy"><i class="material-icons">add_shopping_cart</i></div></button>
+                    </form>
                 </div>
                 <div class="right">
                     <div class="done"><i class="material-icons">done</i></div>

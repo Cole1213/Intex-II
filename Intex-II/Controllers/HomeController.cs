@@ -17,14 +17,24 @@ namespace Intex_II.Controllers
             _repo = temp;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             //Pass in the recommendations when we have them
             ViewBag.Recommendations = _repo.Products.Take(5).ToList();
-            
+
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Index(Cart cart)
+        {
+            _repo.AddCart(cart);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
         public IActionResult Products(List<string> categories = null, decimal? minPrice = null, decimal? maxPrice = null)
         {
             IQueryable<Product> productsQuery = _repo.Products; // Assuming _repo.Products is IQueryable<Product>
@@ -60,11 +70,28 @@ namespace Intex_II.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Products(Cart cart)
+        {
+            _repo.AddCart(cart);
+
+            return RedirectToAction("Products");
+        }
+
+        [HttpGet]
         public IActionResult SingleProduct(int productId)
         {
-            Product product = _repo.Products.FirstOrDefault(p => p.ProductId == productId);
+            ViewBag.Products = _repo.Products.FirstOrDefault(p => p.ProductId == productId);
 
-            return View(product);
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SingleProduct(Cart cart)
+        {
+            _repo.AddCart(cart);
+
+            return RedirectToAction("SingleProduct", new { productId = cart.ProductId });
         }
         
         public IActionResult Privacy()
@@ -77,11 +104,38 @@ namespace Intex_II.Controllers
             return View();
         }
 
-        public IActionResult Cart()
+        [HttpGet]
+        public IActionResult Cart(int customerId = 1)
         {
-            //NEED STUFF HERE
+            //Pass in actual cart items later
+            ViewBag.CartItems = (from Carts in _repo.Carts
+                                 join Products in _repo.Products
+                                 on Carts.ProductId equals Products.ProductId
+                                 where Carts.CustomerId.Equals(customerId)
+                                 select new
+                                 {
+                                     CustomerId = Carts.CustomerId,
+                                     ProductId = Carts.ProductId,
+                                     Quantity = Carts.ItemQuantity,
+                                     TotalPrice = Carts.TotalPrice,
+                                     ProductName = Products.ProductName,
+                                     ProductYear = Products.ProductYear,
+                                     ProductNumParts = Products.ProductNumParts,
+                                     ProductPrice = Products.ProductPrice,
+                                     ProductImage = Products.ProductImage,
+                                     ProductDescription = Products.ProductDescription,
+                                     ProductCategorySimple = Products.ProductCategorySimple
+                                 }).ToList();
 
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Cart(Cart cart)
+        {
+            _repo.RemoveCart(cart);
+
+            return RedirectToAction("Cart");
         }
 
         public IActionResult AdminProducts()
