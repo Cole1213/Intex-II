@@ -4,18 +4,19 @@
 <div class="hero-img">
     <div class="hero-txt poppins-regular">
         <h2 >
-            Welcome to Aurora Bricks!
+            Craft<br/> Your <br/>Dream <br/>
         </h2>
-        <img src="imgs/legobrick.png" height="50px"/>
-        <a asp-controller="Home" asp-action="Products"><button>
+           <img src="imgs/legobrick.png" height="50px"/>
+        <h4>One Brick at a Time.</h4>
+     
+        <a asp-action="Products" asp-controller="Home">
             Shop Now >
-        </button></a>
+        </a>
     </div>
     <div class="carousel" data-carousel="1" data-speed="5000">
         <span class="carousel-control-left"></span>
         <span class="carousel-control-right"></span>
         <div class="carousel-content">
-            <!-- add extra last pic first and extra first pic last for hover effect to work properly  -->
             <img src="imgs/lotr.png" alt="image 5"/>
             <img src="imgs/gringotts.png" alt="image 1"/>
             <img src="imgs/castle.png" alt="image 2"/>
@@ -28,12 +29,76 @@
             <img src="imgs/gringotts.png" alt="image 1"/>
         </div>
     </div>
-    @* <img src="imgs/lotr.png" height="300px"/> *@
 </div>
-@foreach(var r in ViewBag.Recommendations)
-{
-    <p>@r.ProductName - @r.ProductPrice</p>
-}
 <div class="text-center">
-    
+<div class="cards">
+@foreach(var r in ViewBag.Recommendations)
+{<a asp-action="SingleProduct" asp-controller="Home">
+    <div class="wrapper">
+        <div class="container" style="background: url(@r.ProductImage) no-repeat center center; background-size: contain;">
+            <div class="top"></div>
+            <div class="bottom">
+                <div class="left">
+                    <div class="details">
+                        <p>@r.ProductPrice</p>
+                    </div>
+                    <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+                </div>
+                <div class="right">
+                    <div class="done"><i class="material-icons">done</i></div>
+                    <div class="details">
+                        <p>Added to your cart</p>
+                    </div>
+                    <div class="remove"><i class="material-icons">clear</i></div>
+                </div>
+            </div>
+        </div>
+        <div class="inside">
+            <div class="icon"><i class="material-icons">info_outline</i></div>
+            <div class="contents">
+                
+                <h2>@r.ProductName</h2>
+                @* <table> *@
+                @*     <tr> *@
+                @*         <th>Width</th> *@
+                @*         <th>Height</th> *@
+                @*     </tr> *@
+                @*     <tr> *@
+                @*         <td>3000mm</td> *@
+                @*         <td>4000mm</td> *@
+                @*     </tr> *@
+                @*     <tr> *@
+                @*         <th>Something</th> *@
+                @*         <th>Something</th> *@
+                @*     </tr> *@
+                @*     <tr> *@
+                @*         <td>200mm</td> *@
+                @*         <td>200mm</td> *@
+                @*     </tr> *@
+                @*     <tr> *@
+                @*         <th>Something</th> *@
+                @*         <th>Something</th> *@
+                @*     </tr> *@
+                @*     <tr> *@
+                @*         <td>200mm</td> *@
+                @*         <td>200mm</td> *@
+                @*     </tr> *@
+                @*     <tr> *@
+                @*         <th>Something</th> *@
+                @*         <th>Something</th> *@
+                @*     </tr> *@
+                @*     <tr> *@
+                @*         <td>200mm</td> *@
+                @*         <td>200mm</td> *@
+                @*     </tr> *@
+                @* </table> *@
+            </div>
+        </div>
+    </div>
+</a>
+}
+
+
+
+</div>
 </div>
