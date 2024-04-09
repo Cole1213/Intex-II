@@ -1,17 +1,40 @@
 using Intex_II.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
+// var connectionString = builder.Configuration.GetConnectionString("IdentityDataContextConnection") ?? throw new InvalidOperationException("Connection string 'IdentityDataContextConnection' not found.");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<IntexIiContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration["ConnectionStrings:LegoConnection"]);
-});
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:LegoConnection"]));
+
+builder.Services.AddRazorPages();  // Add this line to register Razor Pages services
+
+// builder.Services.AddDbContext<IntexIiContext>(options =>
+// {
+//     options.UseSqlServer(builder.Configuration["ConnectionStrings:LegoConnection"]);
+// });
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<IntexIiContext>();
+
+
+// var services = builder.Services;
+// var configuration = builder.Configuration;
+//
+// services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
+// {
+//     microsoftOptions.ClientId = configuration["Authentication:Microsoft:ClientId"];
+//     microsoftOptions.ClientSecret = configuration["Authentication:Microsoft:ClientSecret"];
+// });
+
 
 builder.Services.AddScoped<ILegoRepository, EFLegoRepository>();
 
@@ -51,6 +74,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseAuthentication();
 
 app.UseRouting();
 
@@ -59,5 +83,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapRazorPages();
+
 
 app.Run();

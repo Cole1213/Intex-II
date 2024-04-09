@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Security.Cryptography.Xml;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Intex_II.Controllers
 {
