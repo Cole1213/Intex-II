@@ -33,7 +33,7 @@ namespace Intex_II.Controllers
             if (categories != null && categories.Any())
             {
                 // Filter products that belong to any of the selected categories
-                productsQuery = productsQuery.Where(p => categories.Contains(p.ProductCategory));
+                productsQuery = productsQuery.Where(p => categories.Contains(p.ProductCategorySimple));
             }
 
             if (minPrice.HasValue)
@@ -53,7 +53,7 @@ namespace Intex_II.Controllers
 
             // Pass in categories for the checkbox filters
             ViewBag.Categories = _repo.Products
-                                    .Select(p => p.ProductCategory)
+                                    .Select(p => p.ProductCategorySimple)
                                     .Distinct()
                                     .ToList();
 

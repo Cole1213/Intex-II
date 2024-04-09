@@ -17,11 +17,13 @@ public partial class Product
 
     public string? ProductImage { get; set; }
 
-    public string ProductPrimaryColor { get; set; } = null!;
+    public string? ProductPrimaryColor { get; set; }
 
     public string? ProductSecondaryColor { get; set; }
 
     public string? ProductDescription { get; set; }
 
     public string? ProductCategory { get; set; }
+
+    public string? ProductCategorySimple { get; set; }
 }

@@ -18,4 +18,6 @@ public partial class Customer
     public string? CustomerGender { get; set; }
 
     public double? CustomerAge { get; set; }
+
+    public string? CustomerEmail { get; set; }
 }
