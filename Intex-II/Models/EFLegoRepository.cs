@@ -19,6 +19,8 @@ namespace Intex_II.Models
 
         public IQueryable<Cart> Carts => _context.Carts;
 
+        public IQueryable<AspNetUser> AspNetUsers => _context.AspNetUsers;
+
         public void AddCart(Cart cart)
         {
             _context.Carts.Add(cart);
@@ -76,6 +78,12 @@ namespace Intex_II.Models
         public void AddOrder(Order order)
         {
             _context.Orders.Add(order);
+            _context.SaveChanges();
+        }
+
+        public void AddLineItem(LineItem lineItem)
+        {
+            _context.LineItems.Add(lineItem);
             _context.SaveChanges();
         }
     }
