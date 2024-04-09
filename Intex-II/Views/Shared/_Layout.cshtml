@@ -30,7 +30,7 @@
             <div class="right-nav-elements">
               <a asp-controller="Home" asp-action="Dashboard"><img src="/imgs/lego.png" height="30px"></a>
               <a ><img src="@((ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home") ? "/imgs/whitesearch.png" : "/imgs/search.png")" height="30px"></a>
-              <a asp-action="Cart" asp-controller="Home"><img src="@((ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home") ? "/imgs/whitecart.png" : "/imgs/cart.png")" height="27px"></a> 
+              <a asp-action="Cart" asp-controller="Home"><img src="@((ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home") ? "/imgs/whitecart.png" : "/imgs/cart.png")" height="27px"></a>
             </div>
         </nav>
     </header>
@@ -86,7 +86,9 @@
         <p>Here is some privacy info</p>
     </div>
 </footer>
+
 <script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
 
 </body>
 </html>

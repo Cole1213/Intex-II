@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Intex_II.Models;
 
-public partial class IntexIiContext : DbContext
+public partial class IntexIiContext : IdentityDbContext<IdentityUser>
 {
     public IntexIiContext()
     {
@@ -29,6 +31,8 @@ public partial class IntexIiContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder); // This needs to be the first line in this method
+
         modelBuilder.Entity<Customer>(entity =>
         {
             entity.Property(e => e.CustomerId)
