@@ -20,7 +20,7 @@
 
         public void UpdateUser(Customer customer);
 
-        public void DeleteUser(Customer customer);
+        public void DeleteUser(AspNetUser user);
 
         public void AddUser(Customer customer);
 

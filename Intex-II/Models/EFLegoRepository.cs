@@ -39,9 +39,9 @@ namespace Intex_II.Models
             _context.SaveChanges();
         }
 
-        public void DeleteUser(Customer customer)
+        public void DeleteUser(AspNetUser user)
         {
-            _context.Customers.Remove(customer);
+            _context.AspNetUsers.Remove(user);
             _context.SaveChanges();
         }
 

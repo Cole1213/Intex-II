@@ -12,7 +12,7 @@
 @foreach (var p in ViewBag.Users)
 {
     <h3>@p.user.UserName @p.user.Email @p.Name</h3>
-    <a asp-controller="Home" asp-action="AdminDeleteUser" asp-route-customerId="@p.user.Id"><button>Delete</button></a>
+    <a asp-controller="Home" asp-action="AdminDeleteUser" asp-route-userId="@p.user.Id"><button>Delete</button></a>
 }
 
 <br />

@@ -215,17 +215,17 @@ namespace Intex_II.Controllers
         }
 
         [HttpGet]
-        public IActionResult AdminDeleteUser(int customerId)
+        public IActionResult AdminDeleteUser(string userId)
         {
-            var recordToDelete = _repo.Customers.Single(y => y.CustomerId == customerId);
+            var recordToDelete = _repo.AspNetUsers.Single(y => y.Id.Equals(userId));
 
             return View(recordToDelete);
         }
 
         [HttpPost]
-        public IActionResult AdminDeleteUser(Customer customer)
+        public IActionResult AdminDeleteUser(AspNetUser user)
         {
-            _repo.DeleteUser(customer);
+            _repo.DeleteUser(user);
 
             return RedirectToAction("AdminUsers");
         }
