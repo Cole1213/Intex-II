@@ -17,6 +17,8 @@ public partial class IntexIiContext : IdentityDbContext<IdentityUser>
     {
     }
 
+    public virtual DbSet<Cart> Carts { get; set; }
+
     public virtual DbSet<Customer> Customers { get; set; }
 
     public virtual DbSet<LineItem> LineItems { get; set; }
@@ -31,7 +33,19 @@ public partial class IntexIiContext : IdentityDbContext<IdentityUser>
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder); // This needs to be the first line in this method
+        base.OnModelCreating(modelBuilder); // Ensure this is called first
+       
+        modelBuilder.Entity<Cart>(entity =>
+        {
+            entity.HasKey(e => new { e.CustomerId, e.ProductId });
+
+            entity.ToTable("Cart");
+
+            entity.Property(e => e.CustomerId).HasColumnName("Customer_Id");
+            entity.Property(e => e.ProductId).HasColumnName("Product_Id");
+            entity.Property(e => e.ItemQuantity).HasColumnName("Item_Quantity");
+            entity.Property(e => e.TotalPrice).HasColumnName("Total_Price");
+        });
 
         modelBuilder.Entity<Customer>(entity =>
         {
@@ -41,6 +55,9 @@ public partial class IntexIiContext : IdentityDbContext<IdentityUser>
             entity.Property(e => e.BirthDate).HasColumnName("Birth_Date");
             entity.Property(e => e.CustomerAge).HasColumnName("Customer_Age");
             entity.Property(e => e.CustomerCountry).HasColumnName("Customer_Country");
+            entity.Property(e => e.CustomerEmail)
+                .HasMaxLength(50)
+                .HasColumnName("Customer_Email");
             entity.Property(e => e.CustomerFname).HasColumnName("Customer_FName");
             entity.Property(e => e.CustomerGender)
                 .HasMaxLength(1)
@@ -81,6 +98,7 @@ public partial class IntexIiContext : IdentityDbContext<IdentityUser>
                 .ValueGeneratedNever()
                 .HasColumnName("Product_Id");
             entity.Property(e => e.ProductCategory).HasColumnName("Product_Category");
+            entity.Property(e => e.ProductCategorySimple).HasColumnName("Product_Category_Simple");
             entity.Property(e => e.ProductDescription).HasColumnName("Product_Description");
             entity.Property(e => e.ProductImage).HasColumnName("Product_Image");
             entity.Property(e => e.ProductName).HasColumnName("Product_Name");
