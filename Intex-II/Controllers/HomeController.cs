@@ -26,7 +26,7 @@ namespace Intex_II.Controllers
 
             return View();
         }
-
+        
         [HttpPost]
         public IActionResult Index(Cart cart)
         {
@@ -99,7 +99,7 @@ namespace Intex_II.Controllers
         {
             return View();
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult About()
         {
             return View();

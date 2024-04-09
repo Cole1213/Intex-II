@@ -15,6 +15,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<IntexIiContext>(options =>
     options.UseSqlServer(builder.Configuration["ConnectionStrings:LegoConnection"]));
 
+
 builder.Services.AddRazorPages();  // Add this line to register Razor Pages services
 
 // builder.Services.AddDbContext<IntexIiContext>(options =>
@@ -22,18 +23,30 @@ builder.Services.AddRazorPages();  // Add this line to register Razor Pages serv
 //     options.UseSqlServer(builder.Configuration["ConnectionStrings:LegoConnection"]);
 // });
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+    {
+        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+        options.Lockout.MaxFailedAccessAttempts = 5;
+        options.Password.RequireDigit = true;
+        options.Password.RequiredLength = 12;
+        options.Password.RequireLowercase = true;
+        options.Password.RequireUppercase = true;
+        options.Password.RequireNonAlphanumeric = true;
+        options.Password.RequiredUniqueChars = 2;
+        options.User.RequireUniqueEmail = true;
+        options.SignIn.RequireConfirmedAccount = false;
+        options.SignIn.RequireConfirmedEmail = false;
+    }).AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<IntexIiContext>();
 
+var services = builder.Services;
+var configuration = builder.Configuration;
 
-// var services = builder.Services;
-// var configuration = builder.Configuration;
-//
-// services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
-// {
-//     microsoftOptions.ClientId = configuration["Authentication:Microsoft:ClientId"];
-//     microsoftOptions.ClientSecret = configuration["Authentication:Microsoft:ClientSecret"];
-// });
+services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
+{
+    microsoftOptions.ClientId = configuration["Authentication:Microsoft:ClientId"];
+    microsoftOptions.ClientSecret = configuration["Authentication:Microsoft:ClientSecret"];
+});
 
 
 builder.Services.AddScoped<ILegoRepository, EFLegoRepository>();
@@ -63,6 +76,19 @@ builder.Services.AddHttpsRedirection(options =>
 
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    if (!await roleManager.RoleExistsAsync("Admin"))
+    {
+        await roleManager.CreateAsync(new IdentityRole("Admin"));
+    }
+    if (!await roleManager.RoleExistsAsync("Customer"))
+    {
+        await roleManager.CreateAsync(new IdentityRole("Customer"));
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
