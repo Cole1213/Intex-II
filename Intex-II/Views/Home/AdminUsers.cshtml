@@ -3,3 +3,37 @@
 *@
 @{
 }
+
+<br />
+<br />
+<br />
+<a asp-controller="Home" asp-action="AdminAddUser"><button>Add User</button></a>
+
+@foreach (var p in ViewBag.Customers)
+{
+    <h3>@p.CustomerFname @p.CustomerLname</h3>
+    <a asp-controller="Home" asp-action="AdminDeleteUser" asp-route-customerId="@p.CustomerId"><button>Delete</button></a>
+}
+
+<br />
+@if (ViewBag.TotalPages > 1)
+{
+    <div>
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <a asp-action="AdminUsers" asp-route-page="1">First</a>
+            <a asp-action="AdminUsers" asp-route-page="@(ViewBag.CurrentPage - 1)">Previous</a>
+        }
+
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <a asp-action="AdminUsers" asp-route-page="@i" class="@(i == ViewBag.CurrentPage ? "current" : "")">@i</a>
+        }
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a asp-action="AdminUsers" asp-route-page="@(ViewBag.CurrentPage + 1)">Next</a>
+            <a asp-action="AdminUsers" asp-route-page="@ViewBag.TotalPages">Last</a>
+        }
+    </div>
+}

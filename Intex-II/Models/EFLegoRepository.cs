@@ -1,4 +1,6 @@
-﻿namespace Intex_II.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Intex_II.Models
 {
     public class EFLegoRepository : ILegoRepository
     {
@@ -21,6 +23,12 @@
             _context.SaveChanges();
         }
 
+        public void DeleteUser(Customer customer)
+        {
+            _context.Customers.Remove(customer);
+            _context.SaveChanges();
+        }
+
         public void AddUser(Customer customer)
         {
             _context.Customers.Add(customer);
@@ -36,6 +44,12 @@
         public void AddProduct(Product product)
         {
             _context.Products.Add(product);
+            _context.SaveChanges();
+        }
+
+        public void DeleteProduct(Product product)
+        {
+            _context.Products.Remove(product);
             _context.SaveChanges();
         }
 
