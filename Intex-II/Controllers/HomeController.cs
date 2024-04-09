@@ -1,3 +1,4 @@
+using Azure;
 using Intex_II.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -50,6 +51,7 @@ namespace Intex_II.Controllers
 
             ViewBag.Products = filteredProducts;
 
+            // Pass in categories for the checkbox filters
             ViewBag.Categories = _repo.Products
                                     .Select(p => p.ProductCategory)
                                     .Distinct()
@@ -58,9 +60,11 @@ namespace Intex_II.Controllers
             return View();
         }
 
-        public IActionResult SingleProduct()
+        public IActionResult SingleProduct(int productId)
         {
-            return View();
+            Product product = _repo.Products.FirstOrDefault(p => p.ProductId == productId);
+
+            return View(product);
         }
         
         public IActionResult Privacy()
@@ -75,42 +79,114 @@ namespace Intex_II.Controllers
 
         public IActionResult Cart()
         {
+            //NEED STUFF HERE
+
             return View();
         }
 
         public IActionResult AdminProducts()
         {
+            ViewBag.Products = _repo.Products.OrderBy(x => x.ProductName).ToList();
+
             return View();
         }
 
-        public IActionResult AdminEditProduct()
+        [HttpGet]
+        public IActionResult AdminEditProduct(int productId)
         {
-            return View("AdminAddProduct");
+            var recordToEdit = _repo.Products.Single(x => x.ProductId == productId);
+
+            return View("AdminAddProduct", recordToEdit);
         }
 
-        public IActionResult AdminDeleteProduct()
+        [HttpPost]
+        public IActionResult AdminEditProduct(Product product)
         {
-            return View();
+            _repo.UpdateProduct(product);
+
+            return RedirectToAction("AdminProducts");
         }
 
+        [HttpGet]
+        public IActionResult AdminDeleteProduct(int productId)
+        {
+            var recordToDelete = _repo.Products.Single(y => y.ProductId == productId);
+
+            return View(recordToDelete);
+        }
+
+        [HttpPost]
+        public IActionResult AdminDeleteProduct(Product product)
+        {
+            _repo.DeleteProduct(product);
+
+            return RedirectToAction("AdminProducts");
+        }
+
+        [HttpGet]
         public IActionResult AdminAddProduct()
         {
             return View();
         }
 
-        public IActionResult AdminUsers()
+        [HttpPost]
+        public IActionResult AdminAddProduct(Product product) 
         {
+            _repo.AddProduct(product);
+
+            return RedirectToAction("AdminProducts");
+        }
+
+        public IActionResult AdminUsers(int page = 1, int pageSize = 100)
+        {
+            // Calculate the number of items to skip based on the page number and page size
+            int skip = (page - 1) * pageSize;
+
+            // Retrieve a page of customers from the repository
+            var customers = _repo.Customers.OrderBy(x => x.CustomerFname).Skip(skip).Take(pageSize).ToList();
+
+            // Count the total number of customers
+            int totalCustomers = _repo.Customers.Count();
+
+            // Calculate the total number of pages
+            int totalPages = (int)Math.Ceiling((double)totalCustomers / pageSize);
+
+            // Pass the customers and pagination information to the view
+            ViewBag.Customers = customers;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = page;
+
             return View();
         }
 
+        [HttpGet]
+        public IActionResult AdminDeleteUser(int customerId)
+        {
+            var recordToDelete = _repo.Customers.Single(y => y.CustomerId == customerId);
+
+            return View(recordToDelete);
+        }
+
+        [HttpPost]
+        public IActionResult AdminDeleteUser(Customer customer)
+        {
+            _repo.DeleteUser(customer);
+
+            return RedirectToAction("AdminUsers");
+        }
+
+        [HttpGet]
         public IActionResult AdminAddUser()
         {
             return View();
         }
 
-        public IActionResult AdminDeleteUser()
+        [HttpPost]
+        public IActionResult AdminAddUser(Customer customer)
         {
-            return View();
+            _repo.AddUser(customer);
+
+            return RedirectToAction("AdminUsers");
         }
 
         public IActionResult AdminOrders()

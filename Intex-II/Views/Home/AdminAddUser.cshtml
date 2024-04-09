@@ -1,5 +1,43 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{
-}
+@model Customer
+
+<br />
+<br />
+<br />
+
+<form action="/Customer/Add" method="post">
+    <input type="hidden" asp-for="CustomerId">
+    <div>
+        <label asp-for="CustomerFname">First Name:</label>
+        <input type="text" asp-for="CustomerFname" name="customerFname">
+    </div>
+    <div>
+        <label asp-for="CustomerLname">Last Name:</label>
+        <input type="text" asp-for="CustomerLname" name="customerLname">
+    </div>
+    <div>
+        <label asp-for="BirthDate">Birth Date:</label>
+        <input type="date" asp-for="BirthDate" name="birthDate">
+    </div>
+    <div>
+        <label asp-for="CustomerCountry">Country:</label>
+        <input type="text" asp-for="CustomerCountry" name="customerCountry">
+    </div>
+    <div>
+        <label asp-for="CustomerGender">Gender:</label>
+        <select asp-for="CustomerGender" name="customerGender">
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="O">Other</option>
+        </select>
+    </div>
+    <div>
+        <label asp-for="CustomerAge">Age:</label>
+        <input type="number" asp-for="CustomerAge" name="customerAge">
+    </div>
+    <div>
+        <button type="submit">Add Customer</button>
+    </div>
+</form>

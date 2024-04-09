@@ -3,3 +3,16 @@
 *@
 @{
 }
+
+<br />
+<br />
+<br />
+<a asp-controller="Home" asp-action="AdminAddProduct"><button>Add Product</button></a>
+
+@foreach(var p in ViewBag.Products)
+{
+    <h3>@p.ProductName</h3>
+    <p>@p.ProductPrice</p>
+    <a asp-controller="Home" asp-action="AdminEditProduct" asp-route-productId="@p.ProductId"><button>Edit</button></a>
+    <a asp-controller="Home" asp-action="AdminDeleteProduct" asp-route-productId="@p.ProductId"><button>Delete</button></a>
+}

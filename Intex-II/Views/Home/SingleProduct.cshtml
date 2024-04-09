@@ -3,8 +3,7 @@
 *@
 @{
 }
-<div style="margin-top:100px;">
-    <h1>Single Product</h1>
-    
-</div>
-
+@model Product
+<img style="height: 250px" src="@Model.ProductImage" alt="Image of product" />
+<h1>@Model.ProductName</h1>
+<p>$ @Model.ProductPrice</p>

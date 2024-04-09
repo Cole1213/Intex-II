@@ -38,6 +38,7 @@
         @foreach (var product in ViewBag.Products)
         {
             <li>@product.ProductName - @product.ProductPrice</li>
+            <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@product.ProductId"><button>View Product</button></a>
         }
     </ul>
 }
