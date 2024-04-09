@@ -3,9 +3,18 @@
 *@
 @{
 }
-@model Product
-<div style="padding-top:100px">
-<img style="height: 250px" src="@Model.ProductImage" alt="Image of product" />
-<h1>@Model.ProductName</h1>
-<p>$ @Model.ProductPrice</p>
-</div>
+@model Cart
+
+<br />
+<br />
+<br />
+<img style="height: 250px" src="@ViewBag.Products.ProductImage" alt="Image of product" />
+<h1>@ViewBag.Products.ProductName</h1>
+<p>$ @ViewBag.Products.ProductPrice</p>
+<form method="post">
+    <input type="hidden" asp-for="CustomerId" value="1" />
+    <input type="hidden" asp-for="ProductId" value="@ViewBag.Products.ProductId" />
+    <input type="hidden" asp-for="ItemQuantity" value="1" />
+    <input type="hidden" asp-for="TotalPrice" value="@ViewBag.Products.ProductPrice" />
+    <button type="submit">Add to Cart</button>
+</form>

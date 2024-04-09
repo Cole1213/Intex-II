@@ -10,6 +10,12 @@
 
         public IQueryable<LineItem> LineItems { get; }
 
+        public IQueryable<Cart> Carts { get; }
+
+        public void AddCart(Cart cart);
+
+        public void RemoveCart(Cart cart);
+
         public void UpdateUser(Customer customer);
 
         public void DeleteUser(Customer customer);

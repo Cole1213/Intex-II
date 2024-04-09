@@ -17,6 +17,20 @@ namespace Intex_II.Models
 
         public IQueryable<LineItem> LineItems => _context.LineItems;
 
+        public IQueryable<Cart> Carts => _context.Carts;
+
+        public void AddCart(Cart cart)
+        {
+            _context.Carts.Add(cart);
+            _context.SaveChanges();
+        }
+
+        public void RemoveCart(Cart cart)
+        {
+            _context.Carts.Remove(cart);
+            _context.SaveChanges();
+        }
+
         public void UpdateUser(Customer customer)
         {
             _context.Customers.Update(customer);

@@ -3,7 +3,7 @@
 *@
 @{
 }
-@model List<Product>
+@model Cart
 @{
     ViewData["Title"] = "Products";
 }
@@ -39,6 +39,13 @@
         {
             <li>@product.ProductName - @product.ProductPrice</li>
             <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@product.ProductId"><button>View Product</button></a>
+            <form method="post">
+                <input type="hidden" asp-for="CustomerId" value="1" />
+                <input type="hidden" asp-for="ProductId" value="@product.ProductId" />
+                <input type="hidden" asp-for="ItemQuantity" value="1" />
+                <input type="hidden" asp-for="TotalPrice" value="@product.ProductPrice" />
+                <button type="submit">Add to Cart</button>
+            </form>
         }
     </ul>
 }
