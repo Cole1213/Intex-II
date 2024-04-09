@@ -80,11 +80,10 @@ if (document.querySelectorAll(".carousel").length > 0) {
     }
 }
 
-
-$('.buy').click(function(){
-    $('.bottom').addClass("clicked");
+$('.buy').click(function() {
+    $(this).closest('.wrapper').find('.bottom').addClass("clicked");
 });
 
-$('.remove').click(function(){
-    $('.bottom').removeClass("clicked");
+$('.remove').click(function() {
+    $(this).closest('.wrapper').find('.bottom').removeClass("clicked");
 });

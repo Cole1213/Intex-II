@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Intex_II</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
     <link rel="shortcut icon" href="~/imgs/favicon.png" type="image/x-icon" />
     <link rel="icon" href="~/imgs/favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -13,38 +15,29 @@
     <script src="https://kit.fontawesome.com/74c768f0cc.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Intex_II.styles.css" asp-append-version="true" />
-            <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-            <script type="text/javascript">
-            $(window).on('scroll',function(){
-                if($(window).scrollTop()){
-                    $('nav').addClass('black');
-                }
-                else{
-                    $('nav').removeClass('black');
-                }
-            })
-            </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+     
 </head>
 <body>
     <header>
         <nav>
             <div class="left-nav-elements">
-                <img src="imgs/whitelogo.png" height="50px" alt="Lego Brick Logo">
-                <a href="#">Shop</a>
-                <a href="#">Discover</a>
-                <a href="#">About</a>
+                <a asp-controller="Home" asp-action="Index"><img src="@((ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home") ? "/imgs/whitelogo.png" : "/imgs/logo.png")" height="50px" alt="Lego Brick Logo"></a>
+                <a asp-controller="Home" asp-action="Products" style="@((ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home") ? "color:white;" : "color:black;")">Shop</a>
+                <a href="#" style="@((ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home") ? "color:white;" : "color:black;")">Discover</a>
+                <a asp-controller="Home" asp-action="About" style="@((ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home") ? "color:white;" : "color:black;")">About</a>
             </div>
             <div class="right-nav-elements">
-              <a><img src="imgs/lego.png" height="30px"></a>
-              <a><img src="imgs/whitesearch.png" height="30px"></a>
-              <a><img src="imgs/whitecart.png" height="27px"></a> 
+              <a asp-controller="Home" asp-action="Dashboard"><img src="/imgs/lego.png" height="30px"></a>
+              <a ><img src="@((ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home") ? "/imgs/whitesearch.png" : "/imgs/search.png")" height="30px"></a>
+              <a asp-action="Cart" asp-controller="Home"><img src="@((ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home") ? "/imgs/whitecart.png" : "/imgs/cart.png")" height="27px"></a> 
             </div>
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+    
             @RenderBody()
-        </main>
+
     </div>
 
 <footer>

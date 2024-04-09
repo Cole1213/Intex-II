@@ -3,7 +3,7 @@
   --secondary-color: #333;
   --padding: 1rem;
   --border-radius: 5px;
-  --size-of-hero:70vh;
+  --size-of-hero:75vh;
 }
 
 @media (min-width: 768px) {
@@ -36,7 +36,7 @@ nav {
   align-items: center;
   width: 100%;
   padding: 0 20px; 
-  z-index: 2; 
+  z-index: 10002; 
   padding-top: 10px;
 }
 
@@ -287,7 +287,9 @@ p{
   height: var(--size-of-hero);
   display: flex;
   flex-direction: row;
-  
+  /*padding-top: 55px;*/
+
+
 }
 
 .poppins-regular {
@@ -300,17 +302,25 @@ p{
 .hero-txt{
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  padding-left: 150px;
   justify-content: center;
   width: 50vw;
-  button {
+  a {
     background-color: white;
     padding: 10px;
+    margin-top:20px;
     color:black;
+    border:none;
+  }
+  h4{
+    color:grey;
   }
   h2 {
     color:white;
+    font-size: 80px
   }
+  
 
 }
 
@@ -322,7 +332,6 @@ p{
 .carousel {
   position: relative;
   overflow: hidden;
-  z-index: 10001;
   width: 50vw;
 }
 
@@ -345,11 +354,12 @@ p{
 }
 
 .carousel-content img {
-  height: var(--size-of-hero);
+  height: 70vh;
   min-width: 100%;
   max-width: 100%;
   object-fit: contain;
   padding:30px;
+  padding-top:100px
 }
 
 .carousel-content video {
@@ -371,13 +381,15 @@ p{
 
 .carousel .carousel-control-right {
   position: absolute;
-  top: 0;
+  top: 55px;
   bottom: 0;
   right: 0;
   width: 10%;
+  height: 70%;
   cursor: pointer;
   z-index: 1;
 }
+
 .carousel .carousel-control-right:hover  {
   background: linear-gradient(to top left, #0000008a, #00003626);
 }
@@ -386,17 +398,16 @@ p{
 }
 
 .text-center {
-  height: 500px;
+  height: auto;
 }
 
-/*.cards {*/
-/*  display: flex;*/
-/*  flex-direction: row;*/
-/*  !*width: 150vw;*!*/
-/*  overflow-x: auto; !* Enables horizontal scrolling *!*/
-/*  overflow-y: hidden; !* Hides vertical overflow *!*/
-/*  white-space: nowrap; !* Prevents wrapping of items *!*/
-/*}*/
+.cards {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  overflow-x: auto; /* Enables horizontal scrolling */
+  overflow-y: hidden; /* Hides vertical overflow */
+}
 /*.card {*/
 /*  height: 400px;*/
 /*  border-radius: 20px;*/
@@ -413,9 +424,10 @@ p{
 
 .wrapper{
   width: 300px;
+  min-width: 300px;
   height: 500px;
   background: white;
-  margin: auto;
+  margin: 30px;
   position: relative;
   overflow: hidden;
   border-radius: 10px 10px 10px 10px;
@@ -433,7 +445,6 @@ p{
     .top{
       height: 80%;
       width:100%;
-      background: url(https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg) no-repeat center center;
       -webkit-background-size: 100%;
       -moz-background-size: 100%;
       -o-background-size: 100%;
@@ -542,7 +553,7 @@ p{
 
   .inside{
     z-index:9;
-    background: #92879B;
+    background: #3f2bac;
     width:140px;
     height:140px;
     position: absolute;
@@ -576,6 +587,7 @@ p{
       }
     }
     .contents{
+      display: flex;
       padding: 5%;
       opacity: 0;
       transform: scale(0.5);
