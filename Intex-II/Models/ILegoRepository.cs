@@ -12,6 +12,8 @@
 
         public IQueryable<Cart> Carts { get; }
 
+        public IQueryable<AspNetUser> AspNetUsers { get; }
+
         public void AddCart(Cart cart);
 
         public void RemoveCart(Cart cart);
@@ -31,6 +33,8 @@
         public void UpdateOrder(Order order);
 
         public void AddOrder(Order order);
+
+        public void AddLineItem(LineItem lineItem);
 
     }
 }
