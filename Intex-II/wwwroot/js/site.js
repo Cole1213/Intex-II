@@ -79,3 +79,12 @@ if (document.querySelectorAll(".carousel").length > 0) {
         carouselClick();
     }
 }
+
+
+$('.buy').click(function(){
+    $('.bottom').addClass("clicked");
+});
+
+$('.remove').click(function(){
+    $('.bottom').removeClass("clicked");
+});

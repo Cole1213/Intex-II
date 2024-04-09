@@ -8,9 +8,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4381a429-cbbe-49f1-a2fd-9daf6fdc64ed" name="Changes" comment="adding pictures">
-      <change beforePath="$PROJECT_DIR$/Intex-II/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/appsettings.json" afterDir="false" />
+    <list default="true" id="4381a429-cbbe-49f1-a2fd-9daf6fdc64ed" name="Changes" comment="adding https stuff">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Intex-II/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Intex-II/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Home/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Shared/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/wwwroot/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/wwwroot/css/site.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +161,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712617141140</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="adding https stuff">
+      <option name="closed" value="true" />
+      <created>1712618013539</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1712618013539</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,6 +183,7 @@
     <MESSAGE value="test" />
     <MESSAGE value="evan changes" />
     <MESSAGE value="adding pictures" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding pictures" />
+    <MESSAGE value="adding https stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding https stuff" />
   </component>
 </project>
