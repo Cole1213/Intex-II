@@ -75,10 +75,12 @@ namespace Intex_II.Models
             _context.SaveChanges();
         }
 
-        public void AddOrder(Order order)
+        public Order AddOrder(Order order)
         {
             _context.Orders.Add(order);
             _context.SaveChanges();
+
+            return order;
         }
 
         public void AddLineItem(LineItem lineItem)

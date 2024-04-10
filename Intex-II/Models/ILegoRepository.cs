@@ -32,7 +32,7 @@
 
         public void UpdateOrder(Order order);
 
-        public void AddOrder(Order order);
+        public Order AddOrder(Order order);
 
         public void AddLineItem(LineItem lineItem);
 

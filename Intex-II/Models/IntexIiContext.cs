@@ -157,11 +157,9 @@ public partial class IntexIiContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.TransactionId);
+            entity.HasKey(e => e.TransactionId).HasName("PK_Products_Transaction_Id");
 
-            entity.Property(e => e.TransactionId)
-                .ValueGeneratedNever()
-                .HasColumnName("Transaction_Id");
+            entity.Property(e => e.TransactionId).HasColumnName("Transaction_Id");
             entity.Property(e => e.CustomerId).HasColumnName("Customer_Id");
             entity.Property(e => e.EntryMode).HasColumnName("Entry_Mode");
             entity.Property(e => e.TransactionBank).HasColumnName("Transaction_Bank");
@@ -176,9 +174,7 @@ public partial class IntexIiContext : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.Property(e => e.ProductId)
-                .ValueGeneratedNever()
-                .HasColumnName("Product_Id");
+            entity.Property(e => e.ProductId).HasColumnName("Product_Id");
             entity.Property(e => e.ProductCategory).HasColumnName("Product_Category");
             entity.Property(e => e.ProductCategorySimple).HasColumnName("Product_Category_Simple");
             entity.Property(e => e.ProductDescription).HasColumnName("Product_Description");

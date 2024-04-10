@@ -15,7 +15,6 @@
 <h2>Order</h2>
 
 <form method="post">
-    <input type="hidden" asp-for="TransactionId"/>
     <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId"/>
 
     <label asp-for="TransactionDate">Transaction Date:</label>
@@ -41,6 +40,14 @@
     <label asp-for="TransactionType">Transaction Type:</label>
     <select asp-for="TransactionType">
         @foreach (var e in ViewBag.TransactionTypes)
+        {
+            <option value="@e">@e</option>
+        }
+    </select>
+
+    <label asp-for="TransactionTypeOfCard">Card Type:</label>
+    <select asp-for="TransactionTypeOfCard">
+        @foreach (var e in ViewBag.TransactionCardTypes)
         {
             <option value="@e">@e</option>
         }
