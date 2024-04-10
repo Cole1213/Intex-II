@@ -33,81 +33,107 @@
     </div>
 </div>
 <div class="text-center">
-<div class="cards">
-@foreach(var r in ViewBag.Recommendations)
-{<a asp-action="SingleProduct" asp-controller="Home" asp-route-productId="@r.ProductId">
-    <div class="wrapper">
-        <div class="container" style="background: url(@r.ProductImage) no-repeat center center; background-size: contain;">
-            <div class="top"></div>
-            <div class="bottom">
-                <div class="left">
-                    <div class="details">
-                        <p>@r.ProductPrice</p>
+    <div class="cards">
+        @foreach(var r in ViewBag.Recommendations)
+        {<a asp-action="SingleProduct" asp-controller="Home" asp-route-productId="@r.ProductId">
+            <div class="wrapper">
+                <div class="container" style="background: url(@r.ProductImage) no-repeat center center; background-size: contain;">
+                    <div class="top"></div>
+                    <div class="bottom">
+                        <div class="left">
+                            <div class="details">
+                                <p>@r.ProductPrice</p>
+                            </div>
+                            <!--<div class="buy"><i class="material-icons">add_shopping_cart</i></div>-->
+                            <form method="post" class="add-to-cart-form" style="height: 100%">
+                                <input type="hidden" asp-for="CustomerId" value="1" />
+                                <input type="hidden" asp-for="ProductId" value="@r.ProductId" />
+                                <input type="hidden" asp-for="ItemQuantity" value="1" />
+                                <input type="hidden" asp-for="TotalPrice" value="@r.ProductPrice" />
+                                <button type="submit" class="buy" style="border: none;">
+                                    @* <div class="buy"> *@
+                                    <i class="material-icons">add_shopping_cart</i>
+                                    @* </div> *@
+                                </button>
+                            </form>
+                        </div>
+                        <div class="right">
+                            <div class="done"><i class="material-icons">done</i></div>
+                            <div class="details">
+                                <p>Added to your cart</p>
+                            </div>
+                            <div class="remove"><i class="material-icons">clear</i></div>
+                        </div>
                     </div>
-                    <!--<div class="buy"><i class="material-icons">add_shopping_cart</i></div>-->
-                    <form method="post">
-                        <input type="hidden" asp-for="CustomerId" value="1" />
-                        <input type="hidden" asp-for="ProductId" value="@r.ProductId" />
-                        <input type="hidden" asp-for="ItemQuantity" value="1" />
-                        <input type="hidden" asp-for="TotalPrice" value="@r.ProductPrice" />
-                        <button type="submit" style="border: none; background: none; padding: 0;"><div class="buy"><i class="material-icons">add_shopping_cart</i></div></button>
-                    </form>
                 </div>
-                <div class="right">
-                    <div class="done"><i class="material-icons">done</i></div>
-                    <div class="details">
-                        <p>Added to your cart</p>
-                    </div>
-                    <div class="remove"><i class="material-icons">clear</i></div>
-                </div>
-            </div>
-        </div>
-        <div class="inside">
-            <div class="icon"><i class="material-icons">info_outline</i></div>
-            <div class="contents">
+                <div class="inside">
+                    <div class="icon"><i class="material-icons">info_outline</i></div>
+                    <div class="contents">
                 
-                <h2>@r.ProductName</h2>
-                @* <table> *@
-                @*     <tr> *@
-                @*         <th>Width</th> *@
-                @*         <th>Height</th> *@
-                @*     </tr> *@
-                @*     <tr> *@
-                @*         <td>3000mm</td> *@
-                @*         <td>4000mm</td> *@
-                @*     </tr> *@
-                @*     <tr> *@
-                @*         <th>Something</th> *@
-                @*         <th>Something</th> *@
-                @*     </tr> *@
-                @*     <tr> *@
-                @*         <td>200mm</td> *@
-                @*         <td>200mm</td> *@
-                @*     </tr> *@
-                @*     <tr> *@
-                @*         <th>Something</th> *@
-                @*         <th>Something</th> *@
-                @*     </tr> *@
-                @*     <tr> *@
-                @*         <td>200mm</td> *@
-                @*         <td>200mm</td> *@
-                @*     </tr> *@
-                @*     <tr> *@
-                @*         <th>Something</th> *@
-                @*         <th>Something</th> *@
-                @*     </tr> *@
-                @*     <tr> *@
-                @*         <td>200mm</td> *@
-                @*         <td>200mm</td> *@
-                @*     </tr> *@
-                @* </table> *@
+                        <h2>@r.ProductName</h2>
+                        @* <table> *@
+                        @*     <tr> *@
+                        @*         <th>Width</th> *@
+                        @*         <th>Height</th> *@
+                        @*     </tr> *@
+                        @*     <tr> *@
+                        @*         <td>3000mm</td> *@
+                        @*         <td>4000mm</td> *@
+                        @*     </tr> *@
+                        @*     <tr> *@
+                        @*         <th>Something</th> *@
+                        @*         <th>Something</th> *@
+                        @*     </tr> *@
+                        @*     <tr> *@
+                        @*         <td>200mm</td> *@
+                        @*         <td>200mm</td> *@
+                        @*     </tr> *@
+                        @*     <tr> *@
+                        @*         <th>Something</th> *@
+                        @*         <th>Something</th> *@
+                        @*     </tr> *@
+                        @*     <tr> *@
+                        @*         <td>200mm</td> *@
+                        @*         <td>200mm</td> *@
+                        @*     </tr> *@
+                        @*     <tr> *@
+                        @*         <th>Something</th> *@
+                        @*         <th>Something</th> *@
+                        @*     </tr> *@
+                        @*     <tr> *@
+                        @*         <td>200mm</td> *@
+                        @*         <td>200mm</td> *@
+                        @*     </tr> *@
+                        @* </table> *@
+                    </div>
+                </div>
             </div>
-        </div>
+        </a>
+        }
+
+
+
     </div>
-</a>
-}
-
-
-
 </div>
-</div>
+<script>
+    $(document).ready(function () {
+        $('.add-to-cart-form').on('submit', function (e) {
+            e.preventDefault(); // Prevent default form submission
+
+            var formData = $(this).serialize(); // Serialize form data
+
+            $.ajax({
+                url: '@Url.Action("SingleProduct", "Home")', // Set to your actual URL
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    // Handle success - for example, show a message or update cart count
+                },
+                error: function (xhr, status, error) {
+                    // Handle error
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script>

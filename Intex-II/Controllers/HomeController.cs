@@ -87,7 +87,8 @@ namespace Intex_II.Controllers
 
             return View();
         }
-
+        
+        [Authorize(Roles = "Customer")]
         [HttpPost]
         public IActionResult SingleProduct(Cart cart)
         {
@@ -198,26 +199,25 @@ namespace Intex_II.Controllers
             return RedirectToAction("AdminProducts");
         }
 
-
+        
         [Authorize(Roles = "Admin")]
         public IActionResult AdminUsers(int page = 1, int pageSize = 10)
-        
         {
             // Calculate the number of items to skip based on the page number and page size
             int skip = (page - 1) * pageSize;
 
-            ViewBag.Users = _repo.AspNetUsers
-                .SelectMany(u => u.Roles, (user, role) => new { user, role.Name })
-                .ToList();
+            // ViewBag.Users = _repo.AspNetUsers
+                // .SelectMany(u => u.Roles, (user, role) => new { user, role.Name })
+                // .ToList();
 
             // Count the total number of customers
-            int totalUsers = _repo.AspNetUsers.Count();
+            // int totalUsers = _repo.AspNetUsers.Count();
 
             // Calculate the total number of pages
-            int totalPages = (int)Math.Ceiling((double)totalUsers / pageSize);
+            // int totalPages = (int)Math.Ceiling((double)totalUsers / pageSize);
 
             // Pass the customers and pagination information to the view
-            ViewBag.TotalPages = totalPages;
+            // ViewBag.TotalPages = totalPages;
             ViewBag.CurrentPage = page;
 
             return View();
@@ -227,10 +227,12 @@ namespace Intex_II.Controllers
         [HttpGet]
         public IActionResult AdminDeleteUser(string userId)
         {
-            var recordToDelete = _repo.AspNetUsers.Single(y => y.Id.Equals(userId));
+            // var recordToDelete = _repo.AspNetUsers.Single(y => y.Id.Equals(userId));
 
-            return View(recordToDelete);
+            // return View(recordToDelete);
+            return View();
         }
+        
 
         [Authorize(Roles = "Admin")]
         [HttpPost]

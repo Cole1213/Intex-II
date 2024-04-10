@@ -43,7 +43,7 @@
                           <img src="@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "/imgs/whitelogo.png" : "/imgs/logo.png")" height="50px" alt="Lego Brick Logo">
                       </a>
                       <a asp-controller="Home" asp-action="AdminProducts" style="color:@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white" : "black");">Products</a>
-                      <a asp-controller="Home" asp-action="AdminUsers" style="color:@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white" : "black");">Users</a>
+                      <a asp-controller="UserAdmin" asp-action="UserAdmin" style="color:@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white" : "black");">Users</a>
                   }
                   else
                   {

@@ -19,7 +19,7 @@ namespace Intex_II.Models
 
         public IQueryable<Cart> Carts => _context.Carts;
 
-        public IQueryable<AspNetUser> AspNetUsers => _context.AspNetUsers;
+        // public IQueryable<AspNetUser> AspNetUsers => _context.AspNetUsers;
 
         public void AddCart(Cart cart)
         {
@@ -41,7 +41,7 @@ namespace Intex_II.Models
 
         public void DeleteUser(AspNetUser user)
         {
-            _context.AspNetUsers.Remove(user);
+            // _context.AspNetUsers.Remove(user);
             _context.SaveChanges();
         }
 
