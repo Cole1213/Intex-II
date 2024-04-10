@@ -8,12 +8,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4381a429-cbbe-49f1-a2fd-9daf6fdc64ed" name="Changes" comment="this is working 100%">
+    <list default="true" id="4381a429-cbbe-49f1-a2fd-9daf6fdc64ed" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Intex-II/wwwroot/css/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Intex-II/wwwroot/css/order.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Intex-II/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Intex-II/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Controllers/HomeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Models/ApplicationUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Models/ApplicationUser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Models/IntexIiContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Models/IntexIiContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Views/Home/AdminOrders.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Home/AdminOrders.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Home/Index.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intex-II/Views/Home/SubmitOrder.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Home/SubmitOrder.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intex-II/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Shared/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Views/Shared/_LoginSharedLayout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Shared/_LoginSharedLayout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/wwwroot/css/footer.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Intex-II/wwwroot/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/wwwroot/css/site.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/wwwroot/js/site.js" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/wwwroot/js/site.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,29 +80,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.Intex-II: http.executor": "Run",
-    ".NET Launch Settings Profile.Intex-II: https.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "evan-branch",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.Intex-II: http.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.Intex-II: https.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;evan-branch&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "/Users/evanneff/Library/Application Support/JetBrains/Rider2023.3/resharper-host/DecompilerCache",
-      "/Users/evanneff/Library/Application Support/JetBrains/Rider2023.3/resharper-host/SourcesCache",
-      "/Users/evanneff/.local/share/Symbols/src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;/Users/evanneff/Library/Application Support/JetBrains/Rider2023.3/resharper-host/DecompilerCache&quot;,
+      &quot;/Users/evanneff/Library/Application Support/JetBrains/Rider2023.3/resharper-host/SourcesCache&quot;,
+      &quot;/Users/evanneff/.local/share/Symbols/src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Intex-II: https">
     <configuration name="Intex-II: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Intex-II/Intex-II.csproj" />

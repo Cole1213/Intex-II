@@ -8,6 +8,10 @@ namespace Intex_II.Models;
 
 public partial class IntexIiContext : IdentityDbContext<IdentityUser>
 {
+    public IntexIiContext()
+    {
+        
+    }
     public IntexIiContext(DbContextOptions<IntexIiContext> options)
         : base(options)
     {

@@ -109,5 +109,23 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
+app.Use(async (context, next) =>
+{
+    context.Response.Headers["Content-Security-Policy"] =
+        "default-src 'self'; " +
+        // Allow scripts from your own domain, Google APIs, unpkg.com, Font Awesome, and jQuery
+        "script-src 'self' 'unsafe-inline' https://apis.google.com https://unpkg.com https://kit.fontawesome.com https://code.jquery.com; " +
+        // Consolidated style-src directive to allow styles from your own domain, Google Fonts, and Font Awesome
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://use.fontawesome.com; " +
+        // Allow styles applied via attributes, consider security implications of 'unsafe-inline'
+        "style-src-attr 'self' 'unsafe-inline'; " +
+        // Allow images from your own domain, trusted CDNs, Amazon media, and LEGO
+        "img-src 'self' https://*.cdn.com https://m.media-amazon.com https://www.lego.com; " +
+        // Consolidated font-src directive to allow fonts from your own domain, Google Fonts, and Font Awesome
+        "font-src 'self' https://fonts.gstatic.com https://use.fontawesome.com";
+        // Specify the report-to endpoint for violations
+        // "report-uri /Home/LogCspReport;";
+    await next();
+});
 
 app.Run();
