@@ -198,6 +198,9 @@ namespace Intex_II.Controllers
             return RedirectToAction("AdminProducts");
         }
 
+<<<<<<<<< Temporary merge branch 1
+        public IActionResult AdminUsers(int page = 1, int pageSize = 10)
+=========
         [Authorize(Roles = "Admin")]
         public IActionResult AdminUsers(int page = 1, int pageSize = 10)
         {
