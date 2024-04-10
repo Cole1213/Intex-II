@@ -8,20 +8,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4381a429-cbbe-49f1-a2fd-9daf6fdc64ed" name="Changes" comment="Adding login stuff">
+    <list default="true" id="4381a429-cbbe-49f1-a2fd-9daf6fdc64ed" name="Changes" comment="adding restrictions and stuff">
+      <change afterPath="$PROJECT_DIR$/Intex-II/Controllers/UserAdminController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Intex-II/Models/UserRolesViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Intex-II/Views/UserAdmin/UserAdmin.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Intex-II/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Intex-II/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Models/AspNetRole.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Models/AspNetRole.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Models/AspNetRoleClaim.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Models/AspNetRoleClaim.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Models/AspNetUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Models/AspNetUser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Models/AspNetUserClaim.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Models/AspNetUserClaim.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Models/AspNetUserLogin.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Models/AspNetUserLogin.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Models/AspNetUserToken.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Models/AspNetUserToken.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Models/Cart.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Models/Cart.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Models/Customer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Models/Customer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Controllers/HomeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Models/EFLegoRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Models/EFLegoRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Models/ILegoRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Models/ILegoRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Models/IdentityDbContext.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Intex-II/Models/IntexIiContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Models/IntexIiContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Models/LineItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Models/LineItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Models/Order.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Models/Order.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Models/Product.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Models/Product.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Home/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Shared/_Layout.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,12 +45,24 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Controllers/HomeController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Controllers/HomeController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Controllers/HomeController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Controllers/HomeController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Controllers/HomeController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Controllers/HomeController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Controllers/HomeController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Controllers/HomeController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Models/AspNetRole.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Models/IntexIiContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Models/IntexIiContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -72,7 +82,7 @@
     ".NET Launch Settings Profile.Intex-II: https.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "evan-changes",
+    "git-widget-placeholder": "evan-branch",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -208,13 +218,40 @@
       <option name="project" value="LOCAL" />
       <updated>1712684329067</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="get everything working">
+      <option name="closed" value="true" />
+      <created>1712699944922</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1712699944922</updated>
+    </task>
+    <task id="LOCAL-00011" summary="adding restrictions and stuff">
+      <option name="closed" value="true" />
+      <created>1712713459751</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1712713459751</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Small changes" />
@@ -226,6 +263,8 @@
     <MESSAGE value="some more changes" />
     <MESSAGE value="evan's changes for day 1" />
     <MESSAGE value="Adding login stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding login stuff" />
+    <MESSAGE value="get everything working" />
+    <MESSAGE value="adding restrictions and stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding restrictions and stuff" />
   </component>
 </project>

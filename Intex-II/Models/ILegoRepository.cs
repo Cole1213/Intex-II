@@ -12,7 +12,7 @@
 
         public IQueryable<Cart> Carts { get; }
 
-        public IQueryable<AspNetUser> AspNetUsers { get; }
+        // public IQueryable<AspNetUser> AspNetUsers { get; }
 
         public void AddCart(Cart cart);
 

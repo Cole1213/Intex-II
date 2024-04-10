@@ -1,0 +1,41 @@
+@model IEnumerable<UserRolesViewModel>
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="padding-top:100px ">
+<h2>Users and Their Roles</h2>
+ 
+<table class="table">
+ <thead>
+     <tr>
+         <th>Email</th>
+         <th>Roles</th>
+         <th>Edit Roles</th>
+     </tr>
+ </thead>
+ <tbody>
+     @foreach (var user in Model)
+     {
+         <tr>
+             <td>@user.Email</td>
+             <td>@string.Join(", ", user.Roles)</td>
+             <td>
+                 <!-- You might want a form here for editing roles, or a link to a separate edit page -->
+                 <form asp-action="UserAdmin" method="post">
+                     <input type="hidden" name="userId" value="@user.UserId" />
+                     <!-- Display roles checkboxes or any other inputs you prefer -->
+                     @foreach (var role in ViewData["Roles"] as List<string>)
+                     {
+                         <input type="checkbox" name="roles" value="@role" @(user.Roles.Contains(role) ? "checked" : "") /> @role
+                     }
+                     <button type="submit">Update Roles</button>
+                 </form>
+             </td>
+         </tr>
+     }
+ </tbody>
+</table>
+</div>
