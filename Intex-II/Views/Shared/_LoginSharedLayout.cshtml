@@ -20,9 +20,21 @@
 </head>
 <body>
     <header>
-
+         <nav>
+            <div class="left-nav-elements">
+                <a asp-controller="Home" asp-action="Index"><img src="/imgs/logo.png" height="50px" alt="Lego Brick Logo"></a>
+                <a asp-controller="Home" asp-action="Products" style="color:black;">Shop</a>
+                <a href="#" style="color:black;">Discover</a>
+                <a asp-controller="Home" asp-action="About" style="color:black;">About</a>
+            </div>
+            <div class="right-nav-elements">
+              <a asp-controller="Home" asp-action="Dashboard"><img src="/imgs/lego.png" height="30px"></a>
+              <a ><img src="/imgs/search.png" height="30px"></a>
+              <a asp-action="Cart" asp-controller="Home"><img src="/imgs/cart.png" height="27px"></a>
+            </div>
+        </nav>
     </header>
-    <div class="container">
+    <div class="container" style="padding-top:100px">
     
             @RenderBody()
 
