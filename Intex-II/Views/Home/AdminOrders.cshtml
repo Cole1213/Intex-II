@@ -11,7 +11,7 @@
     <h3>@p.TransactionId</h3>
     <p>@p.TransactionDate</p>
     <p>@p.TransactionCountry</p>
-    <a asp-controller="Home" asp-action="AdminEditOrder" asp-route-Id="@p.TransactionId"><button>Edit</button></a>
+    <a asp-controller="Home" asp-action="" asp-route-Id="@p.TransactionId"><button>Edit</button></a>
 }
 
 @if (ViewBag.TotalPages > 1)
