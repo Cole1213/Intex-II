@@ -258,10 +258,24 @@ namespace Intex_II.Controllers
 
             return RedirectToAction("AdminUsers");
         }
-        
         [Authorize(Roles = "Admin")]
-        public IActionResult AdminOrders()
+        public IActionResult AdminOrders(int page = 1, int pageSize = 10)
         {
+            // Calculate the number of items to skip based on the page number and page size
+            int skip = (page - 1) * pageSize;
+
+            ViewBag.Orders = _repo.Orders.OrderByDescending(x => x.TransactionDate).Take(pageSize).ToList();
+
+            // Count the total number of customers
+            int totalOrders = 100;
+
+            // Calculate the total number of pages
+            int totalPages = (int)Math.Ceiling((double)totalOrders / pageSize);
+
+            // Pass the customers and pagination information to the view
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = page;
+
             return View();
         }
 
@@ -305,13 +319,18 @@ namespace Intex_II.Controllers
                                     .Distinct()
                                     .ToList();
 
+            ViewBag.TransactionCardTypes = _repo.Orders
+                                    .Select(p => p.TransactionTypeOfCard)
+                                    .Distinct()
+                                    .ToList();
+
             return View();
         }
         
         [HttpPost]
         public IActionResult SubmitOrder(Order order)
         {
-            _repo.AddOrder(order);
+            Order addedOrder = _repo.AddOrder(order);
 
             List<Cart> CartItems = _repo.Carts.Where(x => x.CustomerId == order.CustomerId).ToList();
 
@@ -319,15 +338,14 @@ namespace Intex_II.Controllers
             {
                 LineItem lineItem = new LineItem
                 {
-                    TransactionId = order.TransactionId, 
+                    TransactionId = addedOrder.TransactionId, 
                     ProductId = item.ProductId, 
-                    Quantity = item.ItemQuantity,
-                    Rating = 99
+                    Quantity = item.ItemQuantity
                 };
 
                 _repo.AddLineItem(lineItem);
 
-                //_repo.RemoveCart(item);
+                _repo.RemoveCart(item);
             }
 
             return RedirectToAction("Index");
