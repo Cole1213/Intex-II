@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication;
 
-
-
 var builder = WebApplication.CreateBuilder(args);
 // var connectionString = builder.Configuration.GetConnectionString("IdentityDataContextConnection") ?? throw new InvalidOperationException("Connection string 'IdentityDataContextConnection' not found.");
 
@@ -44,8 +42,8 @@ var configuration = builder.Configuration;
 
 services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
 {
-    microsoftOptions.ClientId = configuration["Authentication:Microsoft:ClientId"];
-    microsoftOptions.ClientSecret = configuration["Authentication:Microsoft:ClientSecret"];
+    microsoftOptions.ClientId = configuration["ClientId"];
+    microsoftOptions.ClientSecret = configuration["ClientSecret"];
 });
 
 
