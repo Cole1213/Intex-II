@@ -21,6 +21,7 @@ namespace Intex_II.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            ViewBag.CartItemCount = 2;
             //Pass in the recommendations when we have them
             ViewBag.Recommendations = _repo.Products.Take(5).ToList();
 
@@ -99,12 +100,12 @@ namespace Intex_II.Controllers
         {
             return View();
         }
-        [Authorize(Roles = "Admin")]
+
         public IActionResult About()
         {
             return View();
         }
-
+        [Authorize(Roles = "Customer")]
         [HttpGet]
         public IActionResult Cart(int customerId = 1)
         {
@@ -130,7 +131,7 @@ namespace Intex_II.Controllers
 
             return View();
         }
-
+        [Authorize(Roles = "Customer")]
         [HttpPost]
         public IActionResult Cart(Cart cart)
         {
@@ -138,14 +139,14 @@ namespace Intex_II.Controllers
 
             return RedirectToAction("Cart");
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult AdminProducts()
         {
             ViewBag.Products = _repo.Products.OrderBy(x => x.ProductName).ToList();
 
             return View();
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult AdminEditProduct(int productId)
         {
@@ -153,15 +154,17 @@ namespace Intex_II.Controllers
 
             return View("AdminAddProduct", recordToEdit);
         }
-
+        
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult AdminEditProduct(Product product)
         {
             _repo.UpdateProduct(product);
 
             return RedirectToAction("AdminProducts");
-        }
-
+        } 
+        
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult AdminDeleteProduct(int productId)
         {
@@ -169,7 +172,8 @@ namespace Intex_II.Controllers
 
             return View(recordToDelete);
         }
-
+        
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult AdminDeleteProduct(Product product)
         {
@@ -177,13 +181,15 @@ namespace Intex_II.Controllers
 
             return RedirectToAction("AdminProducts");
         }
-
+        
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult AdminAddProduct()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult AdminAddProduct(Product product) 
         {
@@ -192,6 +198,7 @@ namespace Intex_II.Controllers
             return RedirectToAction("AdminProducts");
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult AdminUsers(int page = 1, int pageSize = 100)
         {
             // Calculate the number of items to skip based on the page number and page size
@@ -214,6 +221,7 @@ namespace Intex_II.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult AdminDeleteUser(int customerId)
         {
@@ -222,6 +230,7 @@ namespace Intex_II.Controllers
             return View(recordToDelete);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult AdminDeleteUser(Customer customer)
         {
@@ -230,12 +239,14 @@ namespace Intex_II.Controllers
             return RedirectToAction("AdminUsers");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult AdminAddUser()
         {
             return View();
         }
-
+        
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult AdminAddUser(Customer customer)
         {
@@ -243,12 +254,14 @@ namespace Intex_II.Controllers
 
             return RedirectToAction("AdminUsers");
         }
-
+        
+        [Authorize(Roles = "Admin")]
         public IActionResult AdminOrders()
         {
             return View();
         }
 
+        [Authorize(Roles = "Customer")]
         public IActionResult Dashboard()
         {
             return View();
