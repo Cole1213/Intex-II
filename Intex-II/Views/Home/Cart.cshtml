@@ -1,4 +1,5 @@
-﻿@*
+﻿@using System.Collections
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @model Cart
@@ -7,8 +8,13 @@
     <h1>Cart</h1>
     <br />
     <br />
+    @{
+        List<int> ProductIds = new List<int>();
+    }
     @foreach(var item in ViewBag.CartItems)
     {
+        ProductIds.Add(item.ProductId);
+        
         <img src="@item.ProductImage" style="height: 100px" />
         <h3>@item.ProductName</h3>
         <p>@item.ProductPrice</p>
@@ -20,5 +26,7 @@
             <button type="submit">Remove</button>
         </form>
     }
+    <br />
+    <a asp-controller="Home" asp-action="SubmitOrder" asp-route-customerId="1" asp-route-productIds="@ProductIds"><button>Order</button></a>
 
 </div>

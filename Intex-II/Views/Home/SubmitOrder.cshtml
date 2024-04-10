@@ -1,0 +1,67 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Order
+
+@{
+    ViewData["Title"] = "Order";
+}
+
+<br />
+<br />
+<br />
+<h2>Order</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="TransactionId"/>
+    <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId"/>
+
+    <label asp-for="TransactionDate">Transaction Date:</label>
+    <input type="text" asp-for="TransactionDate" value="@DateTime.Today.ToShortDateString()" readonly />
+
+    <label asp-for="TransactionDayOfWeek">Day of Week:</label>
+    <input type="text" asp-for="TransactionDayOfWeek" value="@DateTime.Today.DayOfWeek.ToString()" readonly />
+
+    <label asp-for="TransactionTime">Time of Day:</label>
+    <input type="text" asp-for="TransactionTime" value="@DateTime.Now.ToString("HH")" readonly />
+
+    <label asp-for="EntryMode">Entry Mode:</label>
+    <select asp-for="EntryMode">
+        @foreach(var e in ViewBag.EntryModes)
+        {
+            <option value="@e">@e</option>
+        }
+    </select>
+
+    <label asp-for="Amount">Amount:</label>
+    <input type="number" asp-for="Amount" />
+
+    <label asp-for="TransactionType">Transaction Type:</label>
+    <select asp-for="TransactionType">
+        @foreach (var e in ViewBag.TransactionTypes)
+        {
+            <option value="@e">@e</option>
+        }
+    </select>
+
+    <label asp-for="TransactionCountry">Country:</label>
+    <input type="text" asp-for="TransactionCountry" />
+
+    <label asp-for="TransactionShippingAddress">Shipping Address:</label>
+    <input type="text" asp-for="TransactionShippingAddress" />
+
+    <label asp-for="TransactionBank">Bank:</label>
+    <input type="text" asp-for="TransactionBank" />
+
+    <h3>Line Items</h3>
+    @foreach (var item in ViewBag.CartItems)
+    {
+        <img src="@item.ProductImage" style="height: 100px" />
+        <h3>@item.ProductName</h3>
+        <p>@item.ProductPrice</p>
+    }
+
+    <button type="submit" class="btn btn-primary">Submit Order</button>
+</form>

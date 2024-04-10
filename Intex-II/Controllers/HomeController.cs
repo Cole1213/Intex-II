@@ -199,22 +199,22 @@ namespace Intex_II.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public IActionResult AdminUsers(int page = 1, int pageSize = 100)
+        public IActionResult AdminUsers(int page = 1, int pageSize = 10)
         {
             // Calculate the number of items to skip based on the page number and page size
             int skip = (page - 1) * pageSize;
 
-            // Retrieve a page of customers from the repository
-            var customers = _repo.Customers.OrderBy(x => x.CustomerFname).Skip(skip).Take(pageSize).ToList();
+            ViewBag.Users = _repo.AspNetUsers
+                .SelectMany(u => u.Roles, (user, role) => new { user, role.Name })
+                .ToList();
 
             // Count the total number of customers
-            int totalCustomers = _repo.Customers.Count();
+            int totalUsers = _repo.AspNetUsers.Count();
 
             // Calculate the total number of pages
-            int totalPages = (int)Math.Ceiling((double)totalCustomers / pageSize);
+            int totalPages = (int)Math.Ceiling((double)totalUsers / pageSize);
 
             // Pass the customers and pagination information to the view
-            ViewBag.Customers = customers;
             ViewBag.TotalPages = totalPages;
             ViewBag.CurrentPage = page;
 
@@ -223,18 +223,18 @@ namespace Intex_II.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public IActionResult AdminDeleteUser(int customerId)
+        public IActionResult AdminDeleteUser(string userId)
         {
-            var recordToDelete = _repo.Customers.Single(y => y.CustomerId == customerId);
+            var recordToDelete = _repo.AspNetUsers.Single(y => y.Id.Equals(userId));
 
             return View(recordToDelete);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public IActionResult AdminDeleteUser(Customer customer)
+        public IActionResult AdminDeleteUser(AspNetUser user)
         {
-            _repo.DeleteUser(customer);
+            _repo.DeleteUser(user);
 
             return RedirectToAction("AdminUsers");
         }
@@ -265,6 +265,68 @@ namespace Intex_II.Controllers
         public IActionResult Dashboard()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult SubmitOrder(int customerId = 1)
+        {
+            ViewBag.CartItems = (from Carts in _repo.Carts
+                                 join Products in _repo.Products
+                                 on Carts.ProductId equals Products.ProductId
+                                 where Carts.CustomerId.Equals(customerId)
+                                 select new
+                                 {
+                                     CustomerId = Carts.CustomerId,
+                                     ProductId = Carts.ProductId,
+                                     Quantity = Carts.ItemQuantity,
+                                     TotalPrice = Carts.TotalPrice,
+                                     ProductName = Products.ProductName,
+                                     ProductYear = Products.ProductYear,
+                                     ProductNumParts = Products.ProductNumParts,
+                                     ProductPrice = Products.ProductPrice,
+                                     ProductImage = Products.ProductImage,
+                                     ProductDescription = Products.ProductDescription,
+                                     ProductCategorySimple = Products.ProductCategorySimple
+                                 }).ToList();
+
+            ViewBag.CustomerId = customerId;
+
+            ViewBag.EntryModes = _repo.Orders
+                                    .Select(p => p.EntryMode)
+                                    .Distinct()
+                                    .ToList();
+
+            ViewBag.TransactionTypes = _repo.Orders
+                                    .Select(p => p.TransactionType)
+                                    .Distinct()
+                                    .ToList();
+
+            return View();
+        }
+        
+        [HttpPost]
+        public IActionResult SubmitOrder(Order order)
+        {
+            _repo.AddOrder(order);
+
+            List<Cart> CartItems = _repo.Carts.Where(x => x.CustomerId == order.CustomerId).ToList();
+
+            foreach (var item in CartItems) 
+            {
+                LineItem lineItem = new LineItem
+                {
+                    TransactionId = order.TransactionId, 
+                    ProductId = item.ProductId, 
+                    Quantity = item.ItemQuantity,
+                    Rating = 99
+                };
+
+                _repo.AddLineItem(lineItem);
+
+                //_repo.RemoveCart(item);
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

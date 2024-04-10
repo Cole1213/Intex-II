@@ -9,10 +9,10 @@
 <br />
 <a asp-controller="Home" asp-action="AdminAddUser"><button>Add User</button></a>
 
-@foreach (var p in ViewBag.Customers)
+@foreach (var p in ViewBag.Users)
 {
-    <h3>@p.CustomerFname @p.CustomerLname</h3>
-    <a asp-controller="Home" asp-action="AdminDeleteUser" asp-route-customerId="@p.CustomerId"><button>Delete</button></a>
+    <h3>@p.user.UserName @p.user.Email @p.Name</h3>
+    <a asp-controller="Home" asp-action="AdminDeleteUser" asp-route-userId="@p.user.Id"><button>Delete</button></a>
 }
 
 <br />
