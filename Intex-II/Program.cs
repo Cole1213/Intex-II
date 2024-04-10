@@ -42,8 +42,8 @@ var configuration = builder.Configuration;
 
 services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
 {
-    microsoftOptions.ClientId = configuration["Authentication:Microsoft:ClientId"];
-    microsoftOptions.ClientSecret = configuration["Authentication:Microsoft:ClientSecret"];
+    microsoftOptions.ClientId = configuration["ClientId"];
+    microsoftOptions.ClientSecret = configuration["ClientSecret"];
 });
 
 
