@@ -59,7 +59,7 @@
 
             </div>
             <div class="right-nav-elements">
-              <a asp-controller="Home" asp-action="Dashboard"><img src="/imgs/lego.png" height="30px"></a>
+              <a asp-area="Identity" asp-page="/Account/Manage/Index"><img src="/imgs/lego.png" height="30px"></a>
               <a ><img src="@((ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home") ? "/imgs/whitesearch.png" : "/imgs/search.png")" height="30px"></a>
                 @if (isSignedIn)
                  {
@@ -80,7 +80,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="main-body">
                        
             @RenderBody()
 

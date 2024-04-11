@@ -8,18 +8,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4381a429-cbbe-49f1-a2fd-9daf6fdc64ed" name="Changes" comment="csp header stuff">
-      <change afterPath="$PROJECT_DIR$/Intex-II/wwwroot/css/dashboard.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Intex-II/wwwroot/js/creditcard.js" afterDir="false" />
+    <list default="true" id="4381a429-cbbe-49f1-a2fd-9daf6fdc64ed" name="Changes" comment="sdfsd">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Intex-II/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Intex-II/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Areas/Identity/Pages/Account/Register.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Areas/Identity/Pages/Account/Register.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Models/ApplicationUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Models/ApplicationUser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Views/Home/Dashboard.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Home/Dashboard.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Views/Home/SubmitOrder.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Home/SubmitOrder.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Areas/Identity/Pages/Account/Manage/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Areas/Identity/Pages/Account/Manage/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Areas/Identity/Pages/_ViewStart.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Areas/Identity/Pages/_ViewStart.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intex-II/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Shared/_Layout.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/wwwroot/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/wwwroot/css/site.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/wwwroot/js/site.js" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/wwwroot/js/site.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Views/Shared/_LoginPartial.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Shared/_LoginPartial.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Views/Shared/_LoginSharedLayout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Shared/_LoginSharedLayout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/wwwroot/css/dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/wwwroot/css/dashboard.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +42,9 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Areas/Identity/Pages/Account/Register.cshtml.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Controllers/HomeController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Controllers/HomeController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Controllers/HomeController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Controllers/HomeController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Controllers/HomeController.cs" root0="SKIP_HIGHLIGHTING" />
@@ -57,6 +56,7 @@
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Controllers/HomeController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Controllers/HomeController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Controllers/UserAdminController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Models/ApplicationUser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Models/AspNetRole.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Models/ILegoRepository.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Models/ILegoRepository.cs" root0="SKIP_HIGHLIGHTING" />
@@ -67,7 +67,10 @@
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Models/Order.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Models/Order.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Views/Home/AdminOrders.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Views/Home/SubmitOrder.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
@@ -264,7 +267,23 @@
       <option name="project" value="LOCAL" />
       <updated>1712782013455</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="commits upon commits">
+      <option name="closed" value="true" />
+      <created>1712787203429</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1712787203429</updated>
+    </task>
+    <task id="LOCAL-00015" summary="sdfsd">
+      <option name="closed" value="true" />
+      <created>1712787222647</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1712787222647</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -297,6 +316,8 @@
     <MESSAGE value="adding restrictions and stuff" />
     <MESSAGE value="this is working 100%" />
     <MESSAGE value="csp header stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="csp header stuff" />
+    <MESSAGE value="commits upon commits" />
+    <MESSAGE value="sdfsd" />
+    <option name="LAST_COMMIT_MESSAGE" value="sdfsd" />
   </component>
 </project>
