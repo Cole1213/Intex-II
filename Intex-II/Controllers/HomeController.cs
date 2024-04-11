@@ -7,6 +7,8 @@ using System.Diagnostics;
 using System.Security.Cryptography.Xml;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.CodeAnalysis;
+using Microsoft.ML.OnnxRuntime;
+using Microsoft.ML.OnnxRuntime.Tensors;
 
 namespace Intex_II.Controllers
 {
