@@ -247,7 +247,15 @@ namespace Intex_II.Controllers
 
             return RedirectToAction("AdminProducts");
         }
-
+        
+        [HttpPost]
+        public void LogCspReport([FromBody] dynamic report)
+        {
+            // Log the CSP report to the console
+            Console.WriteLine($"CSP Violation: {report}");
+            // You might need to adjust the parsing of the 'report' object 
+            // depending on the structure of your CSP violation reports
+        }
         
         [Authorize(Roles = "Admin")]
         public IActionResult AdminUsers(int page = 1, int pageSize = 10)

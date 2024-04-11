@@ -28,9 +28,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/imask"></script>
-    <script src="https://kit.fontawesome.com/74c768f0cc.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.2/css/all.css">
+    @* <script src="https://kit.fontawesome.com/74c768f0cc.js" crossorigin="anonymous"></script> *@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Intex_II.styles.css" asp-append-version="true" />
+    @RenderSection("PageSpecificStyles", required: false)
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
      
 </head>
@@ -43,17 +44,17 @@
                       <a asp-controller="Home" asp-action="Dashboard">
                           <img src="@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "/imgs/whitelogo.png" : "/imgs/logo.png")" height="50px" alt="Lego Brick Logo">
                       </a>
-                      <a asp-controller="Home" asp-action="AdminProducts" style="color:@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white" : "black");">Products</a>
-                      <a asp-controller="UserAdmin" asp-action="UserAdmin" style="color:@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white" : "black");">Users</a>
+                      <a asp-controller="Home" asp-action="AdminProducts" class=@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white-nav" : "black-nav")>Products</a>
+                      <a asp-controller="UserAdmin" asp-action="UserAdmin" class=@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white-nav" : "black-nav")>Users</a>
                   }
                   else
                   {
                       <a asp-controller="Home" asp-action="Index">
                           <img src="@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "/imgs/whitelogo.png" : "/imgs/logo.png")" height="50px" alt="Lego Brick Logo">
                       </a>
-                      <a asp-controller="Home" asp-action="Products" style="color:@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white" : "black");">Shop</a>
-                      <a href="#" style="color:@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white" : "black");">Discover</a>
-                      <a asp-controller="Home" asp-action="About" style="color:@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white" : "black");">About</a>
+                      <a asp-controller="Home" asp-action="Products" class=@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white-nav" : "black-nav")>Shop</a>
+                      <a href="#" class=@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white-nav" : "black-nav")>Discover</a>
+                      <a asp-controller="Home" asp-action="About" class=@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white-nav" : "black-nav")>About</a>
                   }
 
             </div>
@@ -62,11 +63,11 @@
               <a ><img src="@((ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home") ? "/imgs/whitesearch.png" : "/imgs/search.png")" height="30px"></a>
                 @if (isSignedIn)
                  {
-                     <div style="position: relative; display: inline-block;">
+                     <div id="cart-div">
                          <a asp-action="Cart" asp-controller="Home">
                              <img src="@((ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home") ? "/imgs/whitecart.png" : "/imgs/cart.png")" height="27px">
                          </a>
-                        <span style="position: absolute; top: -10px; right: -10px; background-color: red; color: white; border-radius: 50%; width: 20px; height: 20px; text-align: center; line-height: 20px; font-size: 12px; display: @(ViewBag.CartItemCount != null ? "block" : "none");">
+                        <span class=@(ViewBag.CartItemCount != null ? "cart-div-icon-show" : "cart-div-icon-no-show");>
                             @(ViewBag.CartItemCount ?? "")
                         </span>
 
