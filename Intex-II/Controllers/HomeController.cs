@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Security.Cryptography.Xml;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.CodeAnalysis;
+using System.Drawing;
 
 namespace Intex_II.Controllers
 {
@@ -53,7 +54,7 @@ namespace Intex_II.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Products(List<string> categories = null, decimal? minPrice = null, decimal? maxPrice = null)
+        public async Task<IActionResult> Products(List<string> categories = null, List<string> Colors = null, decimal? minPrice = null, decimal? maxPrice = null)
         {
             string userName = null; // Initialize userId with null
 
@@ -77,6 +78,12 @@ namespace Intex_II.Controllers
                 productsQuery = productsQuery.Where(p => categories.Contains(p.ProductCategorySimple));
             }
 
+            if (Colors != null && Colors.Any())
+            {
+                productsQuery = productsQuery.Where(p => Colors.Contains(p.ProductPrimaryColor));
+            }
+
+
             if (minPrice.HasValue)
             {
                 productsQuery = productsQuery.Where(p => p.ProductPrice >= minPrice.Value);
@@ -86,6 +93,8 @@ namespace Intex_II.Controllers
             {
                 productsQuery = productsQuery.Where(p => p.ProductPrice <= maxPrice.Value);
             }
+
+
 
             // Retrieve the filtered products
             var filteredProducts = productsQuery.ToList();
@@ -98,8 +107,17 @@ namespace Intex_II.Controllers
                                     .Distinct()
                                     .ToList();
 
+            // Pass in colors for the checkbox filters
+            ViewBag.Colors = _repo.Products
+                                 .Select(p => p.ProductPrimaryColor)
+                                 .Distinct()
+                                 .ToList();
+
+
             return View();
         }
+
+
 
         [HttpPost]
         public IActionResult Products(Cart cart)
