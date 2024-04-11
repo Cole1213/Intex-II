@@ -1,9 +1,13 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{
-}
+@model Customer
+
 <div style="margin-top:100px;">
     <h1>Profile</h1>
     <partial name="_LoginPartial"/>
+
+    <p>Name: @ViewBag.CustomerDetails.CustomerFname @ViewBag.CustomerDetails.CustomerLname</p>
+    <p>Country: @ViewBag.CustomerDetails.CustomerCountry</p>
+    <p>Age: @ViewBag.CustomerDetails.CustomerAge</p>
 </div>
