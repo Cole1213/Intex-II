@@ -340,8 +340,16 @@ namespace Intex_II.Controllers
         }
 
         [Authorize(Roles = "Customer")]
-        public IActionResult Dashboard()
+        public async Task<IActionResult> Dashboard()
         {
+            var customer = HttpContext.User;
+
+            var user = await _signInManager.UserManager.GetUserAsync(customer);
+
+            var userName = user.UserName;
+
+            ViewBag.CustomerDetails = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).FirstOrDefault();
+
             return View();
         }
 
