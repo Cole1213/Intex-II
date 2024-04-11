@@ -127,6 +127,23 @@ namespace Intex_II.Controllers
 
             ViewBag.Products = _repo.Products.FirstOrDefault(p => p.ProductId == productId);
 
+            ViewBag.SimilarProducts = (from Recommendations in _repo.Recommendations
+                                       join Products in _repo.Products
+                                       on Recommendations.RecommendedProductId equals Products.ProductId
+                                       where Recommendations.ProductId == productId
+                                       orderby Recommendations.Rank
+                                       select new
+                                       {
+                                           ProductId = Products.ProductId,
+                                           ProductName = Products.ProductName,
+                                           ProductDescription = Products.ProductDescription,
+                                           ProductPrice = Products.ProductPrice,
+                                           ProductCategory = Products.ProductCategory,
+                                           ProductImage = Products.ProductImage,
+                                           ProductCategorySimple = Products.ProductCategorySimple,
+                                           Rank = Recommendations.Rank
+                                       }).ToList();
+
             return View();
         }
         
@@ -148,6 +165,7 @@ namespace Intex_II.Controllers
         {
             return View();
         }
+
         [Authorize(Roles = "Customer")]
         [HttpGet]
         public async Task<IActionResult> Cart()
@@ -184,6 +202,7 @@ namespace Intex_II.Controllers
 
             return View();
         }
+
         [Authorize(Roles = "Customer")]
         [HttpPost]
         public IActionResult Cart(Cart cart)
@@ -192,6 +211,7 @@ namespace Intex_II.Controllers
 
             return RedirectToAction("Cart");
         }
+
         [Authorize(Roles = "Admin")]
         public IActionResult AdminProducts()
         {
@@ -199,6 +219,7 @@ namespace Intex_II.Controllers
 
             return View();
         }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult AdminEditProduct(int productId)
