@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Security.Cryptography.Xml;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.CodeAnalysis;
 
 namespace Intex_II.Controllers
 {
@@ -158,6 +159,8 @@ namespace Intex_II.Controllers
             var userName = user.UserName;
 
             int customerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
+
+            ViewBag.CustomerId = customerId;
 
             //Pass in actual cart items later
             ViewBag.CartItems = (from Carts in _repo.Carts
@@ -413,6 +416,22 @@ namespace Intex_II.Controllers
 
                 _repo.RemoveCart(item);
             }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult AddCustomer(int customerId)
+        {
+            var recordToEdit = _repo.Customers.Single(x => x.CustomerId == customerId);
+
+            return View(recordToEdit);
+        }
+
+        [HttpPost]
+        public IActionResult AddCustomer(Customer customer)
+        {
+            _repo.EditCustomer(customer);
 
             return RedirectToAction("Index");
         }

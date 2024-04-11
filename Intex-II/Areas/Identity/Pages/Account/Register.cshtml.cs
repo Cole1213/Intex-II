@@ -131,7 +131,7 @@ namespace Intex_II.Areas.Identity.Pages.Account
                         CustomerEmail = user.UserName
                     };
 
-                    _repo.AddCustomer(customer);
+                    Customer newCustomer = _repo.AddCustomer(customer);
 
                     _logger.LogInformation("User created a new account with password.");
 
@@ -160,7 +160,8 @@ namespace Intex_II.Areas.Identity.Pages.Account
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+
+                        return RedirectToAction("AddCustomer", "Home", new { customerId = newCustomer.CustomerId});
                     }
                 }
                 foreach (var error in result.Errors)
