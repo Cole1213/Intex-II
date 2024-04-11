@@ -98,14 +98,6 @@ namespace Intex_II.Controllers
                                     .Distinct()
                                     .ToList();
 
-            // Add pagination
-
-
-
-
-
-
-
             return View();
         }
 

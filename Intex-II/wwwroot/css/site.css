@@ -49,31 +49,6 @@ nav {
   color:white !important;
 }
 
-
-.custom-padding-top {
-    padding-top: 80px; /* Adjust this value to match the height of your header */
-}
-
-.filter-section .color-options {
-    display: flex;
-}
-
-.color-option {
-    width: 30px;
-    height: 30px;
-    border: none;
-    margin-right: 8px;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.color-option:focus {
-        outline: none;
-        box-shadow: 0 0 0 0.25rem rgb(0 123 255 / 25%);
-}
-
-
-
 #cart-div{
   position: relative; 
   display: inline-block;
