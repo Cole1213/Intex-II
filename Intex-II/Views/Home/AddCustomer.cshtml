@@ -3,45 +3,55 @@
 *@
 @model Customer
 
-<br />
-<br />
-<br />
-<form method="post">
-    <div>
-        <input type="hidden" asp-for="CustomerId" />
-    </div>
-    <div>
-        <label asp-for="CustomerFname">First Name:</label>
-        <input type="text" asp-for="CustomerFname" required>
-    </div>
-    <div>
-        <label asp-for="CustomerLname">Last Name:</label>
-        <input type="text" asp-for="CustomerLname" required>
-    </div>
-    <div>
-        <label asp-for="BirthDate">Birthday:</label>
-        <input type="date" asp-for="BirthDate">
-    </div>
-    <div>
-        <label asp-for="CustomerCountry">Home Country:</label>
-        <input type="text" asp-for="CustomerCountry" >
-    </div>
-    <div>
-        <label asp-for="CustomerGender">Gender:</label>
-        <select asp-for="CustomerGender">
-            <option value="F">Female</option>
-            <option value="M">Male</option>
-            <option value="O">Other</option>
-        </select>
-    </div>
-    <div>
-        <label asp-for="CustomerAge">Age:</label>
-        <input type="number" asp-for="CustomerAge">
-    </div>
-    <div>
-        <input type="hidden" asp-for="CustomerEmail">
-    </div>
-    <div>
-        <button type="submit">Create Account</button>
-    </div>
-</form>
+@section PageSpecificStyles {
+    <link rel="stylesheet" href="~/css/login.css">
+}
+
+<div class="row">
+    <h2>Please enter your information to continue</h2>
+    <form method="post">
+        <div>
+            <input type="hidden" asp-for="CustomerId"/>
+        </div>
+        <div class="form-floating mb-3">
+            <input asp-for="CustomerFname" class="form-control" aria-required="true" type="text" placeholder="First Name" />
+            <label asp-for="CustomerFname">First Name</label>
+            <span asp-validation-for="CustomerFname" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <input asp-for="CustomerLname" class="form-control" aria-required="true" type="text" placeholder="Last Name" />
+            <label asp-for="CustomerLname">Last Name</label>
+            <span asp-validation-for="CustomerLname" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <input asp-for="BirthDate" class="form-control" aria-required="true" placeholder="Birthdate" type="date" />
+            <label asp-for="BirthDate">Date</label>
+            <span asp-validation-for="BirthDate" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <input asp-for="CustomerCountry" class="form-control" aria-required="true" placeholder="Country" type="text" />
+            <label asp-for="CustomerCountry">Home Country</label>
+            <span asp-validation-for="CustomerCountry" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <select asp-for="CustomerGender" class="form-control" aria-required="true" placeholder="Gender" type="text">
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+                <option value="O">Other</option>
+            </select>
+            <label asp-for="CustomerGender">Gender</label>
+            <span asp-validation-for="CustomerGender" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <input asp-for="CustomerAge" class="form-control" aria-required="true" placeholder="Age" type="number" />
+            <label asp-for="CustomerAge">Age</label>
+            <span asp-validation-for="CustomerAge" class="text-danger"></span>
+        </div>
+        <div>
+            <input type="hidden" asp-for="CustomerEmail">
+        </div>
+        <div  style="display: flex; justify-content: center" >
+            <button class="login-btn" type="submit">Create Account</button>
+        </div>
+    </form>
+</div>

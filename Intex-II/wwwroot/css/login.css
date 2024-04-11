@@ -52,10 +52,11 @@ body{
 .login-btn{
   background-color: #3b3b88 ;
   border: none;
-  transition: background-color .3s ease-in-out;
+  transition: background-color .3s ease-in-out, color .3s ease-in-out;
 }
 .login-btn:hover{
   background-color: #f1863a;
+  color: white;
 }
 
 .top-header {
@@ -140,6 +141,14 @@ hr{
 }
 
 .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 80vh;
+}
+
+.main-body {
   display: flex;
   justify-content: center;
   align-items: center;
