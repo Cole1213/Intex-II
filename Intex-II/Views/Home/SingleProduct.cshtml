@@ -23,7 +23,7 @@
     <p>@item.Rank</p>
 }
 <form method="post">
-    <input type="hidden" asp-for="CustomerId" value="@ViewBag.UserId" />
+    <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId" />
     <input type="hidden" asp-for="ProductId" value="@ViewBag.Products.ProductId" />
     <input type="hidden" asp-for="ItemQuantity" value="1" />
     <input type="hidden" asp-for="TotalPrice" value="@ViewBag.Products.ProductPrice" />

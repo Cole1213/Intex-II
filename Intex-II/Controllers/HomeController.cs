@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.CodeAnalysis;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Intex_II.Controllers
 {
@@ -28,7 +29,6 @@ namespace Intex_II.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            ViewBag.CartItemCount = 2;
             //Pass in the recommendations when we have them
             ViewBag.Recommendations = _repo.Products.Take(5).ToList();
             
@@ -36,11 +36,16 @@ namespace Intex_II.Controllers
 
             var customer = HttpContext.User;
 
+            int customerId;
             if (customer.Identity.IsAuthenticated)
             {
                 var user = await _signInManager.UserManager.GetUserAsync(customer);
 
                 userName = user.UserName;
+
+                customerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
+
+                ViewBag.CartItemCount = _repo.Carts.Where(x => x.CustomerId.Equals(customerId)).Count();
             }
 
             ViewBag.CustomerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
@@ -80,17 +85,22 @@ namespace Intex_II.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Products(List<string> categories = null, List<string> Colors = null, decimal? minPrice = null, decimal? maxPrice = null)
+        public async Task<IActionResult> Products(List<string> categories = null, List<string> Colors = null, decimal? minPrice = null, decimal? maxPrice = null, int page = 1, int itemsPerPage = 10)
         {
             string userName = null; // Initialize userId with null
 
             var customer = HttpContext.User;
 
+            int customerId;
             if (customer.Identity.IsAuthenticated)
             {
                 var user = await _signInManager.UserManager.GetUserAsync(customer);
 
                 userName = user.UserName;
+
+                customerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
+
+                ViewBag.CartItemCount = _repo.Carts.Where(x => x.CustomerId.Equals(customerId)).Count();
             }
 
             ViewBag.CustomerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
@@ -120,12 +130,20 @@ namespace Intex_II.Controllers
                 productsQuery = productsQuery.Where(p => p.ProductPrice <= maxPrice.Value);
             }
 
+            int skip = (page - 1) * itemsPerPage;
 
-
-            // Retrieve the filtered products
             var filteredProducts = productsQuery.ToList();
+            // Retrieve a specific page of products
+            var pageProducts = productsQuery.Skip(skip).Take(itemsPerPage).ToList();
 
-            ViewBag.Products = filteredProducts;
+            int totalPages = (int)Math.Ceiling((double)filteredProducts.Count / itemsPerPage);
+
+            // Pass pagination information to the view
+            ViewBag.TotalPages = totalPages;
+            ViewBag.ItemsPerPage = itemsPerPage;
+            ViewBag.Page = page;
+
+            ViewBag.Products = pageProducts;
 
             // Pass in categories for the checkbox filters
             ViewBag.Categories = _repo.Products
@@ -182,11 +200,16 @@ namespace Intex_II.Controllers
 
             var customer = HttpContext.User;
 
+            int customerId;
             if (customer.Identity.IsAuthenticated)
             {
                 var user = await _signInManager.UserManager.GetUserAsync(customer);
 
                 userName = user.UserName;
+
+                customerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
+
+                ViewBag.CartItemCount = _repo.Carts.Where(x => x.CustomerId.Equals(customerId)).Count();
             }
 
             ViewBag.CustomerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
@@ -307,6 +330,15 @@ namespace Intex_II.Controllers
             _repo.RemoveCart(cart);
 
             return RedirectToAction("Cart");
+        }
+
+        [Authorize(Roles = "Customer")]
+        [HttpPost]
+        public IActionResult IndexRemoveCart(Cart cart)
+        {
+            _repo.RemoveCart(cart);
+
+            return RedirectToAction("Index");
         }
 
         [Authorize(Roles = "Admin")]
