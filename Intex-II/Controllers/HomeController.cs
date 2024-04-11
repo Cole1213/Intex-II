@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Security.Cryptography.Xml;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.CodeAnalysis;
 
 namespace Intex_II.Controllers
 {
@@ -415,6 +416,22 @@ namespace Intex_II.Controllers
 
                 _repo.RemoveCart(item);
             }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult AddCustomer(int customerId)
+        {
+            var recordToEdit = _repo.Customers.Single(x => x.CustomerId == customerId);
+
+            return View(recordToEdit);
+        }
+
+        [HttpPost]
+        public IActionResult AddCustomer(Customer customer)
+        {
+            _repo.EditCustomer(customer);
 
             return RedirectToAction("Index");
         }
