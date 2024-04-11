@@ -687,6 +687,7 @@ namespace Intex_II.Controllers
             }
 
             order.Fraud = isFraud;
+            order.Status = "Pending";
 
             Order addedOrder = _repo.AddOrder(order);
 

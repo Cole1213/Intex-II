@@ -221,9 +221,7 @@ form {
   color: white;
   background-color: darkorange;  
 }
-td{
-  text-align: center;
-}
+
 .full-page{
   display: flex;
   height: 50vh;

@@ -27,12 +27,12 @@
                     {
                         <tr style="@(p.Fraud ? "color: red;" : "")">
                             <td style="font-size: x-large">@(p.Fraud ? "!": null)</td>
-                            <td>@p.TransactionId</td>
-                            <td>@p.TransactionDate @p.TransactionTime:00</td>
-                            <td>@p.TransactionCountry</td>
-                            <td>@p.Fraud</td>
-                            <td>$@p.Amount</td>
-                            <td>@p.Status</td>
+                            <td style="text-align: center">@p.TransactionId</td>
+                            <td style="text-align: center">@p.TransactionDate @p.TransactionTime:00</td>
+                            <td style="text-align: center">@p.TransactionCountry</td>
+                            <td style="text-align: center">@p.Fraud</td>
+                            <td style="text-align: center">$@p.Amount</td>
+                            <td style="text-align: center">@p.Status</td>
                             <td>
                                 @if (p.Fraud is true)
                                 {
