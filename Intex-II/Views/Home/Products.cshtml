@@ -121,5 +121,97 @@
         </div>
 
     </div>
+    <!-- Pagination -->
+    <div class="pagination">
+        <ul class="pagination">
+            <li class="page-item @(ViewBag.Page == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Products", new { page = 1, itemsPerPage = ViewBag.ItemsPerPage })">First</a>
+            </li>
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.Page ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Products", new { page = i, itemsPerPage = ViewBag.ItemsPerPage })">@i</a>
+                </li>
+            }
+            <li class="page-item @(ViewBag.Page == ViewBag.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Products", new { page = ViewBag.TotalPages, itemsPerPage = ViewBag.ItemsPerPage })">Last</a>
+            </li>
+        </ul>
+    </div>
+    <div class="items-per-page">
+        <label for="itemsPerPage">Items Per Page:</label>
+        <select id="itemsPerPage" name="itemsPerPage" onchange="changeItemsPerPage()">
+            @if(ViewBag.ItemsPerPage == 5)
+            {
+                <option value="5" selected>5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+            }
+            @if(ViewBag.ItemsPerPage == 10)
+            {
+                <option value="5" >5</option>
+                <option value="10" selected>10</option>
+                <option value="20">20</option>
+            }
+            @if(ViewBag.ItemsPerPage == 20)
+            {
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20" selected>20</option>
+            }
+        </select>
+    </div>
 </div>
+<script>
+    function changeItemsPerPage() {
+        var itemsPerPage = document.getElementById("itemsPerPage").value;
+        var currentPage = @(ViewBag.Page);
 
+        window.location.href = "@Url.Action("Products")" + "?page=" + currentPage + "&itemsPerPage=" + itemsPerPage;
+    }
+</script>
+<style>
+    /* Custom styling for select element */
+    .select-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+
+        .select-wrapper select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            background-color: #fff;
+            appearance: none; /* Hide default arrow */
+        }
+
+        /* Styling for arrow icon */
+        .select-wrapper::after {
+            content: '\25BC'; /* Unicode character for down arrow */
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        /* Styling for hover and focus state */
+        .select-wrapper:hover select,
+        .select-wrapper select:focus {
+            border-color: #80bdff;
+            outline: 0;
+        }
+
+        /* Styling for selected option */
+        .select-wrapper select option[selected] {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        /* Styling for dropdown menu */
+        .select-wrapper select option {
+            padding: 10px;
+        }
+</style>

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.CodeAnalysis;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Intex_II.Controllers
 {
@@ -80,7 +81,7 @@ namespace Intex_II.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Products(List<string> categories = null, List<string> Colors = null, decimal? minPrice = null, decimal? maxPrice = null)
+        public async Task<IActionResult> Products(List<string> categories = null, List<string> Colors = null, decimal? minPrice = null, decimal? maxPrice = null, int page = 1, int itemsPerPage = 10)
         {
             string userName = null; // Initialize userId with null
 
@@ -120,12 +121,20 @@ namespace Intex_II.Controllers
                 productsQuery = productsQuery.Where(p => p.ProductPrice <= maxPrice.Value);
             }
 
+            int skip = (page - 1) * itemsPerPage;
 
-
-            // Retrieve the filtered products
             var filteredProducts = productsQuery.ToList();
+            // Retrieve a specific page of products
+            var pageProducts = productsQuery.Skip(skip).Take(itemsPerPage).ToList();
 
-            ViewBag.Products = filteredProducts;
+            int totalPages = (int)Math.Ceiling((double)filteredProducts.Count / itemsPerPage);
+
+            // Pass pagination information to the view
+            ViewBag.TotalPages = totalPages;
+            ViewBag.ItemsPerPage = itemsPerPage;
+            ViewBag.Page = page;
+
+            ViewBag.Products = pageProducts;
 
             // Pass in categories for the checkbox filters
             ViewBag.Categories = _repo.Products
