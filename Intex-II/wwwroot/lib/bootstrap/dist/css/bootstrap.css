@@ -70,6 +70,9 @@
   }
 }
 
+.custom-padding-top {
+    padding-top: 200px; /* Adjust the value to your preference */
+}
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
