@@ -9,76 +9,105 @@
 <div class="full-page-orders">
     <div class="row">
         <table class="table">
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th>Transaction ID</th>
-                        <th>Date Time</th>
-                        <th>Country</th>
-                        <th>Fraudulent</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                        <th></th>
+            <thead>
+            <tr>
+                <th></th>
+                <th>Transaction ID</th>
+                <th>Date Time</th>
+                <th>Country</th>
+                <th>Fraudulent</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th></th>
 
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach (var p in ViewBag.Orders)
-                    {
-                        <tr style="@(p.Fraud ? "color: red;" : "")">
-                            <td style="font-size: x-large">@(p.Fraud ? "!": null)</td>
-                            <td style="text-align: center">@p.TransactionId</td>
-                            <td style="text-align: center">@p.TransactionDate @p.TransactionTime:00</td>
-                            <td style="text-align: center">@p.TransactionCountry</td>
-                            <td style="text-align: center">@p.Fraud</td>
-                            <td style="text-align: center">$@p.Amount</td>
-                            <td style="text-align: center">@p.Status</td>
-                            <td>
-                                @if (p.Fraud is true)
-                                {
-                                    <form action="UpdateOrderStatus" method="post">
-                                        <input type="hidden" asp-for="CustomerId" value="@p.CustomerId"/>
-                                        <input type="hidden" asp-for="TransactionDate" value="@p.TransactionDate"/>
-                                        <input type="hidden" asp-for="TransactionDayOfWeek" value="@p.TransactionDayOfWeek"/>
-                                        <input type="hidden" asp-for="EntryMode" value="@p.EntryMode"/>
-                                        <input type="hidden" asp-for="Amount" value="@p.Amount"/>
-                                        <input type="hidden" asp-for="TransactionType" value="@p.TransactionType"/>
-                                        <input type="hidden" asp-for="TransactionCountry" value="@p.TransactionCountry"/>
-                                        <input type="hidden" asp-for="TransactionShippingAddress" value="@p.TransactionShippingAddress"/>
-                                        <input type="hidden" asp-for="TransactionBank" value="@p.TransactionBank"/>
-                                        <input type="hidden" asp-for="TransactionTypeOfCard" value="@p.TransactionTypeOfCard"/>
-                                        <input type="hidden" asp-for="Status" value="@p.Status"/>
-                                        <input type="hidden" asp-for="TransactionId" value="@p.TransactionId"/>
-                                        <input type="hidden" asp-for="Fraud" value="false"/>
-                                        <button class="chng-to-non-fraud" type="submit">Change to Non Fraudulent</button>
-                                    </form>
-                                }
-                            </td>
-                        </tr>
-                    }
-                    </tbody>
-                    </table>
-
-        @if (ViewBag.TotalPages > 1)
-        {
-            <div>
-                @if (ViewBag.CurrentPage > 1)
-                {
-                    <a asp-action="AdminOrders" asp-route-page="1">First</a>
-                    <a asp-action="AdminOrders" asp-route-page="@(ViewBag.CurrentPage - 1)">Previous</a>
-                }
-
-                @for (int i = 1; i <= ViewBag.TotalPages; i++)
-                {
-                    <a asp-action="AdminOrders" asp-route-page="@i" class="@(i == ViewBag.CurrentPage ? "current" : "")">@i</a>
-                }
-
-                @if (ViewBag.CurrentPage < ViewBag.TotalPages)
-                {
-                    <a asp-action="AdminOrders" asp-route-page="@(ViewBag.CurrentPage + 1)">Next</a>
-                    <a asp-action="AdminOrders" asp-route-page="@ViewBag.TotalPages">Last</a>
-                }
-            </div>
-        }
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var p in ViewBag.Orders)
+            {
+                <tr style="@(p.Fraud ? "color: red;" : "")">
+                    <td style="font-size: x-large">@(p.Fraud ? "!": null)</td>
+                    <td style="text-align: center">@p.TransactionId</td>
+                    <td style="text-align: center">@p.TransactionDate @p.TransactionTime:00</td>
+                    <td style="text-align: center">@p.TransactionCountry</td>
+                    <td style="text-align: center">@p.Fraud</td>
+                    <td style="text-align: center">$@p.Amount</td>
+                    <td style="text-align: center">@p.Status</td>
+                    <td>
+                        @if (p.Fraud is true)
+                        {
+                            <form action="UpdateOrderStatus" method="post">
+                                <input type="hidden" asp-for="CustomerId" value="@p.CustomerId"/>
+                                <input type="hidden" asp-for="TransactionDate" value="@p.TransactionDate"/>
+                                <input type="hidden" asp-for="TransactionDayOfWeek" value="@p.TransactionDayOfWeek"/>
+                                <input type="hidden" asp-for="EntryMode" value="@p.EntryMode"/>
+                                <input type="hidden" asp-for="Amount" value="@p.Amount"/>
+                                <input type="hidden" asp-for="TransactionType" value="@p.TransactionType"/>
+                                <input type="hidden" asp-for="TransactionCountry" value="@p.TransactionCountry"/>
+                                <input type="hidden" asp-for="TransactionShippingAddress" value="@p.TransactionShippingAddress"/>
+                                <input type="hidden" asp-for="TransactionBank" value="@p.TransactionBank"/>
+                                <input type="hidden" asp-for="TransactionTypeOfCard" value="@p.TransactionTypeOfCard"/>
+                                <input type="hidden" asp-for="Status" value="@p.Status"/>
+                                <input type="hidden" asp-for="TransactionId" value="@p.TransactionId"/>
+                                <input type="hidden" asp-for="Fraud" value="false"/>
+                                <button class="chng-to-non-fraud" type="submit">Change to Non Fraudulent</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
     </div>
 </div>
+<div class="pagination-container">
+    <div class="pagination">
+        <ul class="pagination">
+            <li class="page-item @(ViewBag.Page == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("AdminOrders", new { page = 1, itemsPerPage = ViewBag.ItemsPerPage })">First</a>
+            </li>
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.Page ? "active" : "")">
+                    <a class="page-link @(i == ViewBag.Page ? "active-link" : "")" href="@Url.Action("AdminOrders", new { page = i, itemsPerPage = ViewBag.ItemsPerPage })">@i</a>
+                </li>
+            }
+            <li class="page-item @(ViewBag.Page == ViewBag.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("AdminOrders", new { page = ViewBag.TotalPages, itemsPerPage = ViewBag.ItemsPerPage })">Last</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="items-per-page-container">
+    <div class="items-per-page">
+        <label for="itemsPerPage">Items Per Page:</label>
+        <select id="itemsPerPage" name="itemsPerPage" onchange="changeItemsPerPage()">
+            @if (ViewBag.ItemsPerPage == 50)
+            {
+                <option value="50" selected>50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+            }
+            @if (ViewBag.ItemsPerPage == 100)
+            {
+                <option value="50">50</option>
+                <option value="100" selected>100</option>
+                <option value="200">200</option>
+            }
+            @if (ViewBag.ItemsPerPage == 200)
+            {
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="200" selected>200</option>
+            }
+        </select>
+    </div>
+</div>
+<script>
+    function changeItemsPerPage() {
+        var itemsPerPage = document.getElementById("itemsPerPage").value;
+        var currentPage = @(ViewBag.Page);
+
+        window.location.href = "@Url.Action("AdminOrders")" + "?page=" + currentPage + "&itemsPerPage=" + itemsPerPage;
+    }
+</script>

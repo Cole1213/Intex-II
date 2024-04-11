@@ -346,7 +346,6 @@ a {
 
 }
 
-<style >
 .color-filters .color-option {
     display: inline-block;
     margin-right: 10px;
@@ -528,5 +527,17 @@ a {
     display: none; /* Hides the actual checkbox */
 }
 
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Adjust as needed */
+}
 
-</style >
+.items-per-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px; /* Adjust as needed */
+}
+
