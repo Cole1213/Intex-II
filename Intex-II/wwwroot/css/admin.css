@@ -5,6 +5,32 @@
   --border-radius: 5px;
   --size-of-hero:75vh;
 }
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  /*position: relative;*/
+  min-height: 100%;
+  font-size: 14px;
+  /*overflow: hidden;*/
+  /*height: 100vh;*/
+}
+
+.main-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 0px 100px 0px;
+}
+
 body{
   background-color: #f0f4f8;
 }
@@ -116,16 +142,43 @@ body{
 button {
   border-radius: 10px;
   border: none;
-  background-color: lightsalmon;
+  background-color: green ;
   padding: 10px;
   color:white;
+  transition: color .3s ease-in-out;
 }
 button:hover {
-  color:#f1863a;
+  color: black;
+}
+.icon-btn{
+  color:black;
+}
+.role-section{
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  align-items: flex-start;
+}
+
+.role-checkbox{
+  display: flex;
+}
+
+input {
+  margin: 5px;
+  width: 100%;
+}
+
+.product-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .row {
-  width: 40vw;
+  width: 90vw;
+  height: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -134,15 +187,68 @@ button:hover {
   border-radius: 20px;
   border:none;
 }
+th {
+  text-align: center;
+}
+
+.btn-class{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 hr{
   color: #ffffff
 }
-
+form {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   height: 80vh;
+}
+.chng-to-non-fraud{
+  padding: 4px;
+  background-color:#3b3b88;
+  transition: background-color .3s ease-in-out;
+}
+.chng-to-non-fraud:hover{
+  color: white;
+  background-color: darkorange;  
+}
+td{
+  text-align: center;
+}
+.full-page{
+  display: flex;
+  height: 50vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.full-page-orders{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-btn{
+  margin-bottom: 10px;
+  background-color: red;
+  transition: background-color .3s ease-in-out, color .3s ease-in-out;
+}
+.delete-btn:hover{
+  background-color: darkred;
+  color:white;
+}
+
+.table-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center ;
 }

@@ -1,4 +1,20 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    var isSignedIn = SignInManager.IsSignedIn(User);
+    IList<string> userRoles = new List<string>();
+    if (isSignedIn)
+    {
+        var user = await UserManager.GetUserAsync(User);
+        userRoles = await UserManager.GetRolesAsync(user);
+    }
+}
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -20,21 +36,50 @@
      
 </head>
 <body>
-    <header>
-         <nav>
-            <div class="left-nav-elements">
-                <a asp-controller="Home" asp-action="Index"><img src="/imgs/logo.png" height="50px" alt="Lego Brick Logo"></a>
-                <a asp-controller="Home" asp-action="Products" style="color:black;">Shop</a>
-                <a href="#" style="color:black;">Discover</a>
-                <a asp-controller="Home" asp-action="About" style="color:black;">About</a>
-            </div>
-            <div class="right-nav-elements">
-              <a asp-controller="Home" asp-action="Dashboard"><img src="/imgs/lego.png" height="30px" alt=""></a>
-              <a ><img src="/imgs/search.png" height="30px" alt=""></a>
-              <a asp-action="Cart" asp-controller="Home"><img src="/imgs/cart.png" height="27px" alt=""></a>
-            </div>
-        </nav>
-    </header>
+     <header>
+            <nav>
+                <div class="left-nav-elements">
+                      @if (userRoles.Contains("Admin"))
+                      {
+                          <a asp-area="Identity" asp-page="/Account/Manage/Index">
+                              <img src="/imgs/logo.png" height="50px" alt="Lego Brick Logo">
+                          </a>
+                          <a asp-controller="Home" asp-action="AdminProducts" class="black-nav">Products</a>
+                          <a asp-controller="UserAdmin" asp-action="UserAdmin" class="black-nav">Users</a>
+                          <a asp-controller="Home" asp-action="AdminOrders" class="black-nav">Orders</a>
+                      }
+                      else
+                      {
+                          <a asp-controller="Home" asp-action="Index">
+                              <img src="/imgs/logo.png" height="50px" alt="Lego Brick Logo">
+                          </a>
+                          <a asp-controller="Home" asp-action="Products" class="black-nav">Shop</a>
+                          <a href="#" class="black-nav">Discover</a>
+                          <a asp-controller="Home" asp-action="About" class="black-nav">About</a>
+                      }
+                </div>
+                <div class="right-nav-elements">
+                  <a asp-area="Identity" asp-page="/Account/Manage/Index"><img src="/imgs/lego.png" height="30px"></a>
+                  <a ><img src="/imgs/search.png" height="30px"></a>
+                    @if (isSignedIn)
+                     {
+                         <div id="cart-div">
+                             <a asp-action="Cart" asp-controller="Home">
+                                 <img src="/imgs/cart.png" height="27px">
+                             </a>
+                            <span class=@(ViewBag.CartItemCount != null ? "cart-div-icon-show" : "cart-div-icon-no-show");>
+                                @(ViewBag.CartItemCount ?? "")
+                            </span>
+    
+                         </div>
+                     }
+                     else
+                    {
+                        <a asp-action="Cart" asp-controller="Home"><img src="/imgs/cart.png" height="27px"></a>
+                    }
+                </div>
+            </nav>
+        </header>
     <div class="container" style="padding-top:100px">
     
             @RenderBody()

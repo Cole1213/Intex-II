@@ -5,7 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div style="padding-top:100px ">
+@section PageSpecificStyles {
+    <link rel="stylesheet" href="~/css/admin.css">
+}
+
+<div class="row">
 <h2>Users and Their Roles</h2>
  
 <table class="table">
@@ -14,6 +18,7 @@
          <th>Email</th>
          <th>Roles</th>
          <th>Edit Roles</th>
+         <th></th>
      </tr>
  </thead>
  <tbody>
@@ -27,15 +32,20 @@
                  <form method="post">
                      <input type="hidden" name="userId" value="@user.UserId" />
                      <!-- Display roles checkboxes or any other inputs you prefer -->
+                     <div class="role-section">
                      @foreach (var role in ViewData["Roles"] as List<string>)
                      {
-                         <input type="checkbox" name="roles" value="@role" @(user.Roles.Contains(role) ? "checked" : "") /> @role
+                    <label class=role-checkbox>
+                        <input type="checkbox" name="roles" value="@role" @(user.Roles.Contains(role) ? "checked" : "") />
+                        @role
+                    </label>
                      }
-                     <button type="submit" class="btn btn-secondary">Update Roles</button>
+                     </div>
+                     <button type="submit" class="btn icon-btn"><i class="fa-regular fa-floppy-disk" style="font-size: x-large; color: green; margin-left: 5px;"></i></button>
                  </form>
              </td>
             <td>
-                <a asp-controller="UserAdmin" asp-action="DeleteUser" asp-route-userId="@user.UserId"><button class="btn btn-danger">Delete</button></a>
+                <a asp-controller="UserAdmin" asp-action="DeleteUser" asp-route-userId="@user.UserId"><button class="btn"><i style="font-size: x-large" class="fa-solid fa-trash"></i></button></a>
             </td>
          </tr>
      }

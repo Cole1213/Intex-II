@@ -1,37 +1,84 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{
+@model Order
+
+@section PageSpecificStyles {
+    <link rel="stylesheet" href="~/css/admin.css">
 }
-<br />
-<br />
-<br />
-@foreach (var p in ViewBag.Orders)
-{
-    <h3>@p.TransactionId</h3>
-    <p>@p.TransactionDate</p>
-    <p>@p.TransactionCountry</p>
-    <a asp-controller="Home" asp-action="" asp-route-Id="@p.TransactionId"><button>Edit</button></a>
-}
+<div class="full-page-orders">
+    <div class="row">
+        <table class="table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Transaction ID</th>
+                        <th>Date Time</th>
+                        <th>Country</th>
+                        <th>Fraudulent</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th></th>
 
-@if (ViewBag.TotalPages > 1)
-{
-    <div>
-        @if (ViewBag.CurrentPage > 1)
-        {
-            <a asp-action="AdminOrders" asp-route-page="1">First</a>
-            <a asp-action="AdminOrders" asp-route-page="@(ViewBag.CurrentPage - 1)">Previous</a>
-        }
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var p in ViewBag.Orders)
+                    {
+                        <tr style="@(p.Fraud ? "color: red;" : "")">
+                            <td style="font-size: x-large">@(p.Fraud ? "!": null)</td>
+                            <td>@p.TransactionId</td>
+                            <td>@p.TransactionDate @p.TransactionTime:00</td>
+                            <td>@p.TransactionCountry</td>
+                            <td>@p.Fraud</td>
+                            <td>$@p.Amount</td>
+                            <td>@p.Status</td>
+                            <td>
+                                @if (p.Fraud is true)
+                                {
+                                    <form action="UpdateOrderStatus" method="post">
+                                        <input type="hidden" asp-for="CustomerId" value="@p.CustomerId"/>
+                                        <input type="hidden" asp-for="TransactionDate" value="@p.TransactionDate"/>
+                                        <input type="hidden" asp-for="TransactionDayOfWeek" value="@p.TransactionDayOfWeek"/>
+                                        <input type="hidden" asp-for="EntryMode" value="@p.EntryMode"/>
+                                        <input type="hidden" asp-for="Amount" value="@p.Amount"/>
+                                        <input type="hidden" asp-for="TransactionType" value="@p.TransactionType"/>
+                                        <input type="hidden" asp-for="TransactionCountry" value="@p.TransactionCountry"/>
+                                        <input type="hidden" asp-for="TransactionShippingAddress" value="@p.TransactionShippingAddress"/>
+                                        <input type="hidden" asp-for="TransactionBank" value="@p.TransactionBank"/>
+                                        <input type="hidden" asp-for="TransactionTypeOfCard" value="@p.TransactionTypeOfCard"/>
+                                        <input type="hidden" asp-for="Status" value="@p.Status"/>
+                                        <input type="hidden" asp-for="TransactionId" value="@p.TransactionId"/>
+                                        <input type="hidden" asp-for="Fraud" value="false"/>
+                                        <button class="chng-to-non-fraud" type="submit">Change to Non Fraudulent</button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                    </table>
 
-        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        @if (ViewBag.TotalPages > 1)
         {
-            <a asp-action="AdminOrders" asp-route-page="@i" class="@(i == ViewBag.CurrentPage ? "current" : "")">@i</a>
-        }
+            <div>
+                @if (ViewBag.CurrentPage > 1)
+                {
+                    <a asp-action="AdminOrders" asp-route-page="1">First</a>
+                    <a asp-action="AdminOrders" asp-route-page="@(ViewBag.CurrentPage - 1)">Previous</a>
+                }
 
-        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
-        {
-            <a asp-action="AdminOrders" asp-route-page="@(ViewBag.CurrentPage + 1)">Next</a>
-            <a asp-action="AdminOrders" asp-route-page="@ViewBag.TotalPages">Last</a>
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <a asp-action="AdminOrders" asp-route-page="@i" class="@(i == ViewBag.CurrentPage ? "current" : "")">@i</a>
+                }
+
+                @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                {
+                    <a asp-action="AdminOrders" asp-route-page="@(ViewBag.CurrentPage + 1)">Next</a>
+                    <a asp-action="AdminOrders" asp-route-page="@ViewBag.TotalPages">Last</a>
+                }
+            </div>
         }
     </div>
-}
+</div>
