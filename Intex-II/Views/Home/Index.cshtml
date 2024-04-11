@@ -46,7 +46,7 @@
                             </div>
                             <!--<div class="buy"><i class="material-icons">add_shopping_cart</i></div>-->
                             <form method="post" class="add-to-cart-form" style="height: 100%">
-                                <input type="hidden" asp-for="CustomerId" value="1" />
+                                <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId" />
                                 <input type="hidden" asp-for="ProductId" value="@r.ProductId" />
                                 <input type="hidden" asp-for="ItemQuantity" value="1" />
                                 <input type="hidden" asp-for="TotalPrice" value="@r.ProductPrice" />
