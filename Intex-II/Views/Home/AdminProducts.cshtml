@@ -3,16 +3,33 @@
 *@
 @{
 }
-
-<br />
-<br />
-<br />
-<a asp-controller="Home" asp-action="AdminAddProduct"><button>Add Product</button></a>
-
-@foreach(var p in ViewBag.Products)
-{
-    <h3>@p.ProductName</h3>
-    <p>@p.ProductPrice</p>
-    <a asp-controller="Home" asp-action="AdminEditProduct" asp-route-productId="@p.ProductId"><button>Edit</button></a>
-    <a asp-controller="Home" asp-action="AdminDeleteProduct" asp-route-productId="@p.ProductId"><button>Delete</button></a>
+@section PageSpecificStyles {
+    <link rel="stylesheet" href="~/css/admin.css">
 }
+<div class="row">
+    <div class="table-header">
+        <h2>Products</h2>
+        <a asp-controller="Home" asp-action="AdminAddProduct"><button style="padding: 10px" class="chng-to-non-fraud">Add Product</button></a>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var p in ViewBag.Products)
+        {
+            <tr>
+                <td>@p.ProductName</td>
+                <td>$@p.ProductPrice</td>
+                <td><a asp-controller="Home" asp-action="AdminEditProduct" asp-route-productId="@p.ProductId"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                <td><a asp-controller="Home" asp-action="AdminDeleteProduct" asp-route-productId="@p.ProductId"><i class="fa-solid fa-trash"></i></a></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

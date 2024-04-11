@@ -92,6 +92,11 @@
 
     </div>
 </div>
+<div id="cookieConsentPopup" class="cookie-consent-popup">
+    <p>This website uses cookies to ensure you get the best experience.<br/> Click <a asp-action="Privacy" asp-controller="Home">Here</a> to learn more.</p>
+    <button id="closeCookieConsent">Got it!</button>
+    <button id="unsureCookieConsent">I'm not so sure...</button>
+</div>
 <script>
     $(document).ready(function () {
         $('.add-to-cart-form').on('submit', function (e) {

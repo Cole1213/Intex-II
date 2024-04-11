@@ -1,52 +1,71 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
 @model Product
+@section PageSpecificStyles {
+    <link rel="stylesheet" href="~/css/admin.css">
+}
+<div class="row">
+    <form method="post" class="product-form">
+     <table class="table">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Edit</th>
+            </tr>
+            </thead>
+            <tbody>
+            
+            <div>
+                <input type="hidden" asp-for="ProductId"/>
+            </div>
+            <tr>
+                <td><label asp-for="ProductName">Product Name:</label></td> 
+                <td><input type="text" asp-for="ProductName" required></td>
+            </tr>
+            <tr>
+                <td> <label asp-for="ProductYear">Product Year:</label></td> 
+                <td> <input type="number" asp-for="ProductYear"></td>
+            </tr>
 
-<br />
-<br />
-<br />
-<form method="post">
-    <div>
-        <input type="hidden" asp-for="ProductId" />
-    </div>
-    <div>
-        <label asp-for="ProductName">Product Name:</label>
-        <input type="text" asp-for="ProductName" required>
-    </div>
-    <div>
-        <label asp-for="ProductYear">Product Year:</label>
-        <input type="number" asp-for="ProductYear">
-    </div>
-    <div>
-        <label asp-for="ProductNumParts">Number of Parts:</label>
-        <input type="number" asp-for="ProductNumParts">
-    </div>
-    <div>
-        <label asp-for="ProductPrice">Product Price:</label>
-        <input type="number" asp-for="ProductPrice" required>
-    </div>
-    <div>
-        <label asp-for="ProductImage">Product Image URL:</label>
-        <input type="text" asp-for="ProductImage">
-    </div>
-    <div>
-        <label asp-for="ProductPrimaryColor">Primary Color:</label>
-        <input type="text" asp-for="ProductPrimaryColor" required>
-    </div>
-    <div>
-        <label asp-for="ProductSecondaryColor">Secondary Color:</label>
-        <input type="text" asp-for="ProductSecondaryColor">
-    </div>
-    <div>
-        <label asp-for="ProductDescription">Product Description:</label>
-        <textarea asp-for="ProductDescription"></textarea>
-    </div>
-    <div>
-        <label asp-for="ProductCategory">Product Category:</label>
-        <input type="text" asp-for="ProductCategory">
-    </div>
-    <div>
-        <button type="submit">Add Product</button>
-    </div>
-</form>
+            <tr>
+                <td><label asp-for="ProductNumParts">Number of Parts:</label></td>
+                <td><input type="number" asp-for="ProductNumParts"></td>
+            </tr>
+
+            <tr>
+                <td> <label asp-for="ProductPrice">Product Price:</label></td>
+                <td> <input type="number" asp-for="ProductPrice" required></td>
+            </tr>
+
+            <tr>
+                <td> <label asp-for="ProductImage">Product Image URL:</label></td>
+                <td>  <input type="text" asp-for="ProductImage"></td>
+            </tr>
+
+            <tr>
+                <td> <label asp-for="ProductPrimaryColor">Primary Color:</label></td>
+                <td> <select asp-for="ProductPrimaryColor" required>@foreach(var item in ViewBag.Colors){<option value="@item">@item</option>}</select></td>
+            </tr>
+
+            <tr>
+                <td> <label asp-for="ProductSecondaryColor">Secondary Color:</label></td>
+                <td> <select asp-for="ProductSecondaryColor" required>@foreach(var item in ViewBag.Colors){<option value="@item">@item</option>}</select></td>
+            </tr>
+            <tr>
+                <td> <label asp-for="ProductDescription">Product Description:</label></td>
+                <td> <textarea asp-for="ProductDescription"></textarea></td>
+            </tr>
+            <tr>
+                <td> <label asp-for="ProductCategory">Product Category:</label></td>
+                <td>  <input type="text" asp-for="ProductCategory"></td>
+            </tr>
+            </tbody>
+            </table>
+        <div>
+            <button type="submit">Save</button>
+        </div>
+    </form>
+
+</div>

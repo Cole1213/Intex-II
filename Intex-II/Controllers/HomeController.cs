@@ -321,6 +321,7 @@ namespace Intex_II.Controllers
         [HttpGet]
         public IActionResult AdminEditProduct(int productId)
         {
+            ViewBag.Colors = _repo.Products.Select(x => x.ProductPrimaryColor).Distinct().ToList();
             var recordToEdit = _repo.Products.Single(x => x.ProductId == productId);
 
             return View("AdminAddProduct", recordToEdit);
@@ -357,6 +358,7 @@ namespace Intex_II.Controllers
         [HttpGet]
         public IActionResult AdminAddProduct()
         {
+            ViewBag.Colors = _repo.Products.Select(x => x.ProductPrimaryColor).Distinct().ToList();
             return View();
         }
 
@@ -470,6 +472,13 @@ namespace Intex_II.Controllers
             ViewBag.CustomerDetails = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).FirstOrDefault();
 
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult UpdateOrderStatus(Order order)
+        {
+            _repo.UpdateOrder(order);
+            return RedirectToAction("AdminOrders");
         }
 
         [HttpGet]
@@ -678,6 +687,7 @@ namespace Intex_II.Controllers
             }
 
             order.Fraud = isFraud;
+            order.Status = "Pending";
 
             Order addedOrder = _repo.AddOrder(order);
 

@@ -41,11 +41,12 @@
             <div class="left-nav-elements">
                   @if (userRoles.Contains("Admin"))
                   {
-                      <a asp-controller="Home" asp-action="Dashboard">
+                      <a asp-area="Identity" asp-page="/Account/Manage/Index">
                           <img src="@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "/imgs/whitelogo.png" : "/imgs/logo.png")" height="50px" alt="Lego Brick Logo">
                       </a>
                       <a asp-controller="Home" asp-action="AdminProducts" class=@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white-nav" : "black-nav")>Products</a>
                       <a asp-controller="UserAdmin" asp-action="UserAdmin" class=@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white-nav" : "black-nav")>Users</a>
+                      <a asp-controller="Home" asp-action="AdminOrders" class="black-nav">Orders</a>
                   }
                   else
                   {
@@ -125,11 +126,7 @@
         </div>
     </div>
 </footer>
-<div id="cookieConsentPopup" class="cookie-consent-popup">
-    <p>This website uses cookies to ensure you get the best experience.<br/> Click <a asp-action="Privacy" asp-controller="Home">Here</a> to learn more.</p>
-    <button id="closeCookieConsent">Got it!</button>
-    <button id="unsureCookieConsent">I'm not so sure...</button>
-</div>
+
 
 <script src="~/js/site.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)

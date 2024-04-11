@@ -11,7 +11,7 @@
     var customer = user != null ? Repo.Customers.FirstOrDefault(x => x.CustomerEmail == user.UserName) : null; // Adjust based on your data model
 
     <p id="manage" class="username" title="Manage">
-        Hello, <span id="name-on-profile">@customer.CustomerFname</span>!
+        Hello, <span id="name-on-profile">@(customer?.CustomerFname ?? user.UserName)</span>!
     </p>
     <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
         <button id="logout" type="submit" class="">Logout</button>
