@@ -24,14 +24,15 @@
              <td>@string.Join(", ", user.Roles)</td>
              <td>
                  <!-- You might want a form here for editing roles, or a link to a separate edit page -->
-                 <form asp-action="UserAdmin" method="post">
+                 <form method="post">
                      <input type="hidden" name="userId" value="@user.UserId" />
                      <!-- Display roles checkboxes or any other inputs you prefer -->
                      @foreach (var role in ViewData["Roles"] as List<string>)
                      {
                          <input type="checkbox" name="roles" value="@role" @(user.Roles.Contains(role) ? "checked" : "") /> @role
                      }
-                     <button type="submit">Update Roles</button>
+                     <button type="submit" class="btn btn-secondary">Update Roles</button>
+                     <a asp-controller="UserAdmin" asp-action="DeleteUser" asp-route-userId="@user.UserId"><button class="btn btn-danger">Delete</button></a>
                  </form>
              </td>
          </tr>

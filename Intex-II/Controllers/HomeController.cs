@@ -260,64 +260,65 @@ namespace Intex_II.Controllers
             // depending on the structure of your CSP violation reports
         }
         
-        [Authorize(Roles = "Admin")]
-        public IActionResult AdminUsers(int page = 1, int pageSize = 10)
-        {
-            // Calculate the number of items to skip based on the page number and page size
-            int skip = (page - 1) * pageSize;
+        //[Authorize(Roles = "Admin")]
+        //public IActionResult AdminUsers(int page = 1, int pageSize = 10)
+        //{
+        //    // Calculate the number of items to skip based on the page number and page size
+        //    int skip = (page - 1) * pageSize;
 
-            // ViewBag.Users = _repo.AspNetUsers
-                // .SelectMany(u => u.Roles, (user, role) => new { user, role.Name })
-                // .ToList();
+        //    // ViewBag.Users = _repo.AspNetUsers
+        //        // .SelectMany(u => u.Roles, (user, role) => new { user, role.Name })
+        //        // .ToList();
 
-            // Count the total number of customers
-            // int totalUsers = _repo.AspNetUsers.Count();
+        //    // Count the total number of customers
+        //    // int totalUsers = _repo.AspNetUsers.Count();
 
-            // Calculate the total number of pages
-            // int totalPages = (int)Math.Ceiling((double)totalUsers / pageSize);
+        //    // Calculate the total number of pages
+        //    // int totalPages = (int)Math.Ceiling((double)totalUsers / pageSize);
 
-            // Pass the customers and pagination information to the view
-            // ViewBag.TotalPages = totalPages;
-            ViewBag.CurrentPage = page;
+        //    // Pass the customers and pagination information to the view
+        //    // ViewBag.TotalPages = totalPages;
+        //    ViewBag.CurrentPage = page;
 
-            return View();
-        }
+        //    return View();
+        //}
 
-        [Authorize(Roles = "Admin")]
-        [HttpGet]
-        public IActionResult AdminDeleteUser(string userId)
-        {
-            // var recordToDelete = _repo.AspNetUsers.Single(y => y.Id.Equals(userId));
+        //[Authorize(Roles = "Admin")]
+        //[HttpGet]
+        //public IActionResult AdminDeleteUser(string userId)
+        //{
+        //    // var recordToDelete = _repo.AspNetUsers.Single(y => y.Id.Equals(userId));
 
-            // return View(recordToDelete);
-            return View();
-        }
+        //    // return View(recordToDelete);
+        //    return View();
+        //}
         
 
-        [Authorize(Roles = "Admin")]
-        [HttpPost]
-        public IActionResult AdminDeleteUser(AspNetUser user)
-        {
-            _repo.DeleteUser(user);
+        //[Authorize(Roles = "Admin")]
+        //[HttpPost]
+        //public IActionResult AdminDeleteUser(AspNetUser user)
+        //{
+        //    _repo.DeleteUser(user);
 
-            return RedirectToAction("AdminUsers");
-        }
+        //    return RedirectToAction("AdminUsers");
+        //}
 
-        [Authorize(Roles = "Admin")]
-        [HttpGet]
-        public IActionResult AdminAddUser()
-        {
-            return View();
-        }
+        //[Authorize(Roles = "Admin")]
+        //[HttpGet]
+        //public IActionResult AdminAddUser()
+        //{
+        //    return View();
+        //}
         
-        [Authorize(Roles = "Admin")]
-        [HttpPost]
-        public IActionResult AdminAddUser(Customer customer)
-        {
-            _repo.AddUser(customer);
+        //[Authorize(Roles = "Admin")]
+        //[HttpPost]
+        //public IActionResult AdminAddUser(Customer customer)
+        //{
+        //    _repo.AddUser(customer);
 
-            return RedirectToAction("AdminUsers");
-        }
+        //    return RedirectToAction("AdminUsers");
+        //}
+
         [Authorize(Roles = "Admin")]
         public IActionResult AdminOrders(int page = 1, int pageSize = 10)
         {
