@@ -12,7 +12,7 @@
 <h1>@ViewBag.Products.ProductName</h1>
 <p>$ @ViewBag.Products.ProductPrice</p>
 <form method="post">
-    <input type="hidden" asp-for="CustomerId" value="1" />
+    <input type="hidden" asp-for="CustomerId" value="@ViewBag.UserId" />
     <input type="hidden" asp-for="ProductId" value="@ViewBag.Products.ProductId" />
     <input type="hidden" asp-for="ItemQuantity" value="1" />
     <input type="hidden" asp-for="TotalPrice" value="@ViewBag.Products.ProductPrice" />

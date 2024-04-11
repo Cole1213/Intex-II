@@ -36,5 +36,7 @@
 
         public void AddLineItem(LineItem lineItem);
 
+        public void AddCustomer(Customer customer);
+
     }
 }
