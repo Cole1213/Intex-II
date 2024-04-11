@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Intex_II.Models;
 
@@ -26,6 +26,8 @@ public partial class IntexIiContext : IdentityDbContext<IdentityUser>
     public virtual DbSet<Order> Orders { get; set; }
 
     public virtual DbSet<Product> Products { get; set; }
+
+    public virtual DbSet<Recommendation> Recommendations { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -97,6 +99,14 @@ public partial class IntexIiContext : IdentityDbContext<IdentityUser>
             entity.Property(e => e.ProductPrimaryColor).HasColumnName("Product_Primary_Color");
             entity.Property(e => e.ProductSecondaryColor).HasColumnName("Product_Secondary_Color");
             entity.Property(e => e.ProductYear).HasColumnName("Product_Year");
+        });
+
+        modelBuilder.Entity<Recommendation>(entity =>
+        {
+            entity.HasKey(e => new { e.ProductId, e.RecommendedProductId });
+
+            entity.Property(e => e.ProductId).HasColumnName("Product_ID");
+            entity.Property(e => e.RecommendedProductId).HasColumnName("Recommended_Product_ID");
         });
 
         OnModelCreatingPartial(modelBuilder);
