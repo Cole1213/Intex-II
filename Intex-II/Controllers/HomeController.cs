@@ -472,22 +472,24 @@ namespace Intex_II.Controllers
         //}
 
         [Authorize(Roles = "Admin")]
-        public IActionResult AdminOrders(int page = 1, int pageSize = 10)
+        public IActionResult AdminOrders(int page = 1, int itemsPerPage = 50)
         {
-            // Calculate the number of items to skip based on the page number and page size
-            int skip = (page - 1) * pageSize;
+            var orders = _repo.Orders.OrderByDescending(x => x.TransactionDate).Take(500).ToList();
 
-            ViewBag.Orders = _repo.Orders.OrderByDescending(x => x.TransactionDate).Take(pageSize).ToList();
+            int skip = (page - 1) * itemsPerPage;
 
-            // Count the total number of customers
-            int totalOrders = 100;
+            // Retrieve a specific page of products
+            var pageProducts = orders.Skip(skip).Take(itemsPerPage).ToList();
 
-            // Calculate the total number of pages
-            int totalPages = (int)Math.Ceiling((double)totalOrders / pageSize);
+            int totalPages = (int)Math.Ceiling((double)orders.Count / itemsPerPage);
 
-            // Pass the customers and pagination information to the view
+            ViewBag.Orders = pageProducts;
+            // Pass pagination information to the view
             ViewBag.TotalPages = totalPages;
-            ViewBag.CurrentPage = page;
+            ViewBag.ItemsPerPage = itemsPerPage;
+            ViewBag.Page = page;
+
+            ViewBag.Products = pageProducts;
 
             return View();
         }
