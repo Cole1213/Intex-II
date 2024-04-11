@@ -302,6 +302,7 @@ footer {
   }
 }
 
+
 .aboutList {
   list-style: none;
   margin: 0;
@@ -351,6 +352,148 @@ footer {
   p {
     color: #b9bec0;
   }
+}
+
+.color-filters .color-option {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.color-filters .color-circle {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.color-filters input[type="checkbox"]:checked + .color-circle {
+    transform: scale(1.1);
+    border-color: #000;
+}
+
+.customer-reviews {
+    margin-top: 15px;
+}
+
+    .customer-reviews input[type="checkbox"] {
+        display: none;
+    }
+
+    .customer-reviews label {
+        cursor: pointer;
+    }
+
+    .customer-reviews .stars {
+        font-size: 18px;
+        color: #ffdd00;
+    }
+
+    .customer-reviews input[type="checkbox"]:checked + .stars {
+        text-decoration: underline;
+    }
+
+.sleek-column {
+    background-color: #f8f9fa; /* Soft light grey background */
+    border-radius: 15px; /* Smooth, rounded corners */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+    padding: 1rem; /* Comfortable padding */
+    margin-top: 1rem; /* Space from the top of the container */
+    margin-bottom: 1rem; /* Space from the bottom of the container */
+    border: 1px solid #e1e1e1; /* Subtle border for refined edges */
+}
+/* General Styles */
+.sleek-column {
+    background-color: #f8f9fa; /* Soft light grey background */
+    border-radius: 15px; /* Smooth, rounded corners */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+    padding: 1rem; /* Comfortable padding */
+    border: 1px solid #e1e1e1; /* Subtle border for refined edges */
+}
+
+/* Color Filters */
+.color-circle {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid transparent;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+    .color-circle:hover {
+        transform: scale(1.1);
+        border-color: #000;
+    }
+
+/* Ratings */
+.stars {
+    display: inline-block;
+    margin-right: 10px;
+    color: #ffd700; /* Gold color for stars */
+    transition: transform 0.3s ease;
+}
+
+    .stars:hover {
+        transform: scale(1.1);
+    }
+
+/* Cards */
+.card {
+    transition: box-shadow 0.3s ease;
+}
+
+    .card:hover {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+.card-img-top {
+    width: 100%;
+    height: 180px; /* Fixed height, or use object-fit if your images are consistent */
+    object-fit: cover; /* This will ensure images cover the area nicely */
+}
+
+.card-body {
+    padding: 0.8rem;
+}
+
+.card-title {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+}
+
+.card-footer {
+    background: transparent;
+    border-top: none;
+    padding: 0.8rem 0.8rem 0 0.8rem;
+}
+
+/* Buttons */
+.btn-primary, .btn-success {
+    margin-top: 5px; /* Spacing between buttons */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.margin-top-custom {
+    margin-top: 30px; 
+}
+.full-width-button {
+    background-color: black; 
+    color: white; 
+    width: 100%;
+    border: none; 
+}
+
 }
 
 .cookie-consent-popup {

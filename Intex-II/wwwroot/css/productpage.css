@@ -1,0 +1,532 @@
+﻿:root {
+    --primary-color: #ff4500;
+    --secondary-color: #333;
+    --padding: 1rem;
+    --border-radius: 5px;
+    --size-of-hero: 75vh;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+
+html {
+    /*position: relative;*/
+    min-height: 100%;
+    font-size: 14px;
+    /*overflow: hidden;*/
+    /*height: 100vh;*/
+}
+
+body {
+}
+
+nav {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+    z-index: 10002;
+    padding-top: 10px;
+}
+
+/*Used for Dynamic Styling of Nav Bar*/
+.black-nav {
+    color: black !important;
+}
+
+.white-nav {
+    color: white !important;
+}
+
+#cart-div {
+    position: relative;
+    display: inline-block;
+    span
+
+{
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+}
+
+}
+
+.cart-div-icon-show {
+    display: block;
+}
+
+.cart-div-icon-no-show {
+    display: none;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.left-nav-elements img {
+    margin-right: 10px;
+}
+
+
+
+.left-nav-elements a, .right-nav-elements a {
+    margin: 0 10px;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.right-nav-elements {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .right-nav-elements > img {
+        margin: 10px;
+    }
+
+
+
+footer {
+    background-color: #3b3b88;
+    height: 400px;
+    position: absolute;
+    width: 100vw;
+}
+
+.flex-grid {
+    display: flex;
+    width: 100%;
+    height: auto;
+    justify-content: space-around;
+}
+
+.col {
+    flex: 1;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.subscription-form {
+    margin-top: 20px;
+    text-align: center;
+    color: white; /* or any color that matches your design */
+    font-family: sans-serif; /* use the font-family of your choice */
+}
+
+    .subscription-form h2 {
+        margin-bottom: 4px; /* adjust as needed */
+    }
+
+    .subscription-form p {
+        margin-bottom: 16px; /* adjust as needed */
+    }
+
+    .subscription-form form {
+        position: relative;
+        display: inline-block;
+    }
+
+    .subscription-form input[type=email] {
+        font-size: 16px; /* adjust as needed */
+        padding: 8px;
+        background: none;
+        border: none;
+        border-bottom: 2px solid #fff; /* border color */
+        color: white; /* text color */
+        outline: none;
+    }
+
+    .subscription-form button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        border: none;
+        background: none;
+        color: white;
+        cursor: pointer;
+        padding: 8px;
+        font-size: 16px;
+        display: none; /* hide the button by default */
+    }
+
+    .subscription-form input[type=email]:focus + button,
+    .subscription-form input[type=email]:not(:placeholder-shown) + button {
+        display: block; /* show button when the input is focused or not empty */
+    }
+
+    /* Optional: Style for the placeholder */
+    .subscription-form input::placeholder {
+        color: #ddd; /* placeholder color */
+    }
+
+.socials {
+    margin-top: 10px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    margin-bottom: 30px;
+
+    @media (max-width: 767px) {
+        flex-flow: column;
+    }
+
+    justify-content: center;
+}
+
+.fa-brands {
+    font-size: 30px;
+}
+
+.socialList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    justify-content: center;
+    flex-flow: row wrap;
+    li
+
+{
+    margin: 5px;
+    &:first-child
+
+{
+    padding-left: 0;
+}
+
+a {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    text-decoration: none;
+    /*background-color: #999;*/
+    color: #fff;
+    transition: .35s;
+    i
+
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: top left;
+    transform: scale(1) translate(-50%, -50%);
+    transition: .35s;
+}
+
+&:hover {
+    i
+
+{
+    transform: scale(1.5) translate(-50%, -50%);
+}
+
+}
+}
+}
+}
+
+.helpList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h4
+
+{
+    color: white;
+}
+
+li {
+    margin: 5px;
+    &:first-child
+
+{
+    padding-left: 0;
+}
+
+a {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    text-decoration: none;
+    /*background-color: #999;*/
+    color: #fff;
+    transition: .35s;
+}
+
+}
+}
+
+
+.aboutList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h4
+
+{
+    color: white;
+}
+
+li {
+    margin: 5px;
+    &:first-child
+
+{
+    padding-left: 0;
+}
+
+a {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    text-decoration: none;
+    /*background-color: #999;*/
+    color: #fff;
+    transition: .35s;
+}
+
+}
+}
+
+.privacy-info {
+    width: 100vw;
+    height: 40px;
+    p
+
+{
+    color: #b9bec0;
+}
+
+}
+
+<style >
+.color-filters .color-option {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.color-filters .color-circle {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.color-filters input[type="checkbox"]:checked + .color-circle {
+    transform: scale(1.1);
+    border-color: #000;
+}
+
+.customer-reviews {
+    margin-top: 15px;
+}
+
+    .customer-reviews input[type="checkbox"] {
+        display: none;
+    }
+
+    .customer-reviews label {
+        cursor: pointer;
+    }
+
+    .customer-reviews .stars {
+        font-size: 18px;
+        color: #ffdd00;
+    }
+
+    .customer-reviews input[type="checkbox"]:checked + .stars {
+        text-decoration: underline;
+    }
+
+.sleek-column {
+    background-color: #f8f9fa; /* Soft light grey background */
+    border-radius: 15px; /* Smooth, rounded corners */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+    padding: 1rem; /* Comfortable padding */
+    margin-top: 1rem; /* Space from the top of the container */
+    margin-bottom: 1rem; /* Space from the bottom of the container */
+    border: 1px solid #e1e1e1; /* Subtle border for refined edges */
+}
+/* General Styles */
+.sleek-column {
+    background-color: #f8f9fa; /* Soft light grey background */
+    border-radius: 15px; /* Smooth, rounded corners */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+    padding: 1rem; /* Comfortable padding */
+    border: 1px solid #e1e1e1; /* Subtle border for refined edges */
+}
+
+/* Color Filters */
+.color-circle {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid transparent;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+    .color-circle:hover {
+        transform: scale(1.1);
+        border-color: #000;
+    }
+
+/* Ratings */
+.stars {
+    display: inline-block;
+    margin-right: 10px;
+    color: #ffd700; /* Gold color for stars */
+    transition: transform 0.3s ease;
+}
+
+    .stars:hover {
+        transform: scale(1.1);
+    }
+
+/* Cards */
+.card {
+    transition: box-shadow 0.3s ease;
+    border-radius: 10px;
+
+}
+
+    .card:hover {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+.card-img-top {
+    width: 100%;
+    height: 180px; /* Fixed height, or use object-fit if your images are consistent */
+    object-fit: cover; /* This will ensure images cover the area nicely */
+}
+
+.card-body {
+    padding: 0.8rem;
+    background-color: #d2d2d2;
+}
+
+.card-title {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+}
+
+.card-footer {
+    background-color: #d2d2d2;
+    border-top: none;
+    padding: 0.8rem 0.8rem 0 0.8rem;
+}
+
+.card-buttons {
+    padding: 10px;
+    background-color: #d2d2d2;
+}
+
+/* Buttons */
+.btn-primary, .btn-success {
+    margin-top: 5px; /* Spacing between buttons */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.margin-top-custom {
+    margin-top: 30px;
+}
+
+.full-width-button {
+    background-color: black;
+    color: white;
+    width: 100%;
+    border: none;
+}
+
+.color-filters {
+    /* Ensures the container allows wrapping */
+}
+
+.color-option {
+    width: calc(33.333% - 10px); /* for three per row, accounting for margin */
+    text-align: center; /* Centers the color name text */
+    cursor: pointer;
+}
+
+.color-indicator {
+    width: 30px; /* Or any size you want */
+    height: 30px; /* Equal to width for a square */
+    display: inline-block;
+    border: 2px solid transparent; /* Transparent border to maintain layout when changing to solid on selection */
+    transition: border 0.3s; /* Smooth transition for the border */
+}
+
+/* Change border color on selection */
+.color-input:checked + .color-indicator {
+    box-shadow: 0 0 8px 2px #b0b0b0; /* Glowing grey shadow */
+}
+
+.color-name {
+    font-size: 0.8rem; /* Smaller font size for the color names */
+    display: block; /* Ensures the text is below the color square */
+}
+
+.color-input {
+    display: none; /* Hides the actual checkbox */
+}
+
+
+</style >
