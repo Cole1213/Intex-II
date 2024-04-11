@@ -19,6 +19,8 @@ namespace Intex_II.Models
 
         public IQueryable<Cart> Carts => _context.Carts;
 
+        public IQueryable<Recommendation> Recommendations => _context.Recommendations;
+
         // public IQueryable<AspNetUser> AspNetUsers => _context.AspNetUsers;
 
         public void AddCart(Cart cart)

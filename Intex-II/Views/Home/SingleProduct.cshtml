@@ -11,6 +11,17 @@
 <img style="height: 250px" src="@ViewBag.Products.ProductImage" alt="Image of product" />
 <h1>@ViewBag.Products.ProductName</h1>
 <p>$ @ViewBag.Products.ProductPrice</p>
+
+<br />
+<br />
+<h1>Recommended products based on the pipeline:</h1>
+@foreach(var item in ViewBag.SimilarProducts)
+{
+    <img style="height: 100px" src="@item.ProductImage" alt="Image of product" />
+    <h1>@item.ProductName</h1>
+    <p>$@item.ProductPrice</p>
+    <p>@item.Rank</p>
+}
 <form method="post">
     <input type="hidden" asp-for="CustomerId" value="@ViewBag.UserId" />
     <input type="hidden" asp-for="ProductId" value="@ViewBag.Products.ProductId" />

@@ -43,11 +43,34 @@ namespace Intex_II.Controllers
 
             return View();
         }
-        
+
         [HttpPost]
         public IActionResult Index(Cart cart)
         {
-            _repo.AddCart(cart);
+            // Check if the product already exists in the cart for the current customer
+            var existingCartItem = _repo.Carts
+                .FirstOrDefault(c => c.CustomerId == cart.CustomerId && c.ProductId == cart.ProductId);
+
+            if (existingCartItem != null)
+            {
+                // Update the quantity and total price of the existing cart item
+                Cart newCartItem = new Cart
+                {
+                    CustomerId = existingCartItem.CustomerId,
+                    ProductId = existingCartItem.ProductId,
+                    ItemQuantity = existingCartItem.ItemQuantity + 1,
+                    TotalPrice = existingCartItem.TotalPrice
+                };
+
+                _repo.RemoveCart(existingCartItem);
+
+                //_repo.AddCart(newCartItem);
+            }
+            else
+            {
+                // If the product doesn't exist in the cart, add a new entry
+                //_repo.AddCart(cart);
+            }
 
             return RedirectToAction("Index");
         }
@@ -104,7 +127,29 @@ namespace Intex_II.Controllers
         [HttpPost]
         public IActionResult Products(Cart cart)
         {
-            _repo.AddCart(cart);
+            var existingCartItem = _repo.Carts
+                .FirstOrDefault(c => c.CustomerId == cart.CustomerId && c.ProductId == cart.ProductId);
+
+            if (existingCartItem != null)
+            {
+                // Update the quantity and total price of the existing cart item
+                Cart newCartItem = new Cart
+                {
+                    CustomerId = existingCartItem.CustomerId,
+                    ProductId = existingCartItem.ProductId,
+                    ItemQuantity = existingCartItem.ItemQuantity + 1,
+                    TotalPrice = existingCartItem.TotalPrice
+                };
+
+                _repo.RemoveCart(existingCartItem);
+
+                _repo.AddCart(newCartItem);
+            }
+            else
+            {
+                // If the product doesn't exist in the cart, add a new entry
+                _repo.AddCart(cart);
+            }
 
             return RedirectToAction("Products");
         }
@@ -127,6 +172,23 @@ namespace Intex_II.Controllers
 
             ViewBag.Products = _repo.Products.FirstOrDefault(p => p.ProductId == productId);
 
+            ViewBag.SimilarProducts = (from Recommendations in _repo.Recommendations
+                                       join Products in _repo.Products
+                                       on Recommendations.RecommendedProductId equals Products.ProductId
+                                       where Recommendations.ProductId == productId
+                                       orderby Recommendations.Rank
+                                       select new
+                                       {
+                                           ProductId = Products.ProductId,
+                                           ProductName = Products.ProductName,
+                                           ProductDescription = Products.ProductDescription,
+                                           ProductPrice = Products.ProductPrice,
+                                           ProductCategory = Products.ProductCategory,
+                                           ProductImage = Products.ProductImage,
+                                           ProductCategorySimple = Products.ProductCategorySimple,
+                                           Rank = Recommendations.Rank
+                                       }).ToList();
+
             return View();
         }
         
@@ -134,7 +196,29 @@ namespace Intex_II.Controllers
         [HttpPost]
         public IActionResult SingleProduct(Cart cart)
         {
-            _repo.AddCart(cart);
+            var existingCartItem = _repo.Carts
+                .FirstOrDefault(c => c.CustomerId == cart.CustomerId && c.ProductId == cart.ProductId);
+
+            if (existingCartItem != null)
+            {
+                // Update the quantity and total price of the existing cart item
+                Cart newCartItem = new Cart
+                {
+                    CustomerId = existingCartItem.CustomerId,
+                    ProductId = existingCartItem.ProductId,
+                    ItemQuantity = existingCartItem.ItemQuantity + 1,
+                    TotalPrice = existingCartItem.TotalPrice
+                };
+
+                _repo.RemoveCart(existingCartItem);
+
+                _repo.AddCart(newCartItem);
+            }
+            else
+            {
+                // If the product doesn't exist in the cart, add a new entry
+                _repo.AddCart(cart);
+            }
 
             return RedirectToAction("SingleProduct", new { productId = cart.ProductId });
         }
@@ -148,6 +232,7 @@ namespace Intex_II.Controllers
         {
             return View();
         }
+
         [Authorize(Roles = "Customer")]
         [HttpGet]
         public async Task<IActionResult> Cart()
@@ -171,7 +256,7 @@ namespace Intex_II.Controllers
                                  {
                                      CustomerId = Carts.CustomerId,
                                      ProductId = Carts.ProductId,
-                                     Quantity = Carts.ItemQuantity,
+                                     ItemQuantity = Carts.ItemQuantity,
                                      TotalPrice = Carts.TotalPrice,
                                      ProductName = Products.ProductName,
                                      ProductYear = Products.ProductYear,
@@ -182,8 +267,18 @@ namespace Intex_II.Controllers
                                      ProductCategorySimple = Products.ProductCategorySimple
                                  }).ToList();
 
+            var total = 0;
+
+            foreach(var item in ViewBag.CartItems)
+            {
+                total = total + (item.ProductPrice * item.ItemQuantity);
+            }
+
+            ViewBag.CartTotal = total;
+
             return View();
         }
+
         [Authorize(Roles = "Customer")]
         [HttpPost]
         public IActionResult Cart(Cart cart)
@@ -192,6 +287,7 @@ namespace Intex_II.Controllers
 
             return RedirectToAction("Cart");
         }
+
         [Authorize(Roles = "Admin")]
         public IActionResult AdminProducts()
         {
@@ -199,6 +295,7 @@ namespace Intex_II.Controllers
 
             return View();
         }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult AdminEditProduct(int productId)
@@ -260,64 +357,65 @@ namespace Intex_II.Controllers
             // depending on the structure of your CSP violation reports
         }
         
-        [Authorize(Roles = "Admin")]
-        public IActionResult AdminUsers(int page = 1, int pageSize = 10)
-        {
-            // Calculate the number of items to skip based on the page number and page size
-            int skip = (page - 1) * pageSize;
+        //[Authorize(Roles = "Admin")]
+        //public IActionResult AdminUsers(int page = 1, int pageSize = 10)
+        //{
+        //    // Calculate the number of items to skip based on the page number and page size
+        //    int skip = (page - 1) * pageSize;
 
-            // ViewBag.Users = _repo.AspNetUsers
-                // .SelectMany(u => u.Roles, (user, role) => new { user, role.Name })
-                // .ToList();
+        //    // ViewBag.Users = _repo.AspNetUsers
+        //        // .SelectMany(u => u.Roles, (user, role) => new { user, role.Name })
+        //        // .ToList();
 
-            // Count the total number of customers
-            // int totalUsers = _repo.AspNetUsers.Count();
+        //    // Count the total number of customers
+        //    // int totalUsers = _repo.AspNetUsers.Count();
 
-            // Calculate the total number of pages
-            // int totalPages = (int)Math.Ceiling((double)totalUsers / pageSize);
+        //    // Calculate the total number of pages
+        //    // int totalPages = (int)Math.Ceiling((double)totalUsers / pageSize);
 
-            // Pass the customers and pagination information to the view
-            // ViewBag.TotalPages = totalPages;
-            ViewBag.CurrentPage = page;
+        //    // Pass the customers and pagination information to the view
+        //    // ViewBag.TotalPages = totalPages;
+        //    ViewBag.CurrentPage = page;
 
-            return View();
-        }
+        //    return View();
+        //}
 
-        [Authorize(Roles = "Admin")]
-        [HttpGet]
-        public IActionResult AdminDeleteUser(string userId)
-        {
-            // var recordToDelete = _repo.AspNetUsers.Single(y => y.Id.Equals(userId));
+        //[Authorize(Roles = "Admin")]
+        //[HttpGet]
+        //public IActionResult AdminDeleteUser(string userId)
+        //{
+        //    // var recordToDelete = _repo.AspNetUsers.Single(y => y.Id.Equals(userId));
 
-            // return View(recordToDelete);
-            return View();
-        }
+        //    // return View(recordToDelete);
+        //    return View();
+        //}
         
 
-        [Authorize(Roles = "Admin")]
-        [HttpPost]
-        public IActionResult AdminDeleteUser(AspNetUser user)
-        {
-            _repo.DeleteUser(user);
+        //[Authorize(Roles = "Admin")]
+        //[HttpPost]
+        //public IActionResult AdminDeleteUser(AspNetUser user)
+        //{
+        //    _repo.DeleteUser(user);
 
-            return RedirectToAction("AdminUsers");
-        }
+        //    return RedirectToAction("AdminUsers");
+        //}
 
-        [Authorize(Roles = "Admin")]
-        [HttpGet]
-        public IActionResult AdminAddUser()
-        {
-            return View();
-        }
+        //[Authorize(Roles = "Admin")]
+        //[HttpGet]
+        //public IActionResult AdminAddUser()
+        //{
+        //    return View();
+        //}
         
-        [Authorize(Roles = "Admin")]
-        [HttpPost]
-        public IActionResult AdminAddUser(Customer customer)
-        {
-            _repo.AddUser(customer);
+        //[Authorize(Roles = "Admin")]
+        //[HttpPost]
+        //public IActionResult AdminAddUser(Customer customer)
+        //{
+        //    _repo.AddUser(customer);
 
-            return RedirectToAction("AdminUsers");
-        }
+        //    return RedirectToAction("AdminUsers");
+        //}
+
         [Authorize(Roles = "Admin")]
         public IActionResult AdminOrders(int page = 1, int pageSize = 10)
         {

@@ -17,7 +17,8 @@
         
         <img src="@item.ProductImage" style="height: 100px" />
         <h3>@item.ProductName</h3>
-        <p>@item.ProductPrice</p>
+        <p>Price: $@item.ProductPrice</p>
+        <p>Quantity: @item.ItemQuantity</p>
         <form method="post">
             <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId" />
             <input type="hidden" asp-for="ProductId" value="@item.ProductId" />
@@ -26,6 +27,8 @@
             <button type="submit">Remove</button>
         </form>
     }
+    <br />
+    <h3>Cart Total: $@ViewBag.CartTotal</h3>
     <br />
     <a asp-controller="Home" asp-action="SubmitOrder" asp-route-customerId="1" asp-route-productIds="@ProductIds"><button>Order</button></a>
 

@@ -8,7 +8,7 @@
 <br />
 <form method="post">
     <div>
-        <input type="text" asp-for="CustomerId" />
+        <input type="hidden" asp-for="CustomerId" />
     </div>
     <div>
         <label asp-for="CustomerFname">First Name:</label>
@@ -28,15 +28,18 @@
     </div>
     <div>
         <label asp-for="CustomerGender">Gender:</label>
-        <input type="text" asp-for="CustomerGender">
+        <select asp-for="CustomerGender">
+            <option value="F">Female</option>
+            <option value="M">Male</option>
+            <option value="O">Other</option>
+        </select>
     </div>
     <div>
         <label asp-for="CustomerAge">Age:</label>
         <input type="number" asp-for="CustomerAge">
     </div>
     <div>
-        <label asp-for="CustomerEmail">Email:</label>
-        <input type="text" asp-for="CustomerEmail">
+        <input type="hidden" asp-for="CustomerEmail">
     </div>
     <div>
         <button type="submit">Create Account</button>
