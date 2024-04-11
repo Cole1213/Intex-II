@@ -166,12 +166,26 @@
         </div>
     </div>
 </div>
+@if(ViewBag.AddedToCart is not null)
+{
+    <div id="popup" class="cart-popup">
+        <div class="cart-popup-content">
+            <h2>Item Added to Cart</h2>
+            <button class="popup-btn-org" onclick="closePopup()">Okay</button>
+            <a href="@Url.Action("Cart", "Home")"><button class="popup-btn-purp">View Cart</button></a>
+        </div>
+    </div>
+}
 <script>
     function changeItemsPerPage() {
         var itemsPerPage = document.getElementById("itemsPerPage").value;
         var currentPage = @(ViewBag.Page);
 
         window.location.href = "@Url.Action("Products")" + "?page=" + currentPage + "&itemsPerPage=" + itemsPerPage;
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
     }
 </script>
 
