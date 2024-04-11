@@ -29,7 +29,6 @@ namespace Intex_II.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            ViewBag.CartItemCount = 2;
             //Pass in the recommendations when we have them
             ViewBag.Recommendations = _repo.Products.Take(5).ToList();
             
@@ -37,11 +36,16 @@ namespace Intex_II.Controllers
 
             var customer = HttpContext.User;
 
+            int customerId;
             if (customer.Identity.IsAuthenticated)
             {
                 var user = await _signInManager.UserManager.GetUserAsync(customer);
 
                 userName = user.UserName;
+
+                customerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
+
+                ViewBag.CartItemCount = _repo.Carts.Where(x => x.CustomerId.Equals(customerId)).Count();
             }
 
             ViewBag.CustomerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
@@ -87,11 +91,16 @@ namespace Intex_II.Controllers
 
             var customer = HttpContext.User;
 
+            int customerId;
             if (customer.Identity.IsAuthenticated)
             {
                 var user = await _signInManager.UserManager.GetUserAsync(customer);
 
                 userName = user.UserName;
+
+                customerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
+
+                ViewBag.CartItemCount = _repo.Carts.Where(x => x.CustomerId.Equals(customerId)).Count();
             }
 
             ViewBag.CustomerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
@@ -191,11 +200,16 @@ namespace Intex_II.Controllers
 
             var customer = HttpContext.User;
 
+            int customerId;
             if (customer.Identity.IsAuthenticated)
             {
                 var user = await _signInManager.UserManager.GetUserAsync(customer);
 
                 userName = user.UserName;
+
+                customerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
+
+                ViewBag.CartItemCount = _repo.Carts.Where(x => x.CustomerId.Equals(customerId)).Count();
             }
 
             ViewBag.CustomerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
@@ -316,6 +330,15 @@ namespace Intex_II.Controllers
             _repo.RemoveCart(cart);
 
             return RedirectToAction("Cart");
+        }
+
+        [Authorize(Roles = "Customer")]
+        [HttpPost]
+        public IActionResult IndexRemoveCart(Cart cart)
+        {
+            _repo.RemoveCart(cart);
+
+            return RedirectToAction("Index");
         }
 
         [Authorize(Roles = "Admin")]
