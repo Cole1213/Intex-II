@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Intex_II.Controllers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,13 @@ public class UserAdminController : Controller
 {
     private readonly UserManager<IdentityUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
+    private ILegoRepository _repo;
 
-    public UserAdminController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+    public UserAdminController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, ILegoRepository repo)
     {
         _userManager = userManager;
         _roleManager = roleManager;
+        _repo = repo;
     }
     [Authorize(Roles = "Admin")]
     [HttpGet]
@@ -68,5 +71,42 @@ public class UserAdminController : Controller
         }
 
         return RedirectToAction("UserAdmin");
+    }
+    [Authorize(Roles = "Admin")]
+    [HttpGet]
+    public async Task<IActionResult> DeleteUser(string userId)
+    {
+        var recordToDelete = await _userManager.FindByIdAsync(userId);
+
+        return View(recordToDelete);
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpPost]
+    public async Task<IActionResult> DeleteUser(string id, int a = 2)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        await _userManager.DeleteAsync(user);
+
+        // Fetch the updated user list
+        var users = _userManager.Users.ToList();
+        var userRolesViewModel = new List<UserRolesViewModel>();
+        foreach (IdentityUser u in users)
+        {
+            var viewModel = new UserRolesViewModel();
+            viewModel.UserId = u.Id;
+            viewModel.Email = u.Email;
+            viewModel.Roles = await GetUserRoles(u);
+            userRolesViewModel.Add(viewModel);
+        }
+
+        // Pass the updated user list to the view
+        ViewData["Roles"] = _roleManager.Roles.Select(r => r.Name).ToList();
+        return View("UserAdmin", userRolesViewModel);
     }
 }
