@@ -43,11 +43,34 @@ namespace Intex_II.Controllers
 
             return View();
         }
-        
+
         [HttpPost]
         public IActionResult Index(Cart cart)
         {
-            _repo.AddCart(cart);
+            // Check if the product already exists in the cart for the current customer
+            var existingCartItem = _repo.Carts
+                .FirstOrDefault(c => c.CustomerId == cart.CustomerId && c.ProductId == cart.ProductId);
+
+            if (existingCartItem != null)
+            {
+                // Update the quantity and total price of the existing cart item
+                Cart newCartItem = new Cart
+                {
+                    CustomerId = existingCartItem.CustomerId,
+                    ProductId = existingCartItem.ProductId,
+                    ItemQuantity = existingCartItem.ItemQuantity + 1,
+                    TotalPrice = existingCartItem.TotalPrice
+                };
+
+                _repo.RemoveCart(existingCartItem);
+
+                //_repo.AddCart(newCartItem);
+            }
+            else
+            {
+                // If the product doesn't exist in the cart, add a new entry
+                //_repo.AddCart(cart);
+            }
 
             return RedirectToAction("Index");
         }
@@ -104,7 +127,29 @@ namespace Intex_II.Controllers
         [HttpPost]
         public IActionResult Products(Cart cart)
         {
-            _repo.AddCart(cart);
+            var existingCartItem = _repo.Carts
+                .FirstOrDefault(c => c.CustomerId == cart.CustomerId && c.ProductId == cart.ProductId);
+
+            if (existingCartItem != null)
+            {
+                // Update the quantity and total price of the existing cart item
+                Cart newCartItem = new Cart
+                {
+                    CustomerId = existingCartItem.CustomerId,
+                    ProductId = existingCartItem.ProductId,
+                    ItemQuantity = existingCartItem.ItemQuantity + 1,
+                    TotalPrice = existingCartItem.TotalPrice
+                };
+
+                _repo.RemoveCart(existingCartItem);
+
+                _repo.AddCart(newCartItem);
+            }
+            else
+            {
+                // If the product doesn't exist in the cart, add a new entry
+                _repo.AddCart(cart);
+            }
 
             return RedirectToAction("Products");
         }
@@ -151,7 +196,29 @@ namespace Intex_II.Controllers
         [HttpPost]
         public IActionResult SingleProduct(Cart cart)
         {
-            _repo.AddCart(cart);
+            var existingCartItem = _repo.Carts
+                .FirstOrDefault(c => c.CustomerId == cart.CustomerId && c.ProductId == cart.ProductId);
+
+            if (existingCartItem != null)
+            {
+                // Update the quantity and total price of the existing cart item
+                Cart newCartItem = new Cart
+                {
+                    CustomerId = existingCartItem.CustomerId,
+                    ProductId = existingCartItem.ProductId,
+                    ItemQuantity = existingCartItem.ItemQuantity + 1,
+                    TotalPrice = existingCartItem.TotalPrice
+                };
+
+                _repo.RemoveCart(existingCartItem);
+
+                _repo.AddCart(newCartItem);
+            }
+            else
+            {
+                // If the product doesn't exist in the cart, add a new entry
+                _repo.AddCart(cart);
+            }
 
             return RedirectToAction("SingleProduct", new { productId = cart.ProductId });
         }
@@ -189,7 +256,7 @@ namespace Intex_II.Controllers
                                  {
                                      CustomerId = Carts.CustomerId,
                                      ProductId = Carts.ProductId,
-                                     Quantity = Carts.ItemQuantity,
+                                     ItemQuantity = Carts.ItemQuantity,
                                      TotalPrice = Carts.TotalPrice,
                                      ProductName = Products.ProductName,
                                      ProductYear = Products.ProductYear,
@@ -199,6 +266,15 @@ namespace Intex_II.Controllers
                                      ProductDescription = Products.ProductDescription,
                                      ProductCategorySimple = Products.ProductCategorySimple
                                  }).ToList();
+
+            var total = 0;
+
+            foreach(var item in ViewBag.CartItems)
+            {
+                total = total + (item.ProductPrice * item.ItemQuantity);
+            }
+
+            ViewBag.CartTotal = total;
 
             return View();
         }
