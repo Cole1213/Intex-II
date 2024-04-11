@@ -23,7 +23,14 @@ html {
   /*overflow: hidden;*/
   /*height: 100vh;*/
 }
-
+.line-items{
+  display: flex;
+  justify-content: space-between;
+  div{
+    text-align: end;
+    width: 50%;
+  }
+}
 .main-body {
   display: flex;
   justify-content: center;
@@ -31,9 +38,32 @@ html {
   padding: 100px 0px 100px 0px;
 }
 
+.text-center{
+  width: 100%;
+  text-align: center;
+}
+.buttons{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cancel-btn{
+  margin-top: 20px;
+  background-color: #f1863a;
+  padding:.375rem .75rem;
+  border-radius: 5px;
+  font-weight: normal;
+  color:white;
+  
+}
+
 .payment-title {
   width: 100%;
   text-align: center;
+  display: flex;
+  justify-content: space-between;
 }
 
 .form-container .field-container:first-of-type {
