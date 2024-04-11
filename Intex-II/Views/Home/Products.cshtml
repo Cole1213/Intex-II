@@ -7,50 +7,74 @@
 @{
     ViewData["Title"] = "Products";
 }
-<div style="margin-top:100px">
-<h2>Products</h2>
-
-<form asp-controller="Home" asp-action="Products" method="get">
-    <div>
-        <label for="categories">Categories:</label>
-        @foreach(var category in ViewBag.Categories)
-        {
-            <input type="checkbox" id="@category" name="categories" value="@category">
-            <label for="@category">@category</label><br />
-        }
-    </div>
-    <div>
-        <label for="minPrice">Min Price:</label>
-        <input type="number" class="form-control" id="minPrice" name="minPrice" step="0.01">
-    </div>
-    <div>
-        <label for="maxPrice">Max Price:</label>
-        <input type="number" class="form-control" id="maxPrice" name="maxPrice" step="0.01">
-    </div>
-    <button type="submit" class="btn btn-primary">Apply Filters</button>
-</form>
-
-<!-- Display filtered products -->
-@if (Model is null)
-{
-    <h3>Filtered Products</h3>
-    <ul>
-        @foreach (var product in ViewBag.Products)
-        {
-            <li>@product.ProductName - @product.ProductPrice</li>
-            <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@product.ProductId"><button>View Product</button></a>
-            <form method="post">
-                <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId" />
-                <input type="hidden" asp-for="ProductId" value="@product.ProductId" />
-                <input type="hidden" asp-for="ItemQuantity" value="1" />
-                <input type="hidden" asp-for="TotalPrice" value="@product.ProductPrice" />
-                <button type="submit">Add to Cart</button>
+<link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+<div class="container-fluid py-5">
+    <div class="row">
+        <!-- Filter Panel on the left -->
+        <div class="col-lg-3 mb-4">
+            <form asp-controller="Home" asp-action="Products" method="get">
+                <div class="bg-white p-4 shadow-sm rounded">
+                    <h2 class="h4 mb-4 font-weight-bold text-uppercase">Categories</h2>
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <div class="form-check mb-2">
+                            <input type="checkbox" class="form-check-input" id="@category" name="categories" value="@category">
+                            <label class="form-check-label" for="@category">@category</label>
+                        </div>
+                    }
+                    <div class="mt-4">
+                        <label for="minPrice" class="form-label">Min Price:</label>
+                        <input type="number" class="form-control" id="minPrice" name="minPrice" step="0.01">
+                    </div>
+                    <div class="mt-3 mb-4">
+                        <label for="maxPrice" class="form-label">Max Price:</label>
+                        <input type="number" class="form-control" id="maxPrice" name="maxPrice" step="0.01">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Apply Filters</button>
+                </div>
             </form>
-        }
-    </ul>
-}
-else
-{
-    <p>No products match the selected criteria.</p>
-}
+        </div>
+
+        <!-- Display filtered products on the right -->
+        <div class="col-lg-9">
+            @if (Model is null)
+            {
+                <h3>Filtered Products</h3>
+                <div class="row">
+                    @foreach (var product in ViewBag.Products)
+                    {
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                            <div class="card h-100">
+                                <!-- Product Image -->
+                                <img src="@product.ProductImage" class="card-img-top" alt="@product.ProductName">
+
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <h5 class="card-title">@product.ProductName</h5>
+                                    <p class="card-text">$@product.ProductPrice</p>
+                                </div>
+
+                                <!-- Card Actions -->
+                                <div class="card-footer">
+                                    <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@product.ProductId" class="btn btn-primary">View Product</a>
+                                    <form method="post" class="d-inline">
+                                        <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId" />
+                                        <input type="hidden" asp-for="ProductId" value="@product.ProductId" />
+                                        <input type="hidden" asp-for="ItemQuantity" value="1" />
+                                        <input type="hidden" asp-for="TotalPrice" value="@product.ProductPrice" />
+                                        <button type="submit" class="btn btn-success">Add to Cart</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>No products match the selected criteria.</p>
+            }
+        </div>
+
+    </div>
 </div>
