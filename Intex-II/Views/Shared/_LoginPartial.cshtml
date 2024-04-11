@@ -2,14 +2,26 @@
 
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@inject ILegoRepository Repo
 
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <p id="manage" class="username" title="Manage">Hello <span id="name-on-profile">@UserManager.GetUserName(User)</span> !</p>
-        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button id="logout" type="submit" class="">Logout</button>
-        </form>
+    var user = await UserManager.GetUserAsync(User);
+    var customer = user != null ? Repo.Customers.FirstOrDefault(x => x.CustomerEmail == user.UserName) : null; // Adjust based on your data model
+
+    <p id="manage" class="username" title="Manage">
+        Hello, <span id="name-on-profile">@customer.CustomerFname</span>!
+    </p>
+    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        <button id="logout" type="submit" class="">Logout</button>
+    </form>
+    
+    
+    @* <p id="manage" class="username" title="Manage">Hello <span id="name-on-profile">@UserManager.GetUserName(User)</span> !</p> *@
+    @*     <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })"> *@
+    @*         <button id="logout" type="submit" class="">Logout</button> *@
+    @*     </form> *@
 
 }
 else

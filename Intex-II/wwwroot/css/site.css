@@ -81,12 +81,23 @@ span{
 .left-nav-elements img {
   margin-right: 10px;
 }
+nav a {
+  transition: transform 0.3s ease; /* Smooth transition for the transform property */
+  display: inline-block; /* or block depending on your layout */
+}
+
+nav a:hover {
+  transform: scale(1.2); /* Increase the size of the element to 110% of its original size */
+}
 
 
 
 .left-nav-elements a, .right-nav-elements a {
   margin: 0 10px; 
   color:white;
+}
+.left-nav-elements a:hover{
+  transform: scale(1.25);
 }
 
 a {
@@ -109,16 +120,21 @@ a {
 
 footer {
   background-color: #3b3b88;
-  height: 400px;
+  height: 300px;
   position: absolute;
   width: 100vw;
 }
 
 .flex-grid {
   display: flex;
+  padding-left:10% ;
+  padding-right:10% ;
   width: 100%;
-  height: auto;
+  height: 100%;
   justify-content: space-around;
+  div ul li a {
+    width: 100%;
+  }
 }
 
 .col {
@@ -127,6 +143,7 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  align-items: center;
 }
 
 .subscription-form {
@@ -157,8 +174,18 @@ footer {
   border-bottom: 2px solid #fff; /* border color */
   color: white; /* text color */
   outline: none;
+  transition: border-color 0.3s ease; /* smooth transition for border color */
 }
 
+.subscription-form input[type=email]:hover {
+  border-bottom: 2px solid #f1863a; /* new border color on hover */
+}
+
+
+#sub-message{
+  color: #a0a0a0;
+  font-size: smaller;
+}
 .subscription-form button {
   position: absolute;
   right: 0;
@@ -198,19 +225,13 @@ footer {
 }
 
 .socialList {
-  list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: flex-start;
+  align-items: flex-start;
   justify-content: center;
   flex-flow: row wrap;
-  li {
-    margin: 5px;
-    &:first-child {
-      padding-left: 0;
-    }
-    a {
+  a {
       position: relative;
       display: flex;
       justify-content: center;
@@ -233,11 +254,11 @@ footer {
       &:hover {
         i {
           transform: scale(1.5) translate(-50%, -50%);
+          color: #f1863a
         }
       }
     }
   }
-}
 
 .helpList {
   list-style: none;
@@ -245,9 +266,11 @@ footer {
   padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   h4{
     color: white;
+    border-bottom: #f1863a 1px solid;
+    padding-bottom: 10px;
   }
   li {
     margin: 5px;
@@ -268,6 +291,13 @@ footer {
       /*background-color: #999;*/
       color: #fff;
       transition: .35s;
+      &:hover{
+        color: #d86914
+      }
+    i {
+      padding-right: 5px;
+      color: #f1863a;
+    }
     }
   }
 }
@@ -278,9 +308,11 @@ footer {
   padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   h4{
     color: white;
+    border-bottom: #f1863a 1px solid;
+    padding-bottom: 10px;
   }
   li {
     margin: 5px;
@@ -301,6 +333,13 @@ footer {
       /*background-color: #999;*/
       color: #fff;
       transition: .35s;
+      &:hover{
+        color: #d86914
+      }
+      i {
+        padding-right: 5px;
+      }
+    
     }
   }
 }
@@ -323,6 +362,9 @@ footer {
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   z-index: 1000; /* Ensure it appears above other content */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .cookie-consent-popup p {
@@ -337,6 +379,9 @@ footer {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  width: 50%;
+  margin: 10px 0px 10px 0px;
+  transition: background-color .3s ease-in-out;
 }
 
 .cookie-consent-popup button:hover {

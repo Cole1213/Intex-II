@@ -100,4 +100,20 @@ document.addEventListener("DOMContentLoaded", function() {
         // Hide the pop-up
         consentPopup.style.display = "none";
     });
+    
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the button element
+    var closeButton = document.getElementById("unsureCookieConsent");
+
+    // Add a click event listener to the button
+    closeButton.addEventListener("click", function() {
+        // Find the cookie consent pop-up element
+        var consentPopup = document.getElementById("cookieConsentPopup");
+
+        // Hide the pop-up
+        consentPopup.style.display = "none";
+    });
+
 });

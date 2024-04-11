@@ -5,9 +5,52 @@
   --border-radius: 5px;
   --size-of-hero:75vh;
 }
+body{
+  background-color: #f0f4f8;
+}
+.btn-ext-login{
+  background-color: transparent;
+  transition: color .3s ease-in-out;
+  i {
+    color: #aaaaaa;
+    transition: color .3s ease-in-out;
+  }
+  &:hover{
+    color: #f1863a;
+  }
+}
+.divider-reg {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 20px 0px 20px 0px;
+}
 
-h1 {
-  color:green;
+.divider-line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #aaaaaa;
+}
+
+.divider-text {
+  padding: 0 10px;
+  color: #aaaaaa; /* OR text color */
+  white-space: nowrap; /* Prevents wrapping */
+}
+
+/* Optional: If you want the divider to have a max-width */
+.divider {
+  justify-content: center;
+  max-width: 600px; /* Or any max-width you prefer */
+  margin: 0 auto;
+}
+.login-btn{
+  background-color: #3b3b88 ;
+  border: none;
+  transition: background-color .3s ease-in-out;
+}
+.login-btn:hover{
+  background-color: #f1863a;
 }
 
 .top-header {
@@ -73,21 +116,28 @@ button {
   color:white;
 }
 button:hover {
-  background-color: lightcoral;
-  color:white;
+  color:#f1863a;
 }
 
 .row {
-  width: 100%;
+  width: 40vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 20px;
+  border:none;
+}
+
+hr{
+  color: #ffffff
 }
 
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 80vh;
 }
