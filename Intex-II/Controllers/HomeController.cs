@@ -6,24 +6,40 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Security.Cryptography.Xml;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.CodeAnalysis;
 
 namespace Intex_II.Controllers
 {
     public class HomeController : Controller
     {
         private ILegoRepository _repo;
+        private SignInManager<IdentityUser> _signInManager;
 
-        public HomeController(ILegoRepository temp)
+        public HomeController(ILegoRepository temp, SignInManager<IdentityUser> signInManager)
         {
             _repo = temp;
+            _signInManager = signInManager;
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             ViewBag.CartItemCount = 2;
             //Pass in the recommendations when we have them
             ViewBag.Recommendations = _repo.Products.Take(5).ToList();
+            
+            string userName = null; // Initialize userId with null
+
+            var customer = HttpContext.User;
+
+            if (customer.Identity.IsAuthenticated)
+            {
+                var user = await _signInManager.UserManager.GetUserAsync(customer);
+
+                userName = user.UserName;
+            }
+
+            ViewBag.CustomerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
 
             return View();
         }
@@ -37,8 +53,21 @@ namespace Intex_II.Controllers
         }
 
         [HttpGet]
-        public IActionResult Products(List<string> categories = null, decimal? minPrice = null, decimal? maxPrice = null)
+        public async Task<IActionResult> Products(List<string> categories = null, decimal? minPrice = null, decimal? maxPrice = null)
         {
+            string userName = null; // Initialize userId with null
+
+            var customer = HttpContext.User;
+
+            if (customer.Identity.IsAuthenticated)
+            {
+                var user = await _signInManager.UserManager.GetUserAsync(customer);
+
+                userName = user.UserName;
+            }
+
+            ViewBag.CustomerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
+
             IQueryable<Product> productsQuery = _repo.Products; // Assuming _repo.Products is IQueryable<Product>
 
             // Apply filters based on categories and price if provided
@@ -81,8 +110,21 @@ namespace Intex_II.Controllers
         }
 
         [HttpGet]
-        public IActionResult SingleProduct(int productId)
+        public async Task<IActionResult> SingleProduct(int productId)
         {
+            string userName = null; // Initialize userId with null
+
+            var customer = HttpContext.User;
+
+            if (customer.Identity.IsAuthenticated)
+            {
+                var user = await _signInManager.UserManager.GetUserAsync(customer);
+
+                userName = user.UserName;
+            }
+
+            ViewBag.CustomerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
+
             ViewBag.Products = _repo.Products.FirstOrDefault(p => p.ProductId == productId);
 
             return View();
@@ -108,8 +150,18 @@ namespace Intex_II.Controllers
         }
         [Authorize(Roles = "Customer")]
         [HttpGet]
-        public IActionResult Cart(int customerId = 1)
+        public async Task<IActionResult> Cart()
         {
+            var signedInUser = HttpContext.User;
+
+            var user = await _signInManager.UserManager.GetUserAsync(signedInUser);
+
+            var userName = user.UserName;
+
+            int customerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
+
+            ViewBag.CustomerId = customerId;
+
             //Pass in actual cart items later
             ViewBag.CartItems = (from Carts in _repo.Carts
                                  join Products in _repo.Products
@@ -288,14 +340,31 @@ namespace Intex_II.Controllers
         }
 
         [Authorize(Roles = "Customer")]
-        public IActionResult Dashboard()
+        public async Task<IActionResult> Dashboard()
         {
+            var customer = HttpContext.User;
+
+            var user = await _signInManager.UserManager.GetUserAsync(customer);
+
+            var userName = user.UserName;
+
+            ViewBag.CustomerDetails = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).FirstOrDefault();
+
             return View();
         }
 
         [HttpGet]
-        public IActionResult SubmitOrder(int customerId = 1)
+        public async Task<IActionResult> SubmitOrder()
         {
+
+            var customer = HttpContext.User;
+
+            var user = await _signInManager.UserManager.GetUserAsync(customer);
+
+            var userName = user.UserName;
+
+            int customerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
+
             ViewBag.CartItems = (from Carts in _repo.Carts
                                  join Products in _repo.Products
                                  on Carts.ProductId equals Products.ProductId
@@ -336,11 +405,11 @@ namespace Intex_II.Controllers
         }
         
         [HttpPost]
-        public IActionResult SubmitOrder(Order order)
+        public IActionResult SubmitOrder(Order order) 
         {
             Order addedOrder = _repo.AddOrder(order);
 
-            List<Cart> CartItems = _repo.Carts.Where(x => x.CustomerId == order.CustomerId).ToList();
+            List<Cart> CartItems = _repo.Carts.Where(x => x.CustomerId.Equals(order.CustomerId)).ToList();
 
             foreach (var item in CartItems) 
             {
@@ -348,13 +417,29 @@ namespace Intex_II.Controllers
                 {
                     TransactionId = addedOrder.TransactionId, 
                     ProductId = item.ProductId, 
-                    Quantity = item.ItemQuantity
+                    Quantity = (int)item.ItemQuantity
                 };
 
                 _repo.AddLineItem(lineItem);
 
                 _repo.RemoveCart(item);
             }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult AddCustomer(int customerId)
+        {
+            var recordToEdit = _repo.Customers.Single(x => x.CustomerId == customerId);
+
+            return View(recordToEdit);
+        }
+
+        [HttpPost]
+        public IActionResult AddCustomer(Customer customer)
+        {
+            _repo.EditCustomer(customer);
 
             return RedirectToAction("Index");
         }

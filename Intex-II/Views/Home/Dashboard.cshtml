@@ -4,7 +4,13 @@
 @section PageSpecificStyles {
     <link rel="stylesheet" href="~/css/dashboard.css">
 }
+@model Customer
+
 <div style="margin-top:100px;">
     <h1>Profile</h1>
     <partial name="_LoginPartial"/>
+
+    <p>Name: @ViewBag.CustomerDetails.CustomerFname @ViewBag.CustomerDetails.CustomerLname</p>
+    <p>Country: @ViewBag.CustomerDetails.CustomerCountry</p>
+    <p>Age: @ViewBag.CustomerDetails.CustomerAge</p>
 </div>

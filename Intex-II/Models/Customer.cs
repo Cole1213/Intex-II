@@ -5,8 +5,6 @@ namespace Intex_II.Models;
 
 public partial class Customer
 {
-    public int CustomerId { get; set; }
-
     public string? CustomerFname { get; set; }
 
     public string? CustomerLname { get; set; }
@@ -18,6 +16,8 @@ public partial class Customer
     public string? CustomerGender { get; set; }
 
     public double? CustomerAge { get; set; }
+
+    public int CustomerId { get; set; }
 
     public string? CustomerEmail { get; set; }
 }

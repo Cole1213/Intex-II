@@ -88,5 +88,19 @@ namespace Intex_II.Models
             _context.LineItems.Add(lineItem);
             _context.SaveChanges();
         }
+
+        public Customer AddCustomer(Customer customer)
+        {
+            _context.Customers.Add(customer);
+            _context.SaveChanges();
+
+            return customer;
+        }
+
+        public void EditCustomer(Customer customer)
+        {
+            _context.Customers.Update(customer);
+            _context.SaveChanges();
+        }
     }
 }

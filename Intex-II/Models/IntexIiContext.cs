@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 
 namespace Intex_II.Models;
 
@@ -10,13 +10,13 @@ public partial class IntexIiContext : IdentityDbContext<IdentityUser>
 {
     public IntexIiContext()
     {
-        
     }
+
     public IntexIiContext(DbContextOptions<IntexIiContext> options)
         : base(options)
     {
     }
-    
+
     public virtual DbSet<Cart> Carts { get; set; }
 
     public virtual DbSet<Customer> Customers { get; set; }
@@ -39,8 +39,6 @@ public partial class IntexIiContext : IdentityDbContext<IdentityUser>
         {
             entity.HasKey(e => new { e.CustomerId, e.ProductId });
 
-            entity.ToTable("Cart");
-
             entity.Property(e => e.CustomerId).HasColumnName("Customer_Id");
             entity.Property(e => e.ProductId).HasColumnName("Product_Id");
             entity.Property(e => e.ItemQuantity).HasColumnName("Item_Quantity");
@@ -49,15 +47,11 @@ public partial class IntexIiContext : IdentityDbContext<IdentityUser>
 
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.Property(e => e.CustomerId)
-                .ValueGeneratedNever()
-                .HasColumnName("Customer_Id");
+            entity.Property(e => e.CustomerId).HasColumnName("Customer_Id");
             entity.Property(e => e.BirthDate).HasColumnName("Birth_Date");
             entity.Property(e => e.CustomerAge).HasColumnName("Customer_Age");
             entity.Property(e => e.CustomerCountry).HasColumnName("Customer_Country");
-            entity.Property(e => e.CustomerEmail)
-                .HasMaxLength(50)
-                .HasColumnName("Customer_Email");
+            entity.Property(e => e.CustomerEmail).HasColumnName("Customer_Email");
             entity.Property(e => e.CustomerFname).HasColumnName("Customer_FName");
             entity.Property(e => e.CustomerGender)
                 .HasMaxLength(1)

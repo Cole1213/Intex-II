@@ -10,6 +10,8 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using Intex_II.Controllers;
+using Intex_II.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -29,13 +31,15 @@ namespace Intex_II.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private ILegoRepository _repo;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ILegoRepository repo)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -43,6 +47,7 @@ namespace Intex_II.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _repo = repo;
         }
 
         /// <summary>
@@ -120,6 +125,14 @@ namespace Intex_II.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+
+                    Customer customer = new Customer
+                    {
+                        CustomerEmail = user.UserName
+                    };
+
+                    Customer newCustomer = _repo.AddCustomer(customer);
+
                     _logger.LogInformation("User created a new account with password.");
 
                     if (user.NormalizedUserName.StartsWith("ADMIN")) {
@@ -147,7 +160,8 @@ namespace Intex_II.Areas.Identity.Pages.Account
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+
+                        return RedirectToAction("AddCustomer", "Home", new { customerId = newCustomer.CustomerId});
                     }
                 }
                 foreach (var error in result.Errors)
