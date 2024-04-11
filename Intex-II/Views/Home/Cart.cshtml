@@ -19,7 +19,7 @@
         <h3>@item.ProductName</h3>
         <p>@item.ProductPrice</p>
         <form method="post">
-            <input type="hidden" asp-for="CustomerId" value="1" />
+            <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId" />
             <input type="hidden" asp-for="ProductId" value="@item.ProductId" />
             <input type="hidden" asp-for="ItemQuantity" value="1" />
             <input type="hidden" asp-for="TotalPrice" value="@item.ProductPrice" />

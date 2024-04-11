@@ -159,6 +159,8 @@ namespace Intex_II.Controllers
 
             int customerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
 
+            ViewBag.CustomerId = customerId;
+
             //Pass in actual cart items later
             ViewBag.CartItems = (from Carts in _repo.Carts
                                  join Products in _repo.Products
