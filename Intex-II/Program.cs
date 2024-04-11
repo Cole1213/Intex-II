@@ -40,6 +40,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 var services = builder.Services;
 var configuration = builder.Configuration;
 
+
+
 services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
 {
     microsoftOptions.ClientId = configuration["ClientId"];

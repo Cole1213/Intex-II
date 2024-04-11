@@ -1,0 +1,93 @@
+:root {
+  --primary-color: #ff4500;
+  --secondary-color: #333;
+  --padding: 1rem;
+  --border-radius: 5px;
+  --size-of-hero:75vh;
+}
+
+h1 {
+  color:green;
+}
+
+.top-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.right-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.glass-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #8080802e;
+  border-radius: 20px;
+  padding: 50px;
+  margin-bottom: 30px;
+  button{
+    background-color: #3b3b88;
+    border: none;
+    margin: 10px;
+  }
+  a {
+    background-color: #3b3b88;
+    border: none;
+
+  }
+}
+.nav-link{
+  color: #3b3b88 !important;
+}
+.active {
+  background-color: #3b3b88 !important;
+  color:white !important;
+}
+#name-on-profile {
+  font-weight: bolder;
+}
+
+#email-verification {
+  color:white;
+  text-decoration: none;
+}
+#manage{
+  font-size: x-large;
+  text-align: center;
+  padding: 0px;
+  margin: 0;
+}
+
+button {
+  border-radius: 10px;
+  border: none;
+  background-color: lightsalmon;
+  padding: 10px;
+  color:white;
+}
+button:hover {
+  background-color: lightcoral;
+  color:white;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
