@@ -147,29 +147,19 @@
     <input type="text" asp-for="TransactionDate" value="@DateTime.Today.ToShortDateString()" readonly />
 
     <label asp-for="TransactionDayOfWeek">Day of Week:</label>
-    <input type="text" asp-for="TransactionDayOfWeek" value="@DateTime.Today.DayOfWeek.ToString()" readonly />
+    <input type="text" asp-for="TransactionDayOfWeek" value="@DateTime.Today.ToString("ddd")" readonly />
 
     <label asp-for="TransactionTime">Time of Day:</label>
     <input type="text" asp-for="TransactionTime" value="@DateTime.Now.ToString("HH")" readonly />
 
     <label asp-for="EntryMode">Entry Mode:</label>
-    <select asp-for="EntryMode">
-        @foreach(var e in ViewBag.EntryModes)
-        {
-            <option value="@e">@e</option>
-        }
-    </select>
+    <input type="text" asp-for="EntryMode" value="CVC" readonly/>
 
     <label asp-for="Amount">Amount:</label>
-    <input type="number" asp-for="Amount" />
+    <input type="number" asp-for="Amount" value="@ViewBag.CartTotal" readonly/>
 
     <label asp-for="TransactionType">Transaction Type:</label>
-    <select asp-for="TransactionType">
-        @foreach (var e in ViewBag.TransactionTypes)
-        {
-            <option value="@e">@e</option>
-        }
-    </select>
+    <input type="text" asp-for="TransactionType" value="Online" readonly />
 
     <label asp-for="TransactionTypeOfCard">Card Type:</label>
     <select asp-for="TransactionTypeOfCard">
@@ -180,13 +170,23 @@
     </select>
 
     <label asp-for="TransactionCountry">Country:</label>
-    <input type="text" asp-for="TransactionCountry" />
+    <select asp-for="TransactionCountry">
+        @foreach (var e in ViewBag.Countries)
+        {
+            <option value="@e">@e</option>
+        }
+    </select>
 
     <label asp-for="TransactionShippingAddress">Shipping Address:</label>
     <input type="text" asp-for="TransactionShippingAddress" />
 
     <label asp-for="TransactionBank">Bank:</label>
-    <input type="text" asp-for="TransactionBank" />
+    <select asp-for="TransactionBank">
+        @foreach (var e in ViewBag.Banks)
+        {
+            <option value="@e">@e</option>
+        }
+    </select>
 
     <h3>Line Items</h3>
     @foreach (var item in ViewBag.CartItems)
@@ -201,3 +201,6 @@
 
 
 
+@section Scripts {
+    <script src="~/js/creditcard.js" asp-append-version="true"></script>
+}

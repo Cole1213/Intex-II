@@ -81,12 +81,23 @@ span{
 .left-nav-elements img {
   margin-right: 10px;
 }
+nav a {
+  transition: transform 0.3s ease; /* Smooth transition for the transform property */
+  display: inline-block; /* or block depending on your layout */
+}
+
+nav a:hover {
+  transform: scale(1.2); /* Increase the size of the element to 110% of its original size */
+}
 
 
 
 .left-nav-elements a, .right-nav-elements a {
   margin: 0 10px; 
   color:white;
+}
+.left-nav-elements a:hover{
+  transform: scale(1.25);
 }
 
 a {
@@ -109,16 +120,21 @@ a {
 
 footer {
   background-color: #3b3b88;
-  height: 400px;
+  height: 300px;
   position: absolute;
   width: 100vw;
 }
 
 .flex-grid {
   display: flex;
+  padding-left:10% ;
+  padding-right:10% ;
   width: 100%;
-  height: auto;
+  height: 100%;
   justify-content: space-around;
+  div ul li a {
+    width: 100%;
+  }
 }
 
 .col {
@@ -127,6 +143,7 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  align-items: center;
 }
 
 .subscription-form {
@@ -157,8 +174,18 @@ footer {
   border-bottom: 2px solid #fff; /* border color */
   color: white; /* text color */
   outline: none;
+  transition: border-color 0.3s ease; /* smooth transition for border color */
 }
 
+.subscription-form input[type=email]:hover {
+  border-bottom: 2px solid #f1863a; /* new border color on hover */
+}
+
+
+#sub-message{
+  color: #a0a0a0;
+  font-size: smaller;
+}
 .subscription-form button {
   position: absolute;
   right: 0;
@@ -198,19 +225,13 @@ footer {
 }
 
 .socialList {
-  list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: flex-start;
+  align-items: flex-start;
   justify-content: center;
   flex-flow: row wrap;
-  li {
-    margin: 5px;
-    &:first-child {
-      padding-left: 0;
-    }
-    a {
+  a {
       position: relative;
       display: flex;
       justify-content: center;
@@ -233,11 +254,11 @@ footer {
       &:hover {
         i {
           transform: scale(1.5) translate(-50%, -50%);
+          color: #f1863a
         }
       }
     }
   }
-}
 
 .helpList {
   list-style: none;
@@ -245,9 +266,11 @@ footer {
   padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   h4{
     color: white;
+    border-bottom: #f1863a 1px solid;
+    padding-bottom: 10px;
   }
   li {
     margin: 5px;
@@ -268,9 +291,17 @@ footer {
       /*background-color: #999;*/
       color: #fff;
       transition: .35s;
+      &:hover{
+        color: #d86914
+      }
+    i {
+      padding-right: 5px;
+      color: #f1863a;
+    }
     }
   }
 }
+
 
 .aboutList {
   list-style: none;
@@ -278,9 +309,11 @@ footer {
   padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   h4{
     color: white;
+    border-bottom: #f1863a 1px solid;
+    padding-bottom: 10px;
   }
   li {
     margin: 5px;
@@ -301,6 +334,13 @@ footer {
       /*background-color: #999;*/
       color: #fff;
       transition: .35s;
+      &:hover{
+        color: #d86914
+      }
+      i {
+        padding-right: 5px;
+      }
+    
     }
   }
 }
@@ -312,4 +352,181 @@ footer {
   p {
     color: #b9bec0;
   }
+}
+
+.color-filters .color-option {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.color-filters .color-circle {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.color-filters input[type="checkbox"]:checked + .color-circle {
+    transform: scale(1.1);
+    border-color: #000;
+}
+
+.customer-reviews {
+    margin-top: 15px;
+}
+
+    .customer-reviews input[type="checkbox"] {
+        display: none;
+    }
+
+    .customer-reviews label {
+        cursor: pointer;
+    }
+
+    .customer-reviews .stars {
+        font-size: 18px;
+        color: #ffdd00;
+    }
+
+    .customer-reviews input[type="checkbox"]:checked + .stars {
+        text-decoration: underline;
+    }
+
+.sleek-column {
+    background-color: #f8f9fa; /* Soft light grey background */
+    border-radius: 15px; /* Smooth, rounded corners */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+    padding: 1rem; /* Comfortable padding */
+    margin-top: 1rem; /* Space from the top of the container */
+    margin-bottom: 1rem; /* Space from the bottom of the container */
+    border: 1px solid #e1e1e1; /* Subtle border for refined edges */
+}
+/* General Styles */
+.sleek-column {
+    background-color: #f8f9fa; /* Soft light grey background */
+    border-radius: 15px; /* Smooth, rounded corners */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+    padding: 1rem; /* Comfortable padding */
+    border: 1px solid #e1e1e1; /* Subtle border for refined edges */
+}
+
+/* Color Filters */
+.color-circle {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid transparent;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+    .color-circle:hover {
+        transform: scale(1.1);
+        border-color: #000;
+    }
+
+/* Ratings */
+.stars {
+    display: inline-block;
+    margin-right: 10px;
+    color: #ffd700; /* Gold color for stars */
+    transition: transform 0.3s ease;
+}
+
+    .stars:hover {
+        transform: scale(1.1);
+    }
+
+/* Cards */
+.card {
+    transition: box-shadow 0.3s ease;
+}
+
+    .card:hover {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+.card-img-top {
+    width: 100%;
+    height: 180px; /* Fixed height, or use object-fit if your images are consistent */
+    object-fit: cover; /* This will ensure images cover the area nicely */
+}
+
+.card-body {
+    padding: 0.8rem;
+}
+
+.card-title {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+}
+
+.card-footer {
+    background: transparent;
+    border-top: none;
+    padding: 0.8rem 0.8rem 0 0.8rem;
+}
+
+/* Buttons */
+.btn-primary, .btn-success {
+    margin-top: 5px; /* Spacing between buttons */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.margin-top-custom {
+    margin-top: 30px; 
+}
+.full-width-button {
+    background-color: black; 
+    color: white; 
+    width: 100%;
+    border: none; 
+}
+
+}
+
+.cookie-consent-popup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  z-index: 1000; /* Ensure it appears above other content */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cookie-consent-popup p {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.cookie-consent-popup button {
+  background-color: #3B3B88FF;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 50%;
+  margin: 10px 0px 10px 0px;
+  transition: background-color .3s ease-in-out;
+}
+
+.cookie-consent-popup button:hover {
+  background-color: #d86914;
 }

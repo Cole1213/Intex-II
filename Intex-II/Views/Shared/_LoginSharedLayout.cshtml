@@ -11,8 +11,11 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.2/css/all.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @await RenderSectionAsync("PageSpecificStyles", required: false)
+
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
      
 </head>
@@ -26,9 +29,9 @@
                 <a asp-controller="Home" asp-action="About" style="color:black;">About</a>
             </div>
             <div class="right-nav-elements">
-              <a asp-controller="Home" asp-action="Dashboard"><img src="/imgs/lego.png" height="30px"></a>
-              <a ><img src="/imgs/search.png" height="30px"></a>
-              <a asp-action="Cart" asp-controller="Home"><img src="/imgs/cart.png" height="27px"></a>
+              <a asp-controller="Home" asp-action="Dashboard"><img src="/imgs/lego.png" height="30px" alt=""></a>
+              <a ><img src="/imgs/search.png" height="30px" alt=""></a>
+              <a asp-action="Cart" asp-controller="Home"><img src="/imgs/cart.png" height="27px" alt=""></a>
             </div>
         </nav>
     </header>
@@ -39,6 +42,43 @@
     </div>
 
 <footer>
+    <div class="flex-grid">
+        <div class="col">
+            <div class="subscription-form">
+                <p id="sub-message">JOIN AURORA BRICK'S MAILING LIST</p>
+                <form action="your-server-side-handler">
+                    <input type="email" id="email" name="email" placeholder="Email Address" required>
+                    <button type="submit">&#10140;</button> <!-- Unicode arrow symbol -->
+                </form>
+            </div>
+            <div class="socials">
+                <div class="socialList">
+                    <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href=""> <i class="fa-brands fa-tiktok"></i></a>
+                    <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href=""><i class="fa-brands fa-instagram"></i></a>
+                    
+                </div>
+            </div>
+          
+        </div>
+        <div class="col">
+            <ul class="aboutList">
+                <h4>ABOUT US</h4>
+                <li><a href="">Our Story</a></li>
+                <li><a href="">Privacy Info</a></li>
+                <li><a href="">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="col">
+            <ul class="helpList">
+                <h4>CONTACT</h4>
+                <li><a href=""><i class="fa-solid fa-house"></i>   New York, NY 100012, US</a></li>
+                <li><a href=""><i class="fa-solid fa-envelope"></i>   info@example.com</a></li>
+                <li><a href=""><i class="fa-solid fa-phone"></i>    +1 (800) 123-4567</a></li>
+            </ul>
+        </div>
+    </div>
 </footer>
 
 <script src="~/js/site.js" asp-append-version="true"></script>

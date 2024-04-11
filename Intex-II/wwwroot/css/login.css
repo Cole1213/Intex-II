@@ -1,0 +1,143 @@
+:root {
+  --primary-color: #ff4500;
+  --secondary-color: #333;
+  --padding: 1rem;
+  --border-radius: 5px;
+  --size-of-hero:75vh;
+}
+body{
+  background-color: #f0f4f8;
+}
+.btn-ext-login{
+  background-color: transparent;
+  transition: color .3s ease-in-out;
+  i {
+    color: #aaaaaa;
+    transition: color .3s ease-in-out;
+  }
+  &:hover{
+    color: #f1863a;
+  }
+}
+.divider-reg {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 20px 0px 20px 0px;
+}
+
+.divider-line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #aaaaaa;
+}
+
+.divider-text {
+  padding: 0 10px;
+  color: #aaaaaa; /* OR text color */
+  white-space: nowrap; /* Prevents wrapping */
+}
+
+/* Optional: If you want the divider to have a max-width */
+.divider {
+  justify-content: center;
+  max-width: 600px; /* Or any max-width you prefer */
+  margin: 0 auto;
+}
+.login-btn{
+  background-color: #3b3b88 ;
+  border: none;
+  transition: background-color .3s ease-in-out;
+}
+.login-btn:hover{
+  background-color: #f1863a;
+}
+
+.top-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.right-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.glass-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #8080802e;
+  border-radius: 20px;
+  padding: 50px;
+  margin-bottom: 30px;
+  button{
+    background-color: #3b3b88;
+    border: none;
+    margin: 10px;
+  }
+  a {
+    background-color: #3b3b88;
+    border: none;
+
+  }
+}
+.nav-link{
+  color: #3b3b88 !important;
+}
+.active {
+  background-color: #3b3b88 !important;
+  color:white !important;
+}
+#name-on-profile {
+  font-weight: bolder;
+}
+
+#email-verification {
+  color:white;
+  text-decoration: none;
+}
+#manage{
+  font-size: x-large;
+  text-align: center;
+  padding: 0px;
+  margin: 0;
+}
+
+button {
+  border-radius: 10px;
+  border: none;
+  background-color: lightsalmon;
+  padding: 10px;
+  color:white;
+}
+button:hover {
+  color:#f1863a;
+}
+
+.row {
+  width: 40vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 20px;
+  border:none;
+}
+
+hr{
+  color: #ffffff
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 80vh;
+}

@@ -59,7 +59,7 @@
 
             </div>
             <div class="right-nav-elements">
-              <a asp-controller="Home" asp-action="Dashboard"><img src="/imgs/lego.png" height="30px"></a>
+              <a asp-area="Identity" asp-page="/Account/Manage/Index"><img src="/imgs/lego.png" height="30px"></a>
               <a ><img src="@((ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home") ? "/imgs/whitesearch.png" : "/imgs/search.png")" height="30px"></a>
                 @if (isSignedIn)
                  {
@@ -80,7 +80,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="main-body">
                        
             @RenderBody()
 
@@ -90,48 +90,46 @@
     <div class="flex-grid">
         <div class="col">
             <div class="subscription-form">
-                <p>Subscribe for all things Aurora Lego</p>
+                <p id="sub-message">JOIN AURORA BRICK'S MAILING LIST</p>
                 <form action="your-server-side-handler">
                     <input type="email" id="email" name="email" placeholder="Email Address" required>
                     <button type="submit">&#10140;</button> <!-- Unicode arrow symbol -->
                 </form>
             </div>
             <div class="socials">
-                <ul class="socialList">
-                    <li><a href=""><i class="fa-brands fa-facebook-f"></i></a></li>
-                    <li><a href=""> <i class="fa-brands fa-tiktok"></i></a></li>
-                    <li><a href=""><i class="fa-brands fa-x-twitter"></i></a></li>
-                    <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
+                <div class="socialList">
+                    <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href=""> <i class="fa-brands fa-tiktok"></i></a>
+                    <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href=""><i class="fa-brands fa-instagram"></i></a>
                     
-                </ul>
+                </div>
             </div>
           
         </div>
         <div class="col">
             <ul class="aboutList">
-                <h4>About Us</h4>
-                <li><a href="">Test</a></li>
-                <li><a href="">Test</a></li>
-                <li><a href="">Test</a></li>
-                <li><a href="">Test</a></li>
-                <li><a href="">Test</a></li>
+                <h4>ABOUT US</h4>
+                <li><a href="">Our Story</a></li>
+                <li><a href="">Privacy Info</a></li>
+                <li><a href="">Contact Us</a></li>
             </ul>
         </div>
         <div class="col">
             <ul class="helpList">
-                <h4>Get Help</h4>
-                <li><a href="">Test</a></li>
-                <li><a href="">Test</a></li>
-                <li><a href="">Test</a></li>
-                <li><a href="">Test</a></li>
-                <li><a href="">Test</a></li>
+                <h4>CONTACT</h4>
+                <li><a href=""><i class="fa-solid fa-house"></i>   New York, NY 100012, US</a></li>
+                <li><a href=""><i class="fa-solid fa-envelope"></i>   info@example.com</a></li>
+                <li><a href=""><i class="fa-solid fa-phone"></i>    +1 (800) 123-4567</a></li>
             </ul>
         </div>
     </div>
-    <div class="privacy-info">
-        <p>Here is some privacy info</p>
-    </div>
 </footer>
+<div id="cookieConsentPopup" class="cookie-consent-popup">
+    <p>This website uses cookies to ensure you get the best experience.<br/> Click <a asp-action="Privacy" asp-controller="Home">Here</a> to learn more.</p>
+    <button id="closeCookieConsent">Got it!</button>
+    <button id="unsureCookieConsent">I'm not so sure...</button>
+</div>
 
 <script src="~/js/site.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)

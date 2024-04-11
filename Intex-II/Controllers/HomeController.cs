@@ -7,6 +7,8 @@ using System.Diagnostics;
 using System.Security.Cryptography.Xml;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.CodeAnalysis;
+using Microsoft.ML.OnnxRuntime;
+using Microsoft.ML.OnnxRuntime.Tensors;
 
 namespace Intex_II.Controllers
 {
@@ -14,11 +16,13 @@ namespace Intex_II.Controllers
     {
         private ILegoRepository _repo;
         private SignInManager<IdentityUser> _signInManager;
+        private InferenceSession _session;
 
         public HomeController(ILegoRepository temp, SignInManager<IdentityUser> signInManager)
         {
             _repo = temp;
             _signInManager = signInManager;
+            _session = new InferenceSession("wwwroot/lib/Model/decision_tree_classifierWompWomp.onnx");
         }
 
         [HttpGet]
@@ -43,17 +47,40 @@ namespace Intex_II.Controllers
 
             return View();
         }
-        
+
         [HttpPost]
         public IActionResult Index(Cart cart)
         {
-            _repo.AddCart(cart);
+            // Check if the product already exists in the cart for the current customer
+            var existingCartItem = _repo.Carts
+                .FirstOrDefault(c => c.CustomerId == cart.CustomerId && c.ProductId == cart.ProductId);
+
+            if (existingCartItem != null)
+            {
+                // Update the quantity and total price of the existing cart item
+                Cart newCartItem = new Cart
+                {
+                    CustomerId = existingCartItem.CustomerId,
+                    ProductId = existingCartItem.ProductId,
+                    ItemQuantity = existingCartItem.ItemQuantity + 1,
+                    TotalPrice = existingCartItem.TotalPrice
+                };
+
+                _repo.RemoveCart(existingCartItem);
+
+                //_repo.AddCart(newCartItem);
+            }
+            else
+            {
+                // If the product doesn't exist in the cart, add a new entry
+                //_repo.AddCart(cart);
+            }
 
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public async Task<IActionResult> Products(List<string> categories = null, decimal? minPrice = null, decimal? maxPrice = null)
+        public async Task<IActionResult> Products(List<string> categories = null, List<string> Colors = null, decimal? minPrice = null, decimal? maxPrice = null)
         {
             string userName = null; // Initialize userId with null
 
@@ -77,6 +104,12 @@ namespace Intex_II.Controllers
                 productsQuery = productsQuery.Where(p => categories.Contains(p.ProductCategorySimple));
             }
 
+            if (Colors != null && Colors.Any())
+            {
+                productsQuery = productsQuery.Where(p => Colors.Contains(p.ProductPrimaryColor));
+            }
+
+
             if (minPrice.HasValue)
             {
                 productsQuery = productsQuery.Where(p => p.ProductPrice >= minPrice.Value);
@@ -86,6 +119,8 @@ namespace Intex_II.Controllers
             {
                 productsQuery = productsQuery.Where(p => p.ProductPrice <= maxPrice.Value);
             }
+
+
 
             // Retrieve the filtered products
             var filteredProducts = productsQuery.ToList();
@@ -98,13 +133,44 @@ namespace Intex_II.Controllers
                                     .Distinct()
                                     .ToList();
 
+            // Pass in colors for the checkbox filters
+            ViewBag.Colors = _repo.Products
+                                 .Select(p => p.ProductPrimaryColor)
+                                 .Distinct()
+                                 .ToList();
+
+
             return View();
         }
+
+
 
         [HttpPost]
         public IActionResult Products(Cart cart)
         {
-            _repo.AddCart(cart);
+            var existingCartItem = _repo.Carts
+                .FirstOrDefault(c => c.CustomerId == cart.CustomerId && c.ProductId == cart.ProductId);
+
+            if (existingCartItem != null)
+            {
+                // Update the quantity and total price of the existing cart item
+                Cart newCartItem = new Cart
+                {
+                    CustomerId = existingCartItem.CustomerId,
+                    ProductId = existingCartItem.ProductId,
+                    ItemQuantity = existingCartItem.ItemQuantity + 1,
+                    TotalPrice = existingCartItem.TotalPrice
+                };
+
+                _repo.RemoveCart(existingCartItem);
+
+                _repo.AddCart(newCartItem);
+            }
+            else
+            {
+                // If the product doesn't exist in the cart, add a new entry
+                _repo.AddCart(cart);
+            }
 
             return RedirectToAction("Products");
         }
@@ -151,7 +217,29 @@ namespace Intex_II.Controllers
         [HttpPost]
         public IActionResult SingleProduct(Cart cart)
         {
-            _repo.AddCart(cart);
+            var existingCartItem = _repo.Carts
+                .FirstOrDefault(c => c.CustomerId == cart.CustomerId && c.ProductId == cart.ProductId);
+
+            if (existingCartItem != null)
+            {
+                // Update the quantity and total price of the existing cart item
+                Cart newCartItem = new Cart
+                {
+                    CustomerId = existingCartItem.CustomerId,
+                    ProductId = existingCartItem.ProductId,
+                    ItemQuantity = existingCartItem.ItemQuantity + 1,
+                    TotalPrice = existingCartItem.TotalPrice
+                };
+
+                _repo.RemoveCart(existingCartItem);
+
+                _repo.AddCart(newCartItem);
+            }
+            else
+            {
+                // If the product doesn't exist in the cart, add a new entry
+                _repo.AddCart(cart);
+            }
 
             return RedirectToAction("SingleProduct", new { productId = cart.ProductId });
         }
@@ -189,7 +277,7 @@ namespace Intex_II.Controllers
                                  {
                                      CustomerId = Carts.CustomerId,
                                      ProductId = Carts.ProductId,
-                                     Quantity = Carts.ItemQuantity,
+                                     ItemQuantity = Carts.ItemQuantity,
                                      TotalPrice = Carts.TotalPrice,
                                      ProductName = Products.ProductName,
                                      ProductYear = Products.ProductYear,
@@ -199,6 +287,15 @@ namespace Intex_II.Controllers
                                      ProductDescription = Products.ProductDescription,
                                      ProductCategorySimple = Products.ProductCategorySimple
                                  }).ToList();
+
+            var total = 0;
+
+            foreach(var item in ViewBag.CartItems)
+            {
+                total = total + (item.ProductPrice * item.ItemQuantity);
+            }
+
+            ViewBag.CartTotal = total;
 
             return View();
         }
@@ -395,7 +492,7 @@ namespace Intex_II.Controllers
                                  {
                                      CustomerId = Carts.CustomerId,
                                      ProductId = Carts.ProductId,
-                                     Quantity = Carts.ItemQuantity,
+                                     ItemQuantity = Carts.ItemQuantity,
                                      TotalPrice = Carts.TotalPrice,
                                      ProductName = Products.ProductName,
                                      ProductYear = Products.ProductYear,
@@ -423,12 +520,165 @@ namespace Intex_II.Controllers
                                     .Distinct()
                                     .ToList();
 
+            ViewBag.Countries = _repo.Orders
+                                    .Select(p => p.TransactionCountry)
+                                    .Distinct()
+                                    .ToList();
+
+            ViewBag.Banks = _repo.Orders
+                                    .Select(p => p.TransactionBank)
+                                    .Distinct()
+                                    .ToList();
+
+            var total = 0;
+
+            foreach (var item in ViewBag.CartItems)
+            {
+                total = total + (item.ProductPrice * item.ItemQuantity);
+            }
+
+            ViewBag.CartTotal = total;
+
             return View();
         }
         
         [HttpPost]
         public IActionResult SubmitOrder(Order order) 
         {
+            var customerId = order.CustomerId;
+            var time = order.TransactionTime;
+            var orderAmount = order.Amount;
+
+            var day_of_week_Mon = 0;
+            var day_of_week_Tue = 0;
+            var day_of_week_Wed = 0;
+            var day_of_week_Thu = 0;
+            var day_of_week_Sat = 0;
+            var day_of_week_Sun = 0;
+            if (order.TransactionDayOfWeek.Equals("Mon"))
+            {
+                day_of_week_Mon = 1;
+            }
+            if (order.TransactionDayOfWeek.Equals("Tue"))
+            {
+                day_of_week_Tue = 1;
+            }
+            if (order.TransactionDayOfWeek.Equals("Wed"))
+            {
+                day_of_week_Wed = 1;
+            }
+            if (order.TransactionDayOfWeek.Equals("Thu"))
+            {
+                day_of_week_Thu = 1;
+            }
+            if (order.TransactionDayOfWeek.Equals("Sat"))
+            {
+                day_of_week_Sat = 1;
+            }
+            if (order.TransactionDayOfWeek.Equals("Sun"))
+            {
+                day_of_week_Sun = 1;
+            }
+
+            var entry_mode_PIN = 0;
+            var entry_mode_Tap = 0;
+
+            var type_of_transaction_Online = 1;
+            var type_of_transaction_POS = 0;
+
+            var country_of_transaction_India = 0;
+            var country_of_transaction_Russia = 0;
+            var country_of_transaction_USA = 0;
+            var country_of_transaction_United_Kingdom = 0;
+            var shipping_address_India = 0;
+            var shipping_address_Russia = 0;
+            var shipping_address_USA = 0;
+            var shipping_address_United_Kingdom = 0;
+            if (order.TransactionCountry.Equals("India"))
+            {
+                country_of_transaction_India = 1;
+                shipping_address_India = 1;
+            }
+            if (order.TransactionCountry.Equals("Russia"))
+            {
+                country_of_transaction_Russia = 1;
+                shipping_address_Russia = 1;
+            }
+            if (order.TransactionCountry.Equals("USA"))
+            {
+                country_of_transaction_USA = 1;
+                shipping_address_USA = 1;
+            }
+            if (order.TransactionCountry.Equals("United Kingdom"))
+            {
+                country_of_transaction_United_Kingdom = 1;
+                shipping_address_United_Kingdom = 1;
+            }
+
+            var bank_HSBC = 0;
+            var bank_Halifax = 0;
+            var bank_Lloyds = 0;
+            var bank_Metro = 0;
+            var bank_Monzo = 0;
+            var bank_RBS = 0;
+            if (order.TransactionBank.Equals("HSBC"))
+            {
+                bank_HSBC = 1;
+            }
+            if (order.TransactionBank.Equals("Halifax"))
+            {
+                bank_Halifax = 1;
+            }
+            if (order.TransactionBank.Equals("Lloyds"))
+            {
+                bank_Lloyds = 1;
+            }
+            if (order.TransactionBank.Equals("Metro"))
+            {
+                bank_Metro = 1;
+            }
+            if (order.TransactionBank.Equals("Monzo"))
+            {
+                bank_Monzo = 1;
+            }
+            if (order.TransactionBank.Equals("RBS"))
+            {
+                bank_RBS = 1;
+            }
+
+            var type_of_card_Visa = 0;
+            if (order.TransactionTypeOfCard.Equals("Visa"))
+            {
+                type_of_card_Visa = 1;
+            }
+
+            var input = new List<float> { customerId, time, (float)orderAmount, day_of_week_Mon, day_of_week_Sat, day_of_week_Sun, day_of_week_Thu, day_of_week_Tue, day_of_week_Wed, entry_mode_PIN, entry_mode_Tap, type_of_transaction_Online, type_of_transaction_POS, country_of_transaction_India, country_of_transaction_Russia, country_of_transaction_USA, country_of_transaction_United_Kingdom, shipping_address_India, shipping_address_Russia, shipping_address_USA, shipping_address_United_Kingdom, bank_HSBC, bank_Halifax, bank_Lloyds, bank_Metro, bank_Monzo, bank_RBS, type_of_card_Visa };
+            var inputTensor = new DenseTensor<float>(input.ToArray(), new[] { 1, input.Count });
+
+            var inputs = new List<NamedOnnxValue>
+            {
+                NamedOnnxValue.CreateFromTensor("float_input", inputTensor)
+            };
+
+            int prediction;
+            using (var results = _session.Run(inputs))
+            {
+                var predictionTensor = (DenseTensor<long>)results[0].Value;
+                prediction = (int)predictionTensor.GetValue(0);
+            }
+
+            bool isFraud;
+            if (prediction == 0)
+            {
+                isFraud = false;
+            }
+            else
+            {
+                isFraud = true;
+            }
+
+            order.Fraud = isFraud;
+
             Order addedOrder = _repo.AddOrder(order);
 
             List<Cart> CartItems = _repo.Carts.Where(x => x.CustomerId.Equals(order.CustomerId)).ToList();
@@ -447,7 +697,14 @@ namespace Intex_II.Controllers
                 _repo.RemoveCart(item);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("OrderConfirm", new { orderId = addedOrder.TransactionId });
+        }
+
+        public IActionResult OrderConfirm(int orderId)
+        {
+            ViewBag.Order = _repo.Orders.Where(x => x.TransactionId == orderId).FirstOrDefault();
+
+            return View();
         }
 
         [HttpGet]
