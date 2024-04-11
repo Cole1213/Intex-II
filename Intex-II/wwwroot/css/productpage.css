@@ -28,6 +28,23 @@ html {
 body {
 }
 
+.popup-btn-purp{
+        background-color: #3b3b88;
+        border: none;
+        transition: background-color .3s ease-in-out;
+        &:hover{
+            background-color: #f1863a;
+        }
+    }
+.popup-btn-org{
+    background-color: #f1863a;
+    border: none;
+    transition: background-color .3s ease-in-out;
+    &:hover{
+        background-color:#3b3b88;
+    }
+}
+
 nav {
     position: absolute;
     top: 0;
