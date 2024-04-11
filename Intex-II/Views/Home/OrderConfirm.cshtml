@@ -1,0 +1,19 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<br />
+<br />
+<br />
+
+<!--If it is NOT fraudulent-->
+@if (ViewBag.Order.Fraud is false)
+{
+    <h1>Thank you for your order!</h1>
+}
+<!--If it IS fraudlent-->
+@if (ViewBag.Order.Fraud is true)
+{
+    <h1>Your order is under review! We will provide further details soon!</h1>
+}
