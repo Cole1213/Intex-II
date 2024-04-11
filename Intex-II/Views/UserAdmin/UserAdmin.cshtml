@@ -32,9 +32,11 @@
                          <input type="checkbox" name="roles" value="@role" @(user.Roles.Contains(role) ? "checked" : "") /> @role
                      }
                      <button type="submit" class="btn btn-secondary">Update Roles</button>
-                     <a asp-controller="UserAdmin" asp-action="DeleteUser" asp-route-userId="@user.UserId"><button class="btn btn-danger">Delete</button></a>
                  </form>
              </td>
+            <td>
+                <a asp-controller="UserAdmin" asp-action="DeleteUser" asp-route-userId="@user.UserId"><button class="btn btn-danger">Delete</button></a>
+            </td>
          </tr>
      }
  </tbody>
