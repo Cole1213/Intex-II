@@ -1,20 +1,24 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{
+@section PageSpecificStyles {
+    <link rel="stylesheet" href="~/css/productpage.css">
 }
 @model Cart
 @{
+    Layout = "_Layout";
     ViewData["Title"] = "Products";
 }
 <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
-<div class="container-fluid py-5">
+<div class="container-fluid py-5 margin-top-custom">
     <div class="row">
         <!-- Filter Panel on the left -->
-        <div class="col-lg-3 mb-4">
+        <div class="col-lg-3 mb-4 ">
             <form asp-controller="Home" asp-action="Products" method="get">
-                <div class="bg-white p-4 shadow-sm rounded">
-                    <h2 class="h4 mb-4 font-weight-bold text-uppercase">Categories</h2>
+                <div class="sleek-column">
+                    <h1>FILTERS</h1>
+                    <!-- Categories -->
+                    <h3 class="h4 mb-4 font-weight-bold">Categories</h3>
                     @foreach (var category in ViewBag.Categories)
                     {
                         <div class="form-check mb-2">
@@ -22,6 +26,37 @@
                             <label class="form-check-label" for="@category">@category</label>
                         </div>
                     }
+                    <!-- Colors -->
+                    <h3 class="h4 mb-4 font-weight-bold">Colors</h3>
+                    <div class="color-filters d-flex flex-wrap">
+                        @foreach (var color in ViewBag.Colors)
+                        {
+                            <div class="color-option mb-4 mr-2 d-flex flex-column align-items-center">
+                                <input type="checkbox" class="color-input" id="@color" name="Colors" value="@color" hidden>
+                                <label class="color-indicator mb-1" for="@color" style="background-color: @color;"></label>
+                                <label class="color-name" for="@color">@color</label>
+                            </div>
+                        }
+                    </div>
+
+
+
+
+
+@*                     <!-- Ratings -->
+                    <br />
+                    <h3 class="h4 mb-4 font-weight-bold">Ratings</h3>
+                    <select name="rating" class="form-control">
+                        <option value="">Select Rating</option>
+                        <option value="4">★★★★☆ & Up</option>
+                        <option value="3">★★★☆☆ & Up</option>
+                        <option value="2">★★☆☆☆ & Up</option>
+                        <option value="1">★☆☆☆☆ & Up</option>
+                    </select> *@
+
+                    <!-- Price Range -->
+                    <br />
+                    <h3 class="h4 mb-4 font-weight-bold">Price Range</h3>
                     <div class="mt-4">
                         <label for="minPrice" class="form-label">Min Price:</label>
                         <input type="number" class="form-control" id="minPrice" name="minPrice" step="0.01">
@@ -30,16 +65,18 @@
                         <label for="maxPrice" class="form-label">Max Price:</label>
                         <input type="number" class="form-control" id="maxPrice" name="maxPrice" step="0.01">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Apply Filters</button>
+
+                    <!-- Submit Btn -->
+                    <button type="submit" class="full-width-button">Apply Filters</button>
                 </div>
             </form>
         </div>
 
         <!-- Display filtered products on the right -->
-        <div class="col-lg-9">
+        <div class="col-lg-9 sleek-column">
             @if (Model is null)
             {
-                <h3>Filtered Products</h3>
+ 
                 <div class="row">
                     @foreach (var product in ViewBag.Products)
                     {
@@ -49,21 +86,28 @@
                                 <img src="@product.ProductImage" class="card-img-top" alt="@product.ProductName">
 
                                 <!-- Card Body -->
-                                <div class="card-body">
+                                <div class="card-body"> 
+                                <div class="card-info">
                                     <h5 class="card-title">@product.ProductName</h5>
-                                    <p class="card-text">$@product.ProductPrice</p>
+                                    <p class="card-subtitle mb-2 text-muted text-right">$@product.ProductPrice</p>
                                 </div>
+                                
+
 
                                 <!-- Card Actions -->
-                                <div class="card-footer">
-                                    <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@product.ProductId" class="btn btn-primary">View Product</a>
-                                    <form method="post" class="d-inline">
-                                        <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId" />
-                                        <input type="hidden" asp-for="ProductId" value="@product.ProductId" />
-                                        <input type="hidden" asp-for="ItemQuantity" value="1" />
-                                        <input type="hidden" asp-for="TotalPrice" value="@product.ProductPrice" />
-                                        <button type="submit" class="btn btn-success">Add to Cart</button>
-                                    </form>
+                                <div class="card-buttons">
+                                    <ul class="card-footer">
+                                        <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@product.ProductId" class="btn btn-primary">View Product</a>
+
+                                        <form method="post" class="d-inline">
+                                            <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId" />
+                                            <input type="hidden" asp-for="ProductId" value="@product.ProductId" />
+                                            <input type="hidden" asp-for="ItemQuantity" value="1" />
+                                            <input type="hidden" asp-for="TotalPrice" value="@product.ProductPrice" />
+                                            <button type="submit" class="btn btn-success">Add to Cart</button>
+                                        </form>
+                                    </ul>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -78,3 +122,4 @@
 
     </div>
 </div>
+
