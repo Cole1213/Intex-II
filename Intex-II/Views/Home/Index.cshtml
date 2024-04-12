@@ -36,7 +36,14 @@
     </div>
 </div>
 <div class="text-center">
-    <h2 id="card-title">Things you might like...</h2>
+    @if(ViewBag.BecauseYouPurchased is not null)
+    {
+        <h2 id="card-title">Becuase you purchased @ViewBag.BecauseYouPurchased.ProductName...</h2>
+    }
+    else
+    {
+        <h2 id="card-title">Things you might like...</h2>
+    }
     <div class="cards">
         @foreach (var r in ViewBag.Recommendations)
         {
