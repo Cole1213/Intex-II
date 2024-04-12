@@ -14,8 +14,11 @@ body{
   i {
     color: #aaaaaa;
     transition: color .3s ease-in-out;
+    }
   }
-  &:hover{
+
+.btn-ext-login:hover{
+  i{
     color: #f1863a;
   }
 }

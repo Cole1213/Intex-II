@@ -8,19 +8,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4381a429-cbbe-49f1-a2fd-9daf6fdc64ed" name="Changes" comment="sdjfh">
-      <change afterPath="$PROJECT_DIR$/Intex-II/wwwroot/css/community.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Intex-II/wwwroot/css/newsletter.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Intex-II/wwwroot/imgs/community-builds.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Intex-II/wwwroot/imgs/minifig-custom.jpeg" afterDir="false" />
+    <list default="true" id="4381a429-cbbe-49f1-a2fd-9daf6fdc64ed" name="Changes" comment="yeet">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Intex-II/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Intex-II/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Controllers/HomeController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Views/Home/Community.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Home/Community.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Home/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Views/Home/Newsletter.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Home/Newsletter.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Areas/Identity/Pages/Account/Login.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Areas/Identity/Pages/Account/Login.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intex-II/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Shared/_Layout.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/wwwroot/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/wwwroot/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/Views/Shared/_LoginSharedLayout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Shared/_LoginSharedLayout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intex-II/wwwroot/css/dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/wwwroot/css/dashboard.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intex-II/wwwroot/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/wwwroot/css/login.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,6 +62,7 @@
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Views/Home/AdminOrders.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Views/Home/AdminOrders.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -82,30 +76,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.Intex-II: http.executor": "Run",
-    ".NET Launch Settings Profile.Intex-II: https.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "evan-branch",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.Intex-II: http.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.Intex-II: https.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;evan-branch&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "/Users/evanneff/Library/Application Support/JetBrains/Rider2023.3/resharper-host/DecompilerCache",
-      "/Users/evanneff/Library/Application Support/JetBrains/Rider2023.3/resharper-host/SourcesCache",
-      "/Users/evanneff/.local/share/Symbols/src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;/Users/evanneff/Library/Application Support/JetBrains/Rider2023.3/resharper-host/DecompilerCache&quot;,
+      &quot;/Users/evanneff/Library/Application Support/JetBrains/Rider2023.3/resharper-host/SourcesCache&quot;,
+      &quot;/Users/evanneff/.local/share/Symbols/src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Intex-II: https">
     <configuration name="Intex-II: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Intex-II/Intex-II.csproj" />
@@ -152,7 +146,7 @@
       <updated>1712592256624</updated>
       <workItem from="1712592257994" duration="894000" />
       <workItem from="1712593713251" duration="20540000" />
-      <workItem from="1712850926898" duration="38834000" />
+      <workItem from="1712850926898" duration="42080000" />
     </task>
     <task id="LOCAL-00001" summary="Small changes">
       <option name="closed" value="true" />
@@ -338,7 +332,23 @@
       <option name="project" value="LOCAL" />
       <updated>1712887356193</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="my changes yeet">
+      <option name="closed" value="true" />
+      <created>1712900998168</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1712900998168</updated>
+    </task>
+    <task id="LOCAL-00025" summary="yeet">
+      <option name="closed" value="true" />
+      <created>1712901022881</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1712901022881</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -381,6 +391,8 @@
     <MESSAGE value="sidjf" />
     <MESSAGE value="lots of changes" />
     <MESSAGE value="sdjfh" />
-    <option name="LAST_COMMIT_MESSAGE" value="sdjfh" />
+    <MESSAGE value="my changes yeet" />
+    <MESSAGE value="yeet" />
+    <option name="LAST_COMMIT_MESSAGE" value="yeet" />
   </component>
 </project>
