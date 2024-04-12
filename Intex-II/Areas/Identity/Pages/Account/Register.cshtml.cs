@@ -20,6 +20,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Intex_II.Areas.Identity.Pages.Account
 {
@@ -82,6 +84,7 @@ namespace Intex_II.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
+            [ValidEmailDomain(ErrorMessage = "Invalid email domain.")]
             public string Email { get; set; }
 
             /// <summary>
@@ -157,7 +160,7 @@ namespace Intex_II.Areas.Identity.Pages.Account
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
 
-                        return RedirectToAction("AddCustomer", "Home", new { customerId = newCustomer.CustomerId});
+                        return RedirectToAction("AddCustomer", "Home", new { customerId = newCustomer.CustomerId });
                     }
                 }
                 foreach (var error in result.Errors)
@@ -165,7 +168,7 @@ namespace Intex_II.Areas.Identity.Pages.Account
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-            
+
             // If we got this far, something failed, redisplay form
             return Page();
         }
@@ -191,6 +194,56 @@ namespace Intex_II.Areas.Identity.Pages.Account
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
             return (IUserEmailStore<IdentityUser>)_userStore;
+        }
+
+        public class ValidEmailDomainAttribute : ValidationAttribute
+        {
+            private static readonly List<string> ValidEmailDomains = new List<string>
+            {
+                "gmail.com",
+                "yahoo.com",
+                "hotmail.com",
+                "outlook.com",
+                "icloud.com",
+                "aol.com",
+                "live.com",
+                "ymail.com",
+                "protonmail.com",
+                "mail.com",
+                "gmx.com",
+                "zoho.com",
+                "outlook.co.uk",
+                "qq.com",
+                "163.com",
+                "126.com",
+                "sina.com",
+                "yahoo.co.jp",
+                "yandex.com",
+                "qq.com",
+                "byu.edu",
+                "me.com",
+                "mac.com"
+                // Add more valid domains as needed
+            };
+
+            public override bool IsValid(object value)
+            {
+                if (value == null)
+                {
+                    return true; // Null values are considered valid
+                }
+
+                string email = value.ToString();
+                string[] parts = email.Split('@');
+
+                if (parts.Length != 2)
+                {
+                    return false; // Invalid email format
+                }
+
+                string domain = parts[1].ToLower();
+                return ValidEmailDomains.Contains(domain);
+            }
         }
     }
 }

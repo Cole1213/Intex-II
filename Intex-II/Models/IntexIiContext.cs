@@ -93,6 +93,7 @@ public partial class IntexIiContext : IdentityDbContext<IdentityUser>
         modelBuilder.Entity<Product>(entity =>
         {
             entity.Property(e => e.ProductId).HasColumnName("Product_Id");
+            entity.Property(e => e.AurorasTake).HasColumnName("Auroras_Take");
             entity.Property(e => e.ProductCategory).HasColumnName("Product_Category");
             entity.Property(e => e.ProductCategorySimple).HasColumnName("Product_Category_Simple");
             entity.Property(e => e.ProductDescription).HasColumnName("Product_Description");
