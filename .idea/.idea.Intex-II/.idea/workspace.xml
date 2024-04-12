@@ -8,15 +8,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4381a429-cbbe-49f1-a2fd-9daf6fdc64ed" name="Changes" comment="sidjf">
-      <change afterPath="$PROJECT_DIR$/Intex-II/Views/UserAdmin/Index.cshtml" afterDir="false" />
+    <list default="true" id="4381a429-cbbe-49f1-a2fd-9daf6fdc64ed" name="Changes" comment="lots of changes">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Intex-II/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Intex-II/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Areas/Identity/Pages/Account/Login.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Areas/Identity/Pages/Account/Login.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Areas/Identity/Pages/Account/Login.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Areas/Identity/Pages/Account/Login.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Areas/Identity/Pages/Account/Manage/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Areas/Identity/Pages/Account/Manage/_Layout.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Controllers/UserAdminController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Controllers/UserAdminController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intex-II/Views/Shared/_LoginSharedLayout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Intex-II/Views/Shared/_LoginSharedLayout.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +49,7 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Areas/Identity/Pages/Account/Manage/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Views/Home/AddCustomer.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Views/Home/AdminOrders.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/evanneff/RiderProjects/Intex-II/Intex-II/Views/Home/AdminOrders.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
@@ -145,7 +139,7 @@
       <updated>1712592256624</updated>
       <workItem from="1712592257994" duration="894000" />
       <workItem from="1712593713251" duration="20540000" />
-      <workItem from="1712850926898" duration="27190000" />
+      <workItem from="1712850926898" duration="27843000" />
     </task>
     <task id="LOCAL-00001" summary="Small changes">
       <option name="closed" value="true" />
@@ -315,7 +309,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712878967237</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="lots of changes">
+      <option name="closed" value="true" />
+      <created>1712885420165</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1712885420165</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -356,6 +358,7 @@
     <MESSAGE value="few more changes" />
     <MESSAGE value="order page" />
     <MESSAGE value="sidjf" />
-    <option name="LAST_COMMIT_MESSAGE" value="sidjf" />
+    <MESSAGE value="lots of changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="lots of changes" />
   </component>
 </project>
