@@ -124,7 +124,8 @@ app.Use(async (context, next) =>
         // Allow images from your own domain, trusted CDNs, Amazon media, and LEGO
         "img-src 'self' https://*.cdn.com https://m.media-amazon.com https://www.lego.com; " +
         // Consolidated font-src directive to allow fonts from your own domain, Google Fonts, and Font Awesome
-        "font-src 'self' https://fonts.gstatic.com https://use.fontawesome.com";
+        "font-src 'self' https://fonts.gstatic.com https://use.fontawesome.com; " +
+        "frame-src https://app.powerbi.com;";
         // Specify the report-to endpoint for violations
         // "report-uri /Home/LogCspReport;";
     await next();
