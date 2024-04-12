@@ -54,8 +54,8 @@
                           <img src="@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "/imgs/whitelogo.png" : "/imgs/logo.png")" height="50px" alt="Lego Brick Logo">
                       </a>
                       <a asp-controller="Home" asp-action="Products" class=@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white-nav" : "black-nav")>Shop</a>
-                      <a href="#" class=@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white-nav" : "black-nav")>Discover</a>
-                      <a asp-controller="Home" asp-action="About" class=@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white-nav" : "black-nav")>About</a>
+                      <a asp-action="Community" asp-controller="Home" class=@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white-nav" : "black-nav")>Community</a>
+                      <a asp-controller="Home" asp-action="Newsletter" class=@(ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "white-nav" : "black-nav")>Learn</a>
                   }
 
             </div>

@@ -12,6 +12,39 @@
   }
 }
 
+@media (max-height: 1000px) {
+  .hero-txt {
+    padding-left: 10% !important; /* Reduce padding for smaller screens */
+    h2 {
+      font-size: 40px !important; /* Reduce font size to prevent overflow */
+    }
+    h4 {
+      font-size: 18px !important; /* Optionally adjust secondary text size */
+    }
+  }
+
+  .hero-img {
+    height: auto !important; /* Make height auto to accommodate reduced padding and font size */
+  }
+}
+
+/* Further adjustments for even smaller screens */
+@media (max-height: 600px) {
+  #shop-now-button{
+    padding: 5px !important;
+  }
+  .hero-txt {
+    padding-left: 10% !important; /* Further reduce padding for very small screens */
+    h2 {
+      font-size: 30px !important; /* Even smaller font size for very small screens */
+    }
+    h4 {
+      font-size: 16px !important; /* Adjust accordingly */
+    }
+  }
+}
+
+
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -76,9 +109,8 @@ a {
   }
   h2 {
     color:white;
-    font-size: 80px
+    font-size: 80px;
   }
-  
 
 }
 
@@ -205,7 +237,6 @@ a {
   position: relative;
   overflow: hidden;
   border-radius: 10px 10px 10px 10px;
-  box-shadow: 0;
   transform: scale(0.95);
   transition: box-shadow 0.5s, transform 0.5s;
   &:hover{
