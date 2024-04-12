@@ -50,20 +50,20 @@
                             1
                         </div>
 @*                         <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon2" data-mdb-ripple-color="dark">
-                            <i class="fas fa-plus"></i>
-                        </button> *@
+                            <i class="fas fa-plus"></i> *@
+                        @* </button> *@
                     </div>
                 </div>
-        </div>
+                </div class="text-right">
 
-        <form method="post">
-            <input type="hidden" name="CustomerId" value="@ViewBag.UserId" />
-            <input type="hidden" name="ProductId" value="@ViewBag.Products.ProductId" />
-            <input type="hidden" name="ItemQuantity" value="1" />
-            <input type="hidden" name="TotalPrice" value="@ViewBag.Products.ProductPrice" />
-            <button type="submit" class="btn btn-primary">Add to Cart</button>
-        </form>
-    </div>
+                <form method="post">
+                    <input type="hidden" name="CustomerId" value="@ViewBag.UserId" />
+                    <input type="hidden" name="ProductId" value="@ViewBag.Products.ProductId" />
+                    <input type="hidden" name="ItemQuantity" value="1" />
+                    <input type="hidden" name="TotalPrice" value="@ViewBag.Products.ProductPrice" />
+                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                </form>
+            </div>
     </main>
     </div>
     </div>
@@ -74,12 +74,12 @@
 <section class="bg-light border-top py-4">
     <div class="container">
         <div class="row gx-4">
-            <div class="col-lg-8 mb-4">
+            <div class="col-lg-12 mb-4">
                 <div class="border rounded-2 px-3 py-2 bg-white">
                     <!-- Specs navs -->
-                    <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                    <ul class="nav nav-pills nav-justified mb-3" style="background-color:#3B3B83 !important; color: white;" id="ex1" role="tablist">
                         <li class="nav-item d-flex" role="presentation">
-                            <a class="nav-link d-flex align-items-center justify-content-center w-100 active" id="ex1-tab-1" data-mdb-toggle="pill" href="#ex1-pills-1" role="tab" aria-controls="ex1-pills-1" aria-selected="true">Specification</a>
+                            <span class="d-flex align-items-center justify-content-center w-100 active" id="ex1-tab-1" role="tab" aria-controls="ex1-pills-1" aria-selected="true">Specifications:</span></a>
                         </li>
                     </ul>
                     <!-- Specs content -->
@@ -97,8 +97,8 @@
         <!-- Display filtered products on the right -->
         <div class="mt-3">
             <div class="container">
-                <h5 class="card-title">Similar items</h5>
-                <h1>Recommended products based on the pipeline:</h1>
+                <h5 class="card-title">Recommended for you:</h5>
+                
                 <div class="row">
                     @foreach (var item in ViewBag.SimilarProducts)
                     {
@@ -121,7 +121,7 @@
                                         <input type="hidden" asp-for="ProductId" value="@item.ProductId" />
                                         <input type="hidden" asp-for="ItemQuantity" value="1" />
                                         <input type="hidden" asp-for="TotalPrice" value="@item.ProductPrice" />
-                                        <button type="submit" class="btn btn-primary btn-block">Add to Cart</button>
+                                        <button type="submit" class="btn btn-purple btn-block">Add to Cart</button>
                                     </form>
                                     <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@item.ProductId" class="btn btn-warning btn-block mt-2">View Product</a>
                                 </div>

@@ -159,3 +159,14 @@ a {
 .fa {
     color: #FF5722
 }
+
+#ex1-tab-1.active {
+    background-color: #3B3B83; /* Replace with the color you want */
+    color: white; /* Text color */
+}
+
+.btn btn-purple {
+    color: #fff;
+    background-color: #3B3B83;
+    border-color: #3B3B83
+}

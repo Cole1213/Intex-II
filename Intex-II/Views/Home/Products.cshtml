@@ -124,7 +124,7 @@
                                             <input type="hidden" asp-for="ProductId" value="@product.ProductId" />
                                             <input type="hidden" asp-for="ItemQuantity" value="1" />
                                             <input type="hidden" asp-for="TotalPrice" value="@product.ProductPrice" />
-                                            <button type="submit" class="btn-primary float-right">Add to Cart</button>
+                                            <button type="submit" class="btn-primary btn-block">Add to Cart</button>
                                         </form>
                                         <div class="price-wrap">
                                             <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@product.ProductId" class="btn btn-warning float-left">View Product</a>
