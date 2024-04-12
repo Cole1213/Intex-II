@@ -22,6 +22,11 @@ public class UserAdminController : Controller
         _roleManager = roleManager;
         _repo = repo;
     }
+
+    public IActionResult Index()
+    {
+        return View();
+    }
     [Authorize(Roles = "Admin")]
     [HttpGet]
     public async Task<IActionResult> UserAdmin()
