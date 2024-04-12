@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 
 namespace Intex_II.Controllers
 {
@@ -30,10 +31,7 @@ namespace Intex_II.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Index()
-        {
-            //Pass in the recommendations when we have them
-            ViewBag.Recommendations = _repo.Products.Take(5).ToList();
-            
+        {   
             string userName = null; // Initialize userId with null
 
             var customer = HttpContext.User;
@@ -54,6 +52,56 @@ namespace Intex_II.Controllers
                 customerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
 
                 ViewBag.CartItemCount = _repo.Carts.Where(x => x.CustomerId.Equals(customerId)).Count();
+
+                var userBased = _repo.UserBasedRecommendations.Where(x => x.CustomerId.Equals(customerId)).Select(x => x.ProductPurchased).Distinct().ToList();
+
+                if (userBased is not null)
+                {
+                    List<int> myList = new List<int>();
+
+                    foreach(var item in userBased)
+                    {
+                        myList.Add(item);
+                    }
+
+                    // Get the count of the list
+                    int count = myList.Count;
+
+                    // Create a Random object
+                    Random random = new Random();
+
+                    // Generate a random number between 1 and the count of the list
+                    int randomNumber = random.Next(1, count + 1);
+
+                    int productPurchasedId = myList[randomNumber];
+
+                    ViewBag.BecauseYouPurchased = _repo.Products.Where(x => x.ProductId == productPurchasedId).ToList();
+
+                    ViewBag.Recommendations = (from UserBasedRecommendations in _repo.UserBasedRecommendations
+                                               join Products in _repo.Products
+                                               on UserBasedRecommendations.RecommendedProductId equals Products.ProductId
+                                               where UserBasedRecommendations.ProductPurchased == productPurchasedId
+                                               orderby UserBasedRecommendations.Rank
+                                               select new
+                                               {
+                                                   ProductId = Products.ProductId,
+                                                   ProductName = Products.ProductName,
+                                                   ProductDescription = Products.ProductDescription,
+                                                   ProductPrice = Products.ProductPrice,
+                                                   ProductCategory = Products.ProductCategory,
+                                                   ProductImage = Products.ProductImage,
+                                                   ProductCategorySimple = Products.ProductCategorySimple,
+                                                   Rank = UserBasedRecommendations.Rank
+                                               }).ToList();
+                }
+                else
+                {
+                    ViewBag.Recommendations = _repo.Products.Take(5).ToList();
+                }
+            }
+            else
+            {
+                ViewBag.Recommendations = _repo.Products.Take(5).ToList();
             }
 
             ViewBag.CustomerId = _repo.Customers.Where(x => x.CustomerEmail.Equals(userName)).Select(x => x.CustomerId).FirstOrDefault();
