@@ -14,6 +14,10 @@
 
         public IQueryable<Recommendation> Recommendations { get; }
 
+        public IQueryable<UserBasedRecommendation> UserBasedRecommendations { get; }
+
+        public IQueryable<TopProduct> TopProducts { get; }
+
         public void AddCart(Cart cart);
 
         public void RemoveCart(Cart cart);

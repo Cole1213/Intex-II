@@ -29,6 +29,10 @@ public partial class IntexIiContext : IdentityDbContext<IdentityUser>
 
     public virtual DbSet<Recommendation> Recommendations { get; set; }
 
+    public virtual DbSet<TopProduct> TopProducts { get; set; }
+
+    public virtual DbSet<UserBasedRecommendation> UserBasedRecommendations { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=tcp:intex.database.windows.net,1433;Initial Catalog=Intex-II;Persist Security Info=False;User ID=IntexAdmin;Password=2n3LBLv@4ERPpzH;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30");
@@ -36,7 +40,7 @@ public partial class IntexIiContext : IdentityDbContext<IdentityUser>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-
+        
         modelBuilder.Entity<Cart>(entity =>
         {
             entity.HasKey(e => new { e.CustomerId, e.ProductId });
@@ -106,6 +110,25 @@ public partial class IntexIiContext : IdentityDbContext<IdentityUser>
             entity.HasKey(e => new { e.ProductId, e.RecommendedProductId });
 
             entity.Property(e => e.ProductId).HasColumnName("Product_ID");
+            entity.Property(e => e.RecommendedProductId).HasColumnName("Recommended_Product_ID");
+        });
+
+        modelBuilder.Entity<TopProduct>(entity =>
+        {
+            entity.HasKey(e => e.ProductId);
+
+            entity.Property(e => e.ProductId)
+                .ValueGeneratedNever()
+                .HasColumnName("product_ID");
+            entity.Property(e => e.Rating).HasColumnName("rating");
+        });
+
+        modelBuilder.Entity<UserBasedRecommendation>(entity =>
+        {
+            entity.HasKey(e => new { e.CustomerId, e.ProductPurchased, e.RecommendedProductId });
+
+            entity.Property(e => e.CustomerId).HasColumnName("Customer_Id");
+            entity.Property(e => e.ProductPurchased).HasColumnName("Product_Purchased");
             entity.Property(e => e.RecommendedProductId).HasColumnName("Recommended_Product_ID");
         });
 
