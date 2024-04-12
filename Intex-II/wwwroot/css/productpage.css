@@ -29,19 +29,27 @@ body {
 }
 
 .popup-btn-purp{
+    color: white;
+    font-weight: bold;
+    margin: 10px;
         background-color: #3b3b88;
         border: none;
         transition: background-color .3s ease-in-out;
         &:hover{
             background-color: #f1863a;
+            color: white;
         }
     }
-.popup-btn-org{
+.popup-btn-org {
+    color: white;
+    font-weight: bold;
+    margin: 10px;
     background-color: #f1863a;
     border: none;
     transition: background-color .3s ease-in-out;
     &:hover{
         background-color:#3b3b88;
+        color: white;
     }
 }
 

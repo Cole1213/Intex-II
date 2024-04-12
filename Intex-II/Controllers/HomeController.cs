@@ -18,12 +18,14 @@ namespace Intex_II.Controllers
         private ILegoRepository _repo;
         private SignInManager<IdentityUser> _signInManager;
         private InferenceSession _session;
+        private UserManager<IdentityUser> _userManager;
 
-        public HomeController(ILegoRepository temp, SignInManager<IdentityUser> signInManager)
+        public HomeController(ILegoRepository temp, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
         {
             _repo = temp;
             _signInManager = signInManager;
             _session = new InferenceSession("wwwroot/lib/Model/decision_tree_classifierWompWomp.onnx");
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -40,6 +42,12 @@ namespace Intex_II.Controllers
             if (customer.Identity.IsAuthenticated)
             {
                 var user = await _signInManager.UserManager.GetUserAsync(customer);
+                var userRoles = await _userManager.GetRolesAsync(user);
+
+                if (userRoles.Contains("Admin"))
+                {
+                    return RedirectToAction("Index", "UserAdmin");
+                }
 
                 userName = user.UserName;
 
@@ -191,7 +199,7 @@ namespace Intex_II.Controllers
                 _repo.AddCart(cart);
             }
 
-            return RedirectToAction("Products", new { addedToCart = "" });
+            return RedirectToAction("Products", new { addedToCart = "Professor Hilton is the GOAT" });
         }
 
         [HttpGet]
