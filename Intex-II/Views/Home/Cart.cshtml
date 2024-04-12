@@ -1,35 +1,82 @@
 ﻿@using System.Collections
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+
+@section PageSpecificStyles
+{
+    <link rel="stylesheet" href="~/css/cart.css">
+}
 @model Cart
+@{
+    Layout = "_Layout";
+}
 
-<div style="margin-top:100px;">
-    <h1>Cart</h1>
-    <br />
-    <br />
-    @{
-        List<int> ProductIds = new List<int>();
-    }
-    @foreach(var item in ViewBag.CartItems)
-    {
-        ProductIds.Add(item.ProductId);
-        
-        <img src="@item.ProductImage" style="height: 100px" />
-        <h3>@item.ProductName</h3>
-        <p>Price: $@item.ProductPrice</p>
-        <p>Quantity: @item.ItemQuantity</p>
-        <form method="post">
-            <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId" />
-            <input type="hidden" asp-for="ProductId" value="@item.ProductId" />
-            <input type="hidden" asp-for="ItemQuantity" value="1" />
-            <input type="hidden" asp-for="TotalPrice" value="@item.ProductPrice" />
-            <button type="submit">Remove</button>
-        </form>
-    }
-    <br />
-    <h3>Cart Total: $@ViewBag.CartTotal</h3>
-    <br />
-    <a asp-controller="Home" asp-action="SubmitOrder" asp-route-customerId="1" asp-route-productIds="@ProductIds"><button>Order</button></a>
 
+<div class="container-fluid py-5 margin-top-custom">
+    <div class="row">
+        <div class="col-md-8 cart">
+            <!-- Begin cart title -->
+            <div class="title">
+                <div class="row">
+                    <div class="col"><h4><b>Shopping Cart</b></h4></div>
+                    <div class="col align-self-center text-right text-muted">@ViewBag.CartItems.Count Items:</div>
+                </div>
+            </div>
+            <!-- End cart title -->
+            <!-- Begin cart items -->
+            @{
+                List<int> ProductIds = new List<int>();
+            }
+            @foreach (var item in ViewBag.CartItems)
+            {
+                ProductIds.Add(item.ProductId);
+
+                <div class="row border-top border-bottom">
+                    <div class="row main align-items-center">
+                        <div class="col-2"><img class="img-fluid" src="@item.ProductImage" style="height: 100px" /></div>
+                        <div class="col">
+                            <div class="row">@item.ProductName</div>
+                        </div>
+                        <div class="col">
+                            <a href="#"></a><a href="#" class="border">@item.ItemQuantity</a><a href="#"></a>
+                        </div>
+                        <div class="col">
+                            $@item.ProductPrice
+                            <!-- Remove item form -->
+                            <form method="post" style="display: inline;">
+                                <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId" />
+                                <input type="hidden" asp-for="ProductId" value="@item.ProductId" />
+                                <input type="hidden" asp-for="ItemQuantity" value="1" />
+                                <input type="hidden" asp-for="TotalPrice" value="@item.ProductPrice" />
+                                <button type="submit" class="btn btn-link btn-sm">Remove</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="back-to-shop"><a asp-controller="Home" asp-action="Products">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+            <!-- End cart items -->
+        </div>
+
+        <div class="col-md-4">
+            <!-- Begin summary content -->
+            <div><h5><b>Order Summary</b></h5></div>
+            <hr>
+            <div class="row">
+                <div class="col" style="padding-left:0;">ITEMS: @ViewBag.CartItems.Count</div>
+                <div class="col text-right">$ @ViewBag.CartTotal</div>
+            </div>
+            <!-- Checkout button as a link -->
+            @{
+                var productIdQueryParam = string.Join(",", ProductIds);
+            }
+            <a asp-controller="Home"
+               asp-action="SubmitOrder"
+               asp-route-customerId="@ViewBag.CustomerId"
+               asp-route-productIds="@productIdQueryParam"
+               class="btn btn-primary">
+                Checkout
+            </a>
+            <!-- End summary content -->
+        </div>
+    </div>
 </div>

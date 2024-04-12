@@ -17,8 +17,11 @@
             <form asp-controller="Home" asp-action="Products" method="get">
                 <div class="sleek-column">
                     <h1>FILTERS</h1>
+                    <hr />
                     <!-- Categories -->
+
                     <h3 class="h4 mb-4 font-weight-bold">Categories</h3>
+                    
                     @foreach (var category in ViewBag.Categories)
                     {
                         <div class="form-check mb-2">
@@ -26,6 +29,7 @@
                             <label class="form-check-label" for="@category">@category</label>
                         </div>
                     }
+                    <hr />
                     <!-- Colors -->
                     <h3 class="h4 mb-4 font-weight-bold">Colors</h3>
                     <div class="color-filters d-flex flex-wrap">
@@ -53,9 +57,10 @@
                         <option value="2">★★☆☆☆ & Up</option>
                         <option value="1">★☆☆☆☆ & Up</option>
                     </select> *@
-
+                    
                     <!-- Price Range -->
                     <br />
+                    <hr />
                     <h3 class="h4 mb-4 font-weight-bold">Price Range</h3>
                     <div class="mt-4">
                         <label for="minPrice" class="form-label">Min Price:</label>
@@ -65,14 +70,81 @@
                         <label for="maxPrice" class="form-label">Max Price:</label>
                         <input type="number" class="form-control" id="maxPrice" name="maxPrice" step="0.01">
                     </div>
-
+                    <hr />
                     <!-- Submit Btn -->
                     <button type="submit" class="full-width-button">Apply Filters</button>
                 </div>
             </form>
         </div>
-
         <!-- Display filtered products on the right -->
+        <div class="col-lg-9 sleek-column">
+            @if (Model is null)
+            {
+                <div class="row">
+                    @foreach (var product in ViewBag.Products)
+                    {
+                        <div class="col-lg-4 col-md-4 col-sm-6 mb-4">
+                            <!-- New Product Card -->
+                            <div class="container d-flex justify-content-center">
+                                <figure class="card card-product-grid card-lg">
+                                    <a href="#" class="img-wrap" data-abc="true">
+                                        <img src="@product.ProductImage">
+                                    </a>
+                                    <figcaption class="info-wrap">
+                                        <div class="row">
+                                            <div class="col-md-9 col-xs-9">
+                                                <a href="#" class="title" data-abc="true">@product.ProductName</a>
+                                                
+                                            </div>
+                                            <div class="col-md-3 col-xs-3">
+                                                <div>
+                           
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </figcaption>
+                                    <div class="bottom-wrap-payment">
+                                        <figcaption class="info-wrap">
+                                            <div class="row">
+                                                <div class="col-md-9 col-xs-9">
+                                                    <a href="#" class="title" data-abc="true">$@product.ProductPrice</a>
+                                                    
+                                                </div>
+                                                <div class="col-md-3 col-xs-3">
+                                                    <div>
+                                                      @*   <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@product.ProductId" class="btn-primary">View Product</a> *@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </figcaption>
+                                    </div>
+                                    <div class="bottom-wrap">
+                                        <form method="post" class="d-inline">
+                                            <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId" />
+                                            <input type="hidden" asp-for="ProductId" value="@product.ProductId" />
+                                            <input type="hidden" asp-for="ItemQuantity" value="1" />
+                                            <input type="hidden" asp-for="TotalPrice" value="@product.ProductPrice" />
+                                            <button type="submit" class="btn-primary float-right">Add to Cart</button>
+                                        </form>
+                                        <div class="price-wrap">
+                                            <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@product.ProductId" class="btn btn-warning float-left">View Product</a>
+                                        </div>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <!-- No Products Message -->
+                <p>No products match the selected criteria.</p>
+            }
+        </div>
+
+
+@*         <!-- Display filtered products on the right -->
         <div class="col-lg-9 sleek-column">
             @if (Model is null)
             {
@@ -81,24 +153,26 @@
                     @foreach (var product in ViewBag.Products)
                     {
                         <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                            <div class="card h-100">
+                            <div class="card border-0 rounded-0 shadow" style="width: 18rem;">
                                 <!-- Product Image -->
                                 <img src="@product.ProductImage" class="card-img-top" alt="@product.ProductName">
 
                                 <!-- Card Body -->
-                                <div class="card-body"> 
-                                <div class="card-info">
-                                    <h5 class="card-title">@product.ProductName</h5>
-                                    <p class="card-subtitle mb-2 text-muted text-right">$@product.ProductPrice</p>
+                                <div class="card-body mt-3 mb-3 fixed-height-card-body">
+                                    <div class="row">
+                                        <div class="col-10">
+                                            <h4 class="card-title">@product.ProductName</h4>
+                                        </div>
+                                    </div>
                                 </div>
-                                
 
-
-                                <!-- Card Actions -->
-                                <div class="card-buttons">
-                                    <ul class="card-footer">
-                                        <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@product.ProductId" class="btn btn-primary">View Product</a>
-
+                                <!-- Price and Buttons Row -->
+                                <div class="row align-items-center text-center g-0">
+                                    <div class="col-4">
+                                        <h5>$@product.ProductPrice</h5>
+                                    </div>
+                                    <div class="col-8">
+                                        <!-- Add to Cart Button Form -->
                                         <form method="post" class="d-inline">
                                             <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId" />
                                             <input type="hidden" asp-for="ProductId" value="@product.ProductId" />
@@ -106,9 +180,11 @@
                                             <input type="hidden" asp-for="TotalPrice" value="@product.ProductPrice" />
                                             <button type="submit" class="btn btn-success">Add to Cart</button>
                                         </form>
-                                    </ul>
+                                        <!-- View Product Link -->
+                                        <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@product.ProductId" class="btn btn-primary">View Product</a>
+                                    </div>
                                 </div>
-                                </div>
+
                             </div>
                         </div>
                     }
@@ -116,11 +192,10 @@
             }
             else
             {
+                <!-- No Products Message -->
                 <p>No products match the selected criteria.</p>
             }
-        </div>
-
-    </div>
+        </div> *@
     <!-- Pagination -->
     <div class="pagination-container">
         <div class="pagination">
