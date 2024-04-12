@@ -2,28 +2,220 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-   
+    Layout = "_Layout";
 }
 @model Cart
+@section PageSpecificStyles {
+    <link rel="stylesheet" href="~/css/singleproduct.css">
+}
+
+<!-- content -->
+<section class="py-5">
+    <div class="container sleek-column">
+        <div class="row gx-5">
+            <aside class="col-lg-6">
+                <div class="border rounded-4 mb-3 d-flex justify-content-center">
+                    <a data-fslightbox="mygallery" class="rounded-4" target="_blank" data-type="image" href="@ViewBag.Products.ProductImage">
+                        <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="@ViewBag.Products.ProductImage" alt="Image of product" />
+                    </a>
+                </div>
+            </aside>
+            <main class="col-lg-6">
+                <div class="mb-3">
+                    <h4 class="title text-dark">
+                        @ViewBag.Products.ProductName
+                    </h4>
+                </div>
+                <div class="mb-3">
+                    <span class="h5"><p>$ @ViewBag.Products.ProductPrice</p></span>
+                </div>
+                <div class="row">
+                    <dt class="col-3">Pieces:</dt>
+                    <dd class="col-9">@ViewBag.Products.ProductNumParts</dd>
+
+                    <dt class="col-3">Category:</dt>
+                    <dd class="col-9">@ViewBag.Products.ProductCategorySimple</dd>
+
+                </div>
+
+                <hr />
+                <!-- col.// -->
+                <div class="row mb-4">
+                    <label class="mb-2 d-block">Quantity</label>
+                    <div class="input-group mb-3" style="width: 170px;">
+@*                         <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon1" data-mdb-ripple-color="dark">
+                            <i class="fas fa-minus"></i>
+                        </button> *@
+                        <div class="border border-secondary text-center" style="width: 50px; line-height: 50px;">
+                            1
+                        </div>
+@*                         <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon2" data-mdb-ripple-color="dark">
+                            <i class="fas fa-plus"></i>
+                        </button> *@
+                    </div>
+                </div>
+        </div>
+
+        <form method="post">
+            <input type="hidden" name="CustomerId" value="@ViewBag.UserId" />
+            <input type="hidden" name="ProductId" value="@ViewBag.Products.ProductId" />
+            <input type="hidden" name="ItemQuantity" value="1" />
+            <input type="hidden" name="TotalPrice" value="@ViewBag.Products.ProductPrice" />
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
+        </form>
+    </div>
+    </main>
+    </div>
+    </div>
+</section>
+
+<!-- content -->
+
+<section class="bg-light border-top py-4">
+    <div class="container">
+        <div class="row gx-4">
+            <div class="col-lg-8 mb-4">
+                <div class="border rounded-2 px-3 py-2 bg-white">
+                    <!-- Specs navs -->
+                    <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                        <li class="nav-item d-flex" role="presentation">
+                            <a class="nav-link d-flex align-items-center justify-content-center w-100 active" id="ex1-tab-1" data-mdb-toggle="pill" href="#ex1-pills-1" role="tab" aria-controls="ex1-pills-1" aria-selected="true">Specification</a>
+                        </li>
+                    </ul>
+                    <!-- Specs content -->
+                    <div class="tab-content" id="ex1-content">
+                        <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                            <p>
+                            <p>@ViewBag.Products.ProductDescription</p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Display filtered products on the right -->
+        <div class="mt-3">
+            <div class="container">
+                <h5 class="card-title">Similar items</h5>
+                <h1>Recommended products based on the pipeline:</h1>
+                <div class="row">
+                    @foreach (var item in ViewBag.SimilarProducts)
+                    {
+                        <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
+                            <!-- Product Card -->
+                            <div class="card card-product-grid shadow-sm">
+                                <a href="#" class="img-wrap" data-abc="true">
+                                    <img src="@item.ProductImage" class="card-img-top">
+                                </a>
+                                <div class="card-body">
+                                    <h6 class="title">@item.ProductName</h6>
+                                    <div class="mb-2">
+                                        <span class="price">$@item.ProductPrice</span>
+                                    </div>
+                                    <p>Rank: @item.Rank</p>
+                                </div>
+                                <div class="card-footer">
+                                    <form method="post" class="d-inline">
+                                        <input type="hidden" asp-for="CustomerId" value="@ViewBag.UserId" />
+                                        <input type="hidden" asp-for="ProductId" value="@item.ProductId" />
+                                        <input type="hidden" asp-for="ItemQuantity" value="1" />
+                                        <input type="hidden" asp-for="TotalPrice" value="@item.ProductPrice" />
+                                        <button type="submit" class="btn btn-primary btn-block">Add to Cart</button>
+                                    </form>
+                                    <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@item.ProductId" class="btn btn-warning btn-block mt-2">View Product</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                @if (Model is null)
+                {
+                    <!-- No Products Message -->
+                    <p>No products match the selected criteria.</p>
+                }
+            </div>
+        </div>
 
 
 
 
 
 
-<br />
+
+
+@* 
+            <!-- Recommendation Cards -->
+            <div class="mt-3">
+                <div class="px-0 border rounded-2 shadow-0">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Similar items</h5>
+                            <div class="d-flex mb-3">
+                                <a href="#" class="me-3">
+                                    <h1>Recommended products based on the pipeline:</h1>
+                                    @foreach (var item in ViewBag.SimilarProducts)
+                                    {
+                                        <div class="recommended-product">
+                                            <img style="height: 100px" src="@item.ProductImage" alt="Image of product" />
+                                            <h1>@item.ProductName</h1>
+                                            <p>$@item.ProductPrice</p>
+                                            <p>Rank: @item.Rank</p>
+                                        </div>
+                                    }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+</section>
+ *@
+
+@* 
+            <!-- Recommendation Cards -->
+            <div class="mt-3">
+                <div class="px-0 border rounded-2 shadow-0">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Similar items</h5>
+                            <div class="d-flex mb-3">
+                                <a href="#" class="me-3">
+                                    <h1>Recommended products based on the pipeline:</h1>
+                                    @foreach (var item in ViewBag.SimilarProducts)
+                                    {
+                                        <div class="recommended-product">
+                                            <img style="height: 100px" src="@item.ProductImage" alt="Image of product" />
+                                            <h1>@item.ProductName</h1>
+                                            <p>$@item.ProductPrice</p>
+                                            <p>Rank: @item.Rank</p>
+                                        </div>
+                                    }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+</section> *@
+
+
+
+
+@* <br />
 <br />
 <br />
 <img style="height: 250px" src="@ViewBag.Products.ProductImage" alt="Image of product" />
 <h1>@ViewBag.Products.ProductName</h1>
 <p>$ @ViewBag.Products.ProductPrice</p>
-
-
-
-
-
-
-
 <br />
 <br />
 <h1>Recommended products based on the pipeline:</h1>
@@ -35,9 +227,9 @@
     <p>@item.Rank</p>
 }
 <form method="post">
-    <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId" />
+    <input type="hidden" asp-for="CustomerId" value="@ViewBag.UserId" />
     <input type="hidden" asp-for="ProductId" value="@ViewBag.Products.ProductId" />
     <input type="hidden" asp-for="ItemQuantity" value="1" />
     <input type="hidden" asp-for="TotalPrice" value="@ViewBag.Products.ProductPrice" />
     <button type="submit">Add to Cart</button>
-</form>
+</form> *@
