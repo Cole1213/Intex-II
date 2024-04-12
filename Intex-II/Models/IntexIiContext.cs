@@ -40,7 +40,7 @@ public partial class IntexIiContext : IdentityDbContext<IdentityUser>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        
+
         modelBuilder.Entity<Cart>(entity =>
         {
             entity.HasKey(e => new { e.CustomerId, e.ProductId });
@@ -94,6 +94,10 @@ public partial class IntexIiContext : IdentityDbContext<IdentityUser>
         {
             entity.Property(e => e.ProductId).HasColumnName("Product_Id");
             entity.Property(e => e.AurorasTake).HasColumnName("Auroras_Take");
+            entity.Property(e => e.NewImage)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("New_Image");
             entity.Property(e => e.ProductCategory).HasColumnName("Product_Category");
             entity.Property(e => e.ProductCategorySimple).HasColumnName("Product_Category_Simple");
             entity.Property(e => e.ProductDescription).HasColumnName("Product_Description");
