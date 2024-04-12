@@ -353,7 +353,7 @@ namespace Intex_II.Controllers
                                            ProductImage = Products.ProductImage,
                                            ProductCategorySimple = Products.ProductCategorySimple,
                                            Rank = Recommendations.Rank
-                                       }).ToList();
+                                       }).Take(6).ToList();
 
             return View();
         }

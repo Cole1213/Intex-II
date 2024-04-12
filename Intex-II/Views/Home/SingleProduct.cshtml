@@ -57,7 +57,7 @@
         </div>
 
         <form method="post">
-            <input type="hidden" name="CustomerId" value="@ViewBag.UserId" />
+            <input type="hidden" name="CustomerId" value="@ViewBag.CustomerId" />
             <input type="hidden" name="ProductId" value="@ViewBag.Products.ProductId" />
             <input type="hidden" name="ItemQuantity" value="1" />
             <input type="hidden" name="TotalPrice" value="@ViewBag.Products.ProductPrice" />
@@ -97,19 +97,18 @@
         <!-- Display filtered products on the right -->
         <div class="mt-3">
             <div class="container">
-                <h5 class="card-title">Similar items</h5>
-                <h1>Recommended products based on the pipeline:</h1>
+                <h3>Items similar to "@ViewBag.Products.ProductName"</h3>
                 <div class="row">
                     @foreach (var item in ViewBag.SimilarProducts)
                     {
                         <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
                             <!-- Product Card -->
                             <div class="card card-product-grid shadow-sm">
-                                <a href="#" class="img-wrap" data-abc="true">
+                                <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@item.ProductId" class="img-wrap" data-abc="true">
                                     <img src="@item.ProductImage" class="card-img-top">
                                 </a>
                                 <div class="card-body">
-                                    <h6 class="title">@item.ProductName</h6>
+                                    <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@item.ProductId"><h6 class="title">@item.ProductName</h6></a>
                                     <div class="mb-2">
                                         <span class="price">$@item.ProductPrice</span>
                                     </div>
@@ -123,17 +122,11 @@
                                         <input type="hidden" asp-for="TotalPrice" value="@item.ProductPrice" />
                                         <button type="submit" class="btn btn-primary btn-block">Add to Cart</button>
                                     </form>
-                                    <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@item.ProductId" class="btn btn-warning btn-block mt-2">View Product</a>
                                 </div>
                             </div>
                         </div>
                     }
                 </div>
-                @if (Model is null)
-                {
-                    <!-- No Products Message -->
-                    <p>No products match the selected criteria.</p>
-                }
             </div>
         </div>
 

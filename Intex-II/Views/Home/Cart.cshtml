@@ -24,14 +24,20 @@
             <!-- Begin cart items -->
             @{
                 List<int> ProductIds = new List<int>();
+                int totalItems = 0;
             }
             @foreach (var item in ViewBag.CartItems)
             {
+                int totalPrice = 0;
+                totalItems = totalItems + item.ItemQuantity;
+                totalPrice = item.ItemQuantity * item.ProductPrice;
                 ProductIds.Add(item.ProductId);
 
                 <div class="row border-top border-bottom">
                     <div class="row main align-items-center">
-                        <div class="col-2"><img class="img-fluid" src="@item.ProductImage" style="height: 100px" /></div>
+                        <div class="col-2"><a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@item.ProductId"><img class="img-fluid" src="@item.ProductImage" style="height: 100px" /></a>
+
+                        </div>
                         <div class="col">
                             <div class="row">@item.ProductName</div>
                         </div>
@@ -39,7 +45,7 @@
                             <a href="#"></a><a href="#" class="border">@item.ItemQuantity</a><a href="#"></a>
                         </div>
                         <div class="col">
-                            $@item.ProductPrice
+                            $@totalPrice
                             <!-- Remove item form -->
                             <form method="post" style="display: inline;">
                                 <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId" />
@@ -53,7 +59,7 @@
                 </div>
             }
 
-            <div class="back-to-shop"><a asp-controller="Home" asp-action="Products">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+            <div class="back-to-shop"><a asp-controller="Home" asp-action="Products">&leftarrow;<span class="text-muted">Back to shop</span></a></div>
             <!-- End cart items -->
         </div>
 
@@ -62,7 +68,7 @@
             <div><h5><b>Order Summary</b></h5></div>
             <hr>
             <div class="row">
-                <div class="col" style="padding-left:0;">ITEMS: @ViewBag.CartItems.Count</div>
+                <div class="col" style="padding-left:0;">ITEMS: @totalItems</div>
                 <div class="col text-right">$ @ViewBag.CartTotal</div>
             </div>
             <!-- Checkout button as a link -->
