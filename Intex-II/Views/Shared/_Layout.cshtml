@@ -61,7 +61,7 @@
             </div>
             <div class="right-nav-elements">
               <a asp-area="Identity" asp-page="/Account/Manage/Index"><img src="/imgs/lego.png" height="30px"></a>
-              <a ><img src="@((ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home") ? "/imgs/whitesearch.png" : "/imgs/search.png")" height="30px"></a>
+              <a asp-action="Products" asp-controller="Home"><img src="@((ViewContext.RouteData.Values["action"].ToString() == "Index" && ViewContext.RouteData.Values["controller"].ToString() == "Home") ? "/imgs/whitesearch.png" : "/imgs/search.png")" height="30px"></a>
                 @if (isSignedIn)
                  {
                      <div id="cart-div">
