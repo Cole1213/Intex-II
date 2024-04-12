@@ -41,7 +41,7 @@
                 <div class="left-nav-elements">
                       @if (userRoles.Contains("Admin"))
                       {
-                          <a asp-area="Identity" asp-page="/Account/Manage/Index">
+                          <a asp-action="Index" asp-controller="UserAdmin">
                               <img src="/imgs/logo.png" height="50px" alt="Lego Brick Logo">
                           </a>
                           <a asp-controller="Home" asp-action="AdminProducts" class="black-nav">Products</a>
