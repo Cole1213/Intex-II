@@ -46,8 +46,8 @@
 @*                         <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon1" data-mdb-ripple-color="dark">
                             <i class="fas fa-minus"></i>
                         </button> *@
-                        <div class="border border-secondary text-center" style="width: 50px; line-height: 50px;">
-                            1
+                        <div class="text-center" style="width: 50px; line-height: 50px;">
+                            <input type="number" id="qty" value="1" min="1"/>
                         </div>
 @*                         <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon2" data-mdb-ripple-color="dark">
                             <i class="fas fa-plus"></i>
@@ -55,12 +55,12 @@
                     </div>
                 </div>
         </div>
-
-        <form method="post">
-            <input type="hidden" name="CustomerId" value="@ViewBag.CustomerId" />
-            <input type="hidden" name="ProductId" value="@ViewBag.Products.ProductId" />
-            <input type="hidden" name="ItemQuantity" value="1" />
-            <input type="hidden" name="TotalPrice" value="@ViewBag.Products.ProductPrice" />
+        
+        <form method="post" id="addToCartForm">
+            <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId" />
+            <input type="hidden" asp-for="ProductId" value="@ViewBag.Products.ProductId" />
+            <input type="hidden" asp-for="ItemQuantity" id="itemQuantity" value="" />
+            <input type="hidden" asp-for="TotalPrice" value="@ViewBag.Products.ProductPrice" />
             <button type="submit" class="btn btn-primary">Add to Cart</button>
         </form>
     </div>
@@ -129,7 +129,12 @@
                 </div>
             </div>
         </div>
-
+        <script>
+            document.getElementById('addToCartForm').addEventListener('submit', function () {
+                var qtyValue = document.getElementById('qty').value;
+                document.getElementById('itemQuantity').value = qtyValue;
+            });
+        </script>
 
 
 

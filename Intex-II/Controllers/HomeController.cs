@@ -374,7 +374,7 @@ namespace Intex_II.Controllers
                 {
                     CustomerId = existingCartItem.CustomerId,
                     ProductId = existingCartItem.ProductId,
-                    ItemQuantity = existingCartItem.ItemQuantity + 1,
+                    ItemQuantity = existingCartItem.ItemQuantity + cart.ItemQuantity,
                     TotalPrice = existingCartItem.TotalPrice
                 };
 
