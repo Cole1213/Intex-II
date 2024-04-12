@@ -124,6 +124,7 @@ namespace Intex_II.Controllers
                                                    ProductCategory = products.ProductCategory,
                                                    ProductImage = products.ProductImage,
                                                    ProductCategorySimple = products.ProductCategorySimple,
+                                                   NewImage = products.NewImage
                                                }).ToList();
                 }
             }
@@ -143,6 +144,7 @@ namespace Intex_II.Controllers
                                                ProductCategory = products.ProductCategory,
                                                ProductImage = products.ProductImage,
                                                ProductCategorySimple = products.ProductCategorySimple,
+                                               NewImage = products.NewImage
                                            }).ToList();
             }
 
