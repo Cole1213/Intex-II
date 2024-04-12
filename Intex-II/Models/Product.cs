@@ -26,4 +26,6 @@ public partial class Product
     public string? ProductCategorySimple { get; set; }
 
     public int ProductId { get; set; }
+
+    public string? AurorasTake { get; set; }
 }
