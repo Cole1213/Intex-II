@@ -16,7 +16,7 @@
             <aside class="col-lg-6">
                 <div class="border rounded-4 mb-3 d-flex justify-content-center">
                     <a data-fslightbox="mygallery" class="rounded-4" target="_blank" data-type="image" href="@ViewBag.Products.ProductImage">
-                        <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="@ViewBag.Products.ProductImage" alt="Image of product" />
+                        <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="@ViewBag.Products.NewImage" alt="Image of product" />
                     </a>
                 </div>
             </aside>
@@ -53,6 +53,13 @@
                             <i class="fas fa-plus"></i>
                         </button> *@
                     </div>
+                    <div>
+                        @if (ViewBag.Products.AurorasTake is not null)
+                        {
+                            <h5>Aurora's Take&trade;:</h5>
+                        }                       
+                        <p>@ViewBag.Products.AurorasTake</p>
+                    <div>
                 </div>
         </div>
         
@@ -105,7 +112,7 @@
                             <!-- Product Card -->
                             <div class="card card-product-grid shadow-sm">
                                 <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@item.ProductId" class="img-wrap" data-abc="true">
-                                    <img src="@item.ProductImage" class="card-img-top">
+                                    <img src="@item.NewImage" class="card-img-top">
                                 </a>
                                 <div class="card-body">
                                     <a asp-controller="Home" asp-action="SingleProduct" asp-route-productId="@item.ProductId"><h6 class="title">@item.ProductName</h6></a>

@@ -99,7 +99,8 @@ namespace Intex_II.Controllers
                                                ProductCategory = products.ProductCategory,
                                                ProductImage = products.ProductImage,
                                                ProductCategorySimple = products.ProductCategorySimple,
-                                               Rank = userBasedRecommendations.Rank
+                                               Rank = userBasedRecommendations.Rank,
+                                               NewImage = products.NewImage
                                            }).ToList();
 
                     var randomShuffle = new Random();
@@ -352,7 +353,8 @@ namespace Intex_II.Controllers
                                            ProductCategory = Products.ProductCategory,
                                            ProductImage = Products.ProductImage,
                                            ProductCategorySimple = Products.ProductCategorySimple,
-                                           Rank = Recommendations.Rank
+                                           Rank = Recommendations.Rank,
+                                           NewImage = Products.NewImage
                                        }).Take(6).ToList();
 
             return View();
@@ -432,7 +434,8 @@ namespace Intex_II.Controllers
                                      ProductPrice = Products.ProductPrice,
                                      ProductImage = Products.ProductImage,
                                      ProductDescription = Products.ProductDescription,
-                                     ProductCategorySimple = Products.ProductCategorySimple
+                                     ProductCategorySimple = Products.ProductCategorySimple,
+                                     NewImage = Products.NewImage
                                  }).ToList();
 
             //Get totoal cart price
@@ -607,7 +610,8 @@ namespace Intex_II.Controllers
                                      ProductPrice = Products.ProductPrice,
                                      ProductImage = Products.ProductImage,
                                      ProductDescription = Products.ProductDescription,
-                                     ProductCategorySimple = Products.ProductCategorySimple
+                                     ProductCategorySimple = Products.ProductCategorySimple,
+                                     NewImage = Products.NewImage
                                  }).ToList();
 
             ViewBag.CustomerId = customerId;

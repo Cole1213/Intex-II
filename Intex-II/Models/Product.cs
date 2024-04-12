@@ -28,4 +28,6 @@ public partial class Product
     public int ProductId { get; set; }
 
     public string? AurorasTake { get; set; }
+
+    public string? NewImage { get; set; }
 }
