@@ -122,7 +122,7 @@ app.Use(async (context, next) =>
         // Allow styles applied via attributes, consider security implications of 'unsafe-inline'
         "style-src-attr 'self' 'unsafe-inline'; " +
         // Allow images from your own domain, trusted CDNs, Amazon media, and LEGO
-        "img-src 'self' https://*.cdn.com https://m.media-amazon.com https://www.lego.com; " +
+        "img-src 'self' https://*.cdn.com https://m.media-amazon.com https://www.lego.com https://images.brickset.com https://www.brickeconomy.com; " +
         // Consolidated font-src directive to allow fonts from your own domain, Google Fonts, and Font Awesome
         "font-src 'self' https://fonts.gstatic.com https://use.fontawesome.com; " +
         "frame-src https://app.powerbi.com;";

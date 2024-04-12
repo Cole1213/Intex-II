@@ -184,6 +184,18 @@ namespace Intex_II.Controllers
 
         // Get the products page
         [HttpGet]
+        public IActionResult Community()
+        {
+            return View();
+        }
+        
+        [HttpGet]
+        public IActionResult Newsletter()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Products(List<string> categories = null, List<string> Colors = null, decimal? minPrice = null, decimal? maxPrice = null, int page = 1, int itemsPerPage = 10, string addedToCart = null)
         {
             string userName = null; // Initialize userId with null

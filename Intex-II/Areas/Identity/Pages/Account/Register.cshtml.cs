@@ -135,10 +135,6 @@ namespace Intex_II.Areas.Identity.Pages.Account
 
                     _logger.LogInformation("User created a new account with password.");
 
-                    if (user.NormalizedUserName.StartsWith("ADMIN")) {
-                        await _userManager.AddToRoleAsync(user, "Admin");
-                    }
-
                     await _userManager.AddToRoleAsync(user, "Customer");
 
                     var userId = await _userManager.GetUserIdAsync(user);
